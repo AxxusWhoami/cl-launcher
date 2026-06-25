@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Wrath of the Lich King — Lanzador</title>
+    <link rel="stylesheet" href="/styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+  <body>
+    <div class="frost-overlay"></div>
+
+    <main class="launcher">
+      <header class="launcher__header">
+        <nav class="ice-nav" aria-label="Menú del lanzador">
+          <span class="ice-nav__logo">
+            <img src="/logotipo_corelegacy.png" alt="Core Legacy" />
+          </span>
+          <ul class="ice-nav__list">
+            <li><button class="ice-tab is-active" type="button" data-view="inicio" aria-current="page">Inicio</button></li>
+            <li><button class="ice-tab" type="button" data-view="descargas">Descargas</button></li>
+            <li><button class="ice-tab" type="button" data-view="cuenta">Cuenta</button></li>
+            <li><button class="ice-tab" type="button" data-view="foros">Foros</button></li>
+            <li><button class="ice-tab" type="button" data-view="tienda">Tienda</button></li>
+          </ul>
+        </nav>
+      </header>
+
+      <section class="news view" data-view="inicio" aria-label="Noticias y parches">
+        <div class="news__main">
+          <h2 class="news__heading">Noticias del Reino</h2>
+          <div class="news__list" id="news-list">
+            <p class="news__placeholder" id="news-placeholder">Cargando noticias...</p>
+          </div>
+        </div>
+        <aside class="realm-status" aria-label="Estado del reino">
+          <h2 class="news__heading">Server status</h2>
+          <div class="realm-status__body">
+            <ul class="realm-status__list">
+              <li class="realm-status__row">
+                <span class="realm-status__label">
+                  <i class="fa-solid fa-right-to-bracket realm-status__icon"></i>Login
+                </span>
+                <span class="realm-status__indicator" id="status-login">
+                  <i class="fa-solid fa-circle realm-status__dot"></i>
+                  <span class="realm-status__state">...</span>
+                </span>
+              </li>
+              <li class="realm-status__row">
+                <span class="realm-status__label">
+                  <i class="fa-solid fa-server realm-status__icon"></i>CoRe Legacy
+                </span>
+                <span class="realm-status__indicator" id="status-server">
+                  <i class="fa-solid fa-circle realm-status__dot"></i>
+                  <span class="realm-status__state">...</span>
+                </span>
+              </li>
+              <li class="realm-status__row">
+                <span class="realm-status__label">
+                  <i class="fa-solid fa-users realm-status__icon"></i>Players online
+                </span>
+                <span class="realm-status__value" id="status-players">-</span>
+              </li>
+              <li class="realm-status__row">
+                <span class="realm-status__label">
+                  <i class="fa-solid fa-clock realm-status__icon"></i>Uptime
+                </span>
+                <span class="realm-status__value" id="status-uptime">-</span>
+              </li>
+            </ul>
+          </div>
+        </aside>
+      </section>
+
+      <section class="account view" data-view="cuenta" aria-label="Crear cuenta" hidden>
+        <div class="account__card">
+          <h2 class="account__title">Crea tu cuenta - Juega gratis ya</h2>
+          <form class="account__form" id="account-form" novalidate>
+            <label class="account__label" for="account-email">Correo electrónico</label>
+            <input
+              class="account__input"
+              id="account-email"
+              name="email"
+              type="email"
+              inputmode="email"
+              autocomplete="email"
+              placeholder="tu@correo.com"
+              required
+            />
+            <button class="account__submit" type="submit">Crear cuenta</button>
+          </form>
+          <p class="account__manage">
+            ¿Ya tienes cuenta y quieres gestionarla?
+            <a class="account__link" href="https://accounts.corelegacy.gg">Ir a gestión de cuentas</a>
+          </p>
+        </div>
+      </section>
+
+      <footer class="control-panel">
+        <div class="progress" role="group" aria-label="Estado de la instalación">
+          <div class="progress__info">
+            <span class="progress__status" id="status">Mensaje de estado ...</span>
+            <span class="progress__percent" id="percent">100%</span>
+          </div>
+          <div class="progress__track">
+            <div class="progress__bar" id="progress-bar" style="width: 100%"></div>
+          </div>
+          <div class="progress__stats">
+            <span class="progress__size" id="size">1 GB de 40 GB</span>
+            <span class="progress__speed" id="speed">Transferencia 0 kbps</span>
+          </div>
+        </div>
+
+        <button class="play-button" id="play-button" type="button" aria-label="Jugar" hidden>
+          <img class="play-button__img" src="/launcher_jugar_250x200.png" alt="Jugar" />
+        </button>
+        <button class="play-button install-button" id="install-button" type="button" aria-label="Instalar" hidden>
+          <img class="play-button__img" src="/launcher_instalar_250x200.png" alt="Instalar" />
+        </button>
+        <button class="play-button wait-button" id="wait-button" type="button" aria-label="Espere" disabled>
+          <img class="play-button__img" src="/launcher_espere_250x200.png" alt="Espere" />
+        </button>
+      </footer>
+    </main>
+
+    <script type="module" src="/app.js"></script>
+  </body>
+</html>
