@@ -106,8 +106,8 @@ body {
   color: var(--text);
   background: #ffffff;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  align-items: flex-start;
+  justify-content: flex-start;
   padding: 32px 16px;
   line-height: 1.5;
 }
