@@ -54,3 +54,23 @@ startRealmStatus();
 
 // Nieve animada sobre el fondo, por debajo de la interfaz.
 startSnow(document.querySelector(".snow-layer"));
+
+// Música de ambiente: intenta reproducir al cargar; si el navegador lo bloquea
+// (política de autoplay), espera la primera interacción del usuario.
+const ambientAudio = new Audio("/corelegacy_launcher.mp3");
+ambientAudio.loop = true;
+ambientAudio.volume = 0.5;
+
+function playAmbient() {
+  ambientAudio.play().catch(() => {});
+}
+
+ambientAudio.play().catch(() => {
+  const resume = () => {
+    playAmbient();
+    document.removeEventListener("click", resume);
+    document.removeEventListener("keydown", resume);
+  };
+  document.addEventListener("click", resume);
+  document.addEventListener("keydown", resume);
+});
