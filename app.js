@@ -3,6 +3,7 @@ import { LauncherUI } from "./src/ui.js";
 import { launchGame } from "./src/launcher.js";
 import { loadNews } from "./src/news.js";
 import { startRealmStatus } from "./src/realm-status.js";
+import { startSnow } from "./src/snow.js";
 
 const ui = new LauncherUI({
   playButton: document.querySelector("#play-button"),
@@ -50,3 +51,6 @@ loadNews(document.querySelector("#news-list"));
 
 // Estado del reino: consulta inicial y refresco cada minuto.
 startRealmStatus();
+
+// Nieve animada sobre el fondo, por debajo de la interfaz.
+startSnow(document.querySelector(".snow-layer"));
