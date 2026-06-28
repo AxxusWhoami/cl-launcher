@@ -25,15 +25,30 @@ la verificación, el parcheo y el arranque del cliente del juego.
 ## Estructura del proyecto
 
 ```
-index.html              Estructura del lanzador (cabecera, vistas y panel de control)
-styles.css              Estilos completos: temática de hielo, fuentes y vistas
-app.js                  Punto de entrada: conecta la UI, las pestañas y los módulos
-src/ui.js               LauncherUI: controla botón, barra de progreso y estado
-src/launcher.js         Flujo de arranque (simulado; pendiente de conectar con Rust)
-src/news.js             Descarga y renderiza las noticias del reino
-src/realm-status.js     Consulta y refresca el estado del servidor
-src/snow.js             Animación de nieve sobre el canvas del fondo
-public/                 Fondo, logo, imágenes de botones, audio y fuentes
+index.html                              Estructura del lanzador (cabecera, vistas y panel de control)
+styles.css                              Estilos completos: temática de hielo, fuentes y vistas
+app.js                                  Punto de entrada: conecta la UI, las pestañas y los módulos
+src/
+  ui.js                                 LauncherUI: controla botón, barra de progreso y estado
+  launcher.js                           Flujo de arranque (simulado; pendiente de conectar con Rust)
+  news.js                               Descarga y renderiza las noticias del reino
+  realm-status.js                       Consulta y refresca el estado del servidor
+  snow.js                               Animación de nieve sobre el canvas del fondo
+public/
+  launcher_background.png               Imagen de fondo del lanzador
+  logotipo_corelegacy.png               Logo de Core Legacy
+  launcher_jugar_250x200.png            Imagen del botón Jugar
+  launcher_instalar_250x200.png         Imagen del botón Instalar
+  launcher_espere_250x200.png           Imagen del botón Espere
+  corelegacy_launcher.mp3               Música de ambiente
+  MORPHEUS.TTF                          Fuente Morpheus (títulos)
+  fonts/
+    cinzel-latin.woff2                  Fuente Cinzel (latin)
+    cinzel-latin-ext.woff2              Fuente Cinzel (latin extendido)
+    uncial-antiqua-latin.woff2          Fuente Uncial Antiqua (latin)
+    uncial-antiqua-latin-ext.woff2      Fuente Uncial Antiqua (latin extendido)
+    roboto-condensed-latin.woff2        Fuente Roboto Condensed (latin)
+    roboto-condensed-latin-ext.woff2    Fuente Roboto Condensed (latin extendido)
 ```
 
 ## Tecnologías
