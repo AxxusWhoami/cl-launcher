@@ -58,7 +58,6 @@ startSnow(document.querySelector(".snow-layer"));
 // Música de ambiente: intenta reproducir al cargar; si el navegador lo bloquea
 // (política de autoplay), espera la primera interacción del usuario.
 const ambientAudio = new Audio("/corelegacy_launcher.mp3");
-ambientAudio.loop = true;
 ambientAudio.volume = 0.5;
 
 function playAmbient() {
