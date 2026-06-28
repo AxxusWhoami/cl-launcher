@@ -134,7 +134,6 @@ body {
   background:
     linear-gradient(180deg, rgba(6, 11, 20, 0.72), rgba(4, 8, 14, 0.85)),
     url("/launcher_background.png") center / cover no-repeat;
-  padding: 32px 40px;
 }
 
 /* Capa de nieve: encima del fondo, debajo de la interfaz */
@@ -147,11 +146,19 @@ body {
   pointer-events: none;
 }
 
-.launcher__header,
-.launcher > .view,
-.launcher > .control-panel {
+.launcher__header {
+  position: relative;
+}
+
+/* Toda la interfaz en una capa por encima de la nieve */
+.launcher__content {
   position: relative;
   z-index: 2;
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 32px 40px;
 }
 
 /* ===== Cabecera ===== */
