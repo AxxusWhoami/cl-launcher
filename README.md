@@ -7,7 +7,7 @@ la verificación, el parcheo y el arranque del cliente del juego.
 
 ## Características
 
-- **Menú por pestañas (menú de hielo):** Inicio, Descargas, Cuenta, Foros y Tienda.
+- **Menú por pestañas (menú de hielo):** Inicio, Correcciones, Cuenta, Foros y Tienda.
   Solo Inicio y Cuenta tienen vista; el resto marca su estado activo sin dejar la
   pantalla en blanco.
 - **Inicio:** noticias del reino y widget de estado del servidor.
