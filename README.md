@@ -7,7 +7,7 @@ la verificación, el parcheo y el arranque del cliente del juego.
 
 ## Características
 
-- **Menú por pestañas (menú de hielo):** Inicio, Correcciones, Cuenta, Foros y Tienda.
+- **Menú por pestañas (menú de hielo):** Inicio, Correcciones, Cuenta, Tienda y Foros.
   Solo Inicio y Cuenta tienen vista; el resto marca su estado activo sin dejar la
   pantalla en blanco.
 - **Inicio:** noticias del reino y widget de estado del servidor.
@@ -20,6 +20,7 @@ la verificación, el parcheo y el arranque del cliente del juego.
   cuentas en https://accounts.corelegacy.gg (la creación real se conectará vía API).
 - **Panel de control:** barra de progreso y botones de Jugar / Instalar / Espere
   para el flujo de arranque del juego.
+- **Efectos ambientales:** nieve animada sobre el fondo y música de ambiente al cargar.
 
 ## Estructura del proyecto
 
@@ -31,7 +32,8 @@ src/ui.js               LauncherUI: controla botón, barra de progreso y estado
 src/launcher.js         Flujo de arranque (simulado; pendiente de conectar con Rust)
 src/news.js             Descarga y renderiza las noticias del reino
 src/realm-status.js     Consulta y refresca el estado del servidor
-public/                 Fondo, logo, imágenes de botones y fuentes
+src/snow.js             Animación de nieve sobre el canvas del fondo
+public/                 Fondo, logo, imágenes de botones, audio y fuentes
 ```
 
 ## Tecnologías
@@ -39,6 +41,7 @@ public/                 Fondo, logo, imágenes de botones y fuentes
 - [Vite](https://vitejs.dev/) como servidor de desarrollo y empaquetador.
 - JavaScript con módulos ES, sin dependencias de runtime.
 - Fuentes locales: Morpheus (títulos), Cinzel, Uncial Antiqua y Roboto Condensed.
+- Font Awesome 6 (iconos vía CDN).
 
 ## Desarrollo
 
