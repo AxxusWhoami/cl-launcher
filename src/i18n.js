@@ -53,6 +53,9 @@ const TRANSLATIONS = {
     "account.recovery.email.placeholder": "tu@correo.com",
     "account.recovery.submit":            "Enviar link recuperación",
 
+    // Badges del changelog
+    "badge.chore": "tarea",
+
     // Pie — progreso
     "footer.status":   "Mensaje de estado ...",
     "footer.size":     "1 GB de 40 GB",
@@ -109,6 +112,9 @@ const TRANSLATIONS = {
     "account.recovery.email.label":       "Email address",
     "account.recovery.email.placeholder": "you@email.com",
     "account.recovery.submit":            "Send recovery link",
+
+    // Changelog badges
+    "badge.chore": "chore",
 
     // Footer — progress
     "footer.status":   "Status message ...",

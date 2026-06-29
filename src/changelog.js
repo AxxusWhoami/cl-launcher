@@ -11,8 +11,8 @@ const TYPE_META = {
   fix:      { label: "fix",      cls: "changelog-badge--fix" },
   arreglar: { label: "fix",      cls: "changelog-badge--fix" },
   feat:     { label: "feat",     cls: "changelog-badge--feat" },
-  tarea:    { label: "tarea",    cls: "changelog-badge--chore" },
-  chore:    { label: "tarea",    cls: "changelog-badge--chore" },
+  tarea:    { i18nKey: "badge.chore", cls: "changelog-badge--chore" },
+  chore:    { i18nKey: "badge.chore", cls: "changelog-badge--chore" },
   refactor: { label: "refactor", cls: "changelog-badge--refactor" },
 };
 
@@ -39,7 +39,7 @@ function formatGroupDate(isoDate, locale) {
   }).format(date);
 }
 
-function buildItem(entry) {
+function buildItem(entry, locale) {
   const { meta, description } = parseCommit(entry.commit);
 
   const li = document.createElement("li");
@@ -48,7 +48,7 @@ function buildItem(entry) {
   if (meta) {
     const badge = document.createElement("span");
     badge.className = `changelog-badge ${meta.cls}`;
-    badge.textContent = meta.label;
+    badge.textContent = meta.i18nKey ? t(meta.i18nKey, locale) : meta.label;
     li.appendChild(badge);
   }
 
@@ -81,7 +81,7 @@ function buildGroup(date, entries, locale) {
 
   const ul = document.createElement("ul");
   ul.className = "changelog__list";
-  entries.forEach((e) => ul.appendChild(buildItem(e)));
+  entries.forEach((e) => ul.appendChild(buildItem(e, locale)));
   section.appendChild(ul);
 
   return section;
