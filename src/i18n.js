@@ -82,7 +82,7 @@ const TRANSLATIONS = {
     "status.unknown":     "Unknown",
 
     // Changelog
-    "changelog.heading":  "Patch History",
+    "changelog.heading":  "Patch Notes",
     "changelog.loading":  "Loading patch notes...",
     "changelog.empty":    "No patch notes available.",
     "changelog.error":    "Could not load patch notes.",
