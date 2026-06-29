@@ -1,3 +1,11 @@
+@font-face {
+  font-family: "Morpheus";
+  src: url("/MORPHEUS.TTF") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   --gold: #c8a24a;
   --gold-bright: #f2d894;
@@ -772,6 +780,7 @@ body {
 .changelog .news__heading {
   flex-shrink: 0;
   margin-bottom: 12px;
+  font-family: "Morpheus", var(--font-classic);
 }
 
 .changelog__feed {
@@ -817,11 +826,11 @@ body {
 .changelog__date {
   margin: 0 0 10px;
   padding-bottom: 8px;
-  font-family: var(--font-classic);
-  font-weight: 700;
+  font-family: "Morpheus", var(--font-classic);
+  font-weight: normal;
   font-size: 0.82rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  text-transform: none;
   color: var(--gold);
   border-bottom: 1px solid rgba(200, 162, 74, 0.3);
   text-shadow: 0 0 8px rgba(200, 162, 74, 0.3);
