@@ -37,7 +37,7 @@ const TYPE_META = {
   arreglar: { label: "fix",      cls: "changelog-badge--fix" },
   feat:     { label: "feat",     cls: "changelog-badge--feat" },
   tarea:    { label: "tarea",    cls: "changelog-badge--chore" },
-  chore:    { label: "chore",    cls: "changelog-badge--chore" },
+  chore:    { label: "tarea",    cls: "changelog-badge--chore" },
   refactor: { label: "refactor", cls: "changelog-badge--refactor" },
 };
 
