@@ -120,34 +120,9 @@
           <div class="account__panel" id="panel-register" role="tabpanel" hidden>
             <form class="account__form" id="register-form" novalidate>
               <div class="account__field">
-                <label class="account__label" for="reg-user">Nombre de usuario</label>
-                <input class="account__input" id="reg-user" name="username"
-                  type="text" autocomplete="username" placeholder="Elige un nombre de usuario" required />
-              </div>
-              <div class="account__field">
                 <label class="account__label" for="reg-email">Correo electrónico</label>
                 <input class="account__input" id="reg-email" name="email"
                   type="email" inputmode="email" autocomplete="email" placeholder="tu@correo.com" required />
-              </div>
-              <div class="account__field">
-                <label class="account__label" for="reg-password">Contraseña</label>
-                <div class="account__input-wrap">
-                  <input class="account__input" id="reg-password" name="password"
-                    type="password" autocomplete="new-password" placeholder="Mínimo 8 caracteres" required />
-                  <button class="account__eye" type="button" aria-label="Mostrar contraseña" data-target="reg-password">
-                    <i class="fa-solid fa-eye"></i>
-                  </button>
-                </div>
-              </div>
-              <div class="account__field">
-                <label class="account__label" for="reg-confirm">Confirmar contraseña</label>
-                <div class="account__input-wrap">
-                  <input class="account__input" id="reg-confirm" name="confirm"
-                    type="password" autocomplete="new-password" placeholder="Repite tu contraseña" required />
-                  <button class="account__eye" type="button" aria-label="Mostrar contraseña" data-target="reg-confirm">
-                    <i class="fa-solid fa-eye"></i>
-                  </button>
-                </div>
               </div>
               <button class="account__submit" type="submit">Crear cuenta</button>
             </form>
