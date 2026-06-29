@@ -1,4 +1,7 @@
 // Descarga y renderiza las noticias del lanzador desde la API de Core Legacy.
+import { getLocale } from "./locale.js";
+import { t } from "./i18n.js";
+
 const NEWS_URL = "https://apis.corelegacy.gg/news.php?function=getlaunchernews";
 
 const TAG_CLASSES = {
@@ -13,15 +16,19 @@ function tagClass(badget) {
 }
 
 function formatDate(value) {
+  const locale = getLocale();
+  const intlLocale = locale === "enUS" ? "en-US" : "es-ES";
   const date = new Date((value || "").replace(" ", "T"));
   if (Number.isNaN(date.getTime())) return value || "";
-  return new Intl.DateTimeFormat("es-ES", {
+  return new Intl.DateTimeFormat(intlLocale, {
     day: "numeric",
     month: "long",
   }).format(date);
 }
 
 function buildCard(item) {
+  const locale = getLocale();
+
   const card = document.createElement("article");
   card.className = "news-card";
 
@@ -54,7 +61,7 @@ function buildCard(item) {
     link.href = item.link_foros;
     link.target = "_blank";
     link.rel = "noopener noreferrer";
-    link.textContent = "Leer más...";
+    link.textContent = t("news.readmore", locale);
     footer.appendChild(link);
   }
 
@@ -64,6 +71,8 @@ function buildCard(item) {
 
 export async function loadNews(container) {
   if (!container) return;
+
+  const locale = getLocale();
 
   try {
     const response = await fetch(NEWS_URL);
@@ -77,7 +86,7 @@ export async function loadNews(container) {
     if (items.length === 0) {
       const empty = document.createElement("p");
       empty.className = "news__placeholder";
-      empty.textContent = "No hay noticias disponibles.";
+      empty.textContent = t("news.empty", locale);
       container.appendChild(empty);
       return;
     }
@@ -90,7 +99,7 @@ export async function loadNews(container) {
     container.innerHTML = "";
     const failed = document.createElement("p");
     failed.className = "news__placeholder";
-    failed.textContent = "No se pudieron cargar las noticias.";
+    failed.textContent = t("news.error", locale);
     container.appendChild(failed);
   }
 }

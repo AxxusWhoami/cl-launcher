@@ -19,16 +19,16 @@
 
       <div class="launcher__content">
       <header class="launcher__header">
-        <nav class="ice-nav" aria-label="Menú del lanzador">
+        <nav class="ice-nav" data-i18n-aria-label="nav.aria" aria-label="Menú del lanzador">
           <span class="ice-nav__logo">
             <img src="/logotipo_corelegacy.png" alt="Core Legacy" />
           </span>
           <ul class="ice-nav__list">
-            <li><button class="ice-tab is-active" type="button" data-view="inicio" aria-current="page">Inicio</button></li>
-            <li><button class="ice-tab" type="button" data-view="correcciones">Correcciones</button></li>
-            <li><button class="ice-tab" type="button" data-view="cuenta">Cuenta</button></li>
-            <li><button class="ice-tab" type="button" data-view="tienda">Tienda</button></li>
-            <li><button class="ice-tab" type="button" data-view="foros">Foros</button></li>
+            <li><button class="ice-tab is-active" type="button" data-view="inicio" aria-current="page" data-i18n="nav.home">Inicio</button></li>
+            <li><button class="ice-tab" type="button" data-view="correcciones" data-i18n="nav.changelog">Correcciones</button></li>
+            <li><button class="ice-tab" type="button" data-view="cuenta" data-i18n="nav.account">Cuenta</button></li>
+            <li><button class="ice-tab" type="button" data-view="tienda" data-i18n="nav.store">Tienda</button></li>
+            <li><button class="ice-tab" type="button" data-view="foros" data-i18n="nav.forums">Foros</button></li>
           </ul>
           <button class="lang-toggle" id="lang-toggle" type="button" aria-label="Cambiar idioma" hidden>
             <i class="fa-solid fa-globe"></i>
@@ -39,13 +39,13 @@
 
       <section class="news view" data-view="inicio" aria-label="Noticias y parches">
         <div class="news__main">
-          <h2 class="news__heading">Noticias del Reino</h2>
+          <h2 class="news__heading" data-i18n="news.heading">Noticias del Reino</h2>
           <div class="news__list" id="news-list">
-            <p class="news__placeholder" id="news-placeholder">Cargando noticias...</p>
+            <p class="news__placeholder" id="news-placeholder" data-i18n="news.loading">Cargando noticias...</p>
           </div>
         </div>
         <aside class="realm-status" aria-label="Estado del reino">
-          <h2 class="news__heading">Server status</h2>
+          <h2 class="news__heading" data-i18n="status.heading">Estado del servidor</h2>
           <div class="realm-status__body">
             <ul class="realm-status__list">
               <li class="realm-status__row">
@@ -86,13 +86,15 @@
       <section class="account view" data-view="cuenta" aria-label="Cuenta" hidden>
         <div class="account__card">
 
-          <div class="account__tabs" role="tablist" aria-label="Sección de cuenta">
+          <div class="account__tabs" role="tablist" data-i18n-aria-label="account.tabs.label" aria-label="Sección de cuenta">
             <button class="account__tab is-active" type="button" role="tab"
-              data-tab="login" aria-selected="true" aria-controls="panel-login">
+              data-tab="login" aria-selected="true" aria-controls="panel-login"
+              data-i18n="account.tab.login">
               Iniciar sesión
             </button>
             <button class="account__tab" type="button" role="tab"
-              data-tab="register" aria-selected="false" aria-controls="panel-register">
+              data-tab="register" aria-selected="false" aria-controls="panel-register"
+              data-i18n="account.tab.register">
               Crear cuenta
             </button>
           </div>
@@ -100,47 +102,57 @@
           <div class="account__panel" id="panel-login" role="tabpanel">
             <form class="account__form" id="login-form" novalidate>
               <div class="account__field">
-                <label class="account__label" for="login-user">Usuario o correo</label>
+                <label class="account__label" for="login-user" data-i18n="account.login.user.label">Usuario o correo</label>
                 <input class="account__input" id="login-user" name="username"
-                  type="text" autocomplete="username" placeholder="Tu usuario o correo" required />
+                  type="text" autocomplete="username"
+                  data-i18n-placeholder="account.login.user.placeholder"
+                  placeholder="Tu usuario o correo" required />
               </div>
               <div class="account__field">
-                <label class="account__label" for="login-password">Contraseña</label>
+                <label class="account__label" for="login-password" data-i18n="account.login.pass.label">Contraseña</label>
                 <div class="account__input-wrap">
                   <input class="account__input" id="login-password" name="password"
-                    type="password" autocomplete="current-password" placeholder="Tu contraseña" required />
-                  <button class="account__eye" type="button" aria-label="Mostrar contraseña" data-target="login-password">
+                    type="password" autocomplete="current-password"
+                    data-i18n-placeholder="account.login.pass.placeholder"
+                    placeholder="Tu contraseña" required />
+                  <button class="account__eye" type="button"
+                    data-i18n-aria-label="account.login.show"
+                    aria-label="Mostrar contraseña" data-target="login-password">
                     <i class="fa-solid fa-eye"></i>
                   </button>
                 </div>
               </div>
-              <button class="account__forgot" type="button" id="forgot-toggle">¿Olvidaste tu contraseña?</button>
-              <button class="account__submit" type="submit">Iniciar sesión</button>
+              <button class="account__forgot" type="button" id="forgot-toggle" data-i18n="account.login.forgot">¿Olvidaste tu contraseña?</button>
+              <button class="account__submit" type="submit" data-i18n="account.login.submit">Iniciar sesión</button>
             </form>
           </div>
 
           <div class="account__panel" id="panel-register" role="tabpanel" hidden>
             <form class="account__form" id="register-form" novalidate>
               <div class="account__field">
-                <label class="account__label" for="reg-email">Correo electrónico</label>
+                <label class="account__label" for="reg-email" data-i18n="account.register.email.label">Correo electrónico</label>
                 <input class="account__input" id="reg-email" name="email"
-                  type="email" inputmode="email" autocomplete="email" placeholder="tu@correo.com" required />
+                  type="email" inputmode="email" autocomplete="email"
+                  data-i18n-placeholder="account.register.email.placeholder"
+                  placeholder="tu@correo.com" required />
               </div>
-              <button class="account__submit" type="submit">Crear cuenta</button>
+              <button class="account__submit" type="submit" data-i18n="account.register.submit">Crear cuenta</button>
             </form>
           </div>
 
           <div class="account__panel account__recovery" id="panel-recovery" hidden>
-            <button class="account__back" type="button" id="recovery-back">
+            <button class="account__back" type="button" id="recovery-back" data-i18n="account.recovery.back">
               <i class="fa-solid fa-arrow-left"></i> Volver
             </button>
             <form class="account__form" id="recovery-form" novalidate>
               <div class="account__field">
-                <label class="account__label" for="recovery-email">Correo electrónico</label>
+                <label class="account__label" for="recovery-email" data-i18n="account.recovery.email.label">Correo electrónico</label>
                 <input class="account__input" id="recovery-email" name="email"
-                  type="email" inputmode="email" autocomplete="email" placeholder="tu@correo.com" required />
+                  type="email" inputmode="email" autocomplete="email"
+                  data-i18n-placeholder="account.recovery.email.placeholder"
+                  placeholder="tu@correo.com" required />
               </div>
-              <button class="account__submit" type="submit">Enviar link recuperación</button>
+              <button class="account__submit" type="submit" data-i18n="account.recovery.submit">Enviar link recuperación</button>
             </form>
           </div>
 
@@ -149,22 +161,22 @@
 
       <section class="changelog view" data-view="correcciones" aria-label="Historial de correcciones" hidden>
         <div class="changelog__feed" id="changelog-list">
-          <h2 class="news__heading">Historial de correcciones</h2>
+          <h2 class="news__heading" data-i18n="changelog.heading">Historial de correcciones</h2>
         </div>
       </section>
 
       <footer class="control-panel">
         <div class="progress" role="group" aria-label="Estado de la instalación">
           <div class="progress__info">
-            <span class="progress__status" id="status">Mensaje de estado ...</span>
+            <span class="progress__status" id="status" data-i18n="footer.status">Mensaje de estado ...</span>
             <span class="progress__percent" id="percent">100%</span>
           </div>
           <div class="progress__track">
             <div class="progress__bar" id="progress-bar" style="width: 100%"></div>
           </div>
           <div class="progress__stats">
-            <span class="progress__size" id="size">1 GB de 40 GB</span>
-            <span class="progress__speed" id="speed">Transferencia 0 kbps</span>
+            <span class="progress__size" id="size" data-i18n="footer.size">1 GB de 40 GB</span>
+            <span class="progress__speed" id="speed" data-i18n="footer.speed">Transferencia 0 kbps</span>
           </div>
         </div>
 

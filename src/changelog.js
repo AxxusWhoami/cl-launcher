@@ -1,33 +1,8 @@
 // Descarga y renderiza el historial de correcciones desde la API de Core Legacy.
-import { getLocale, isTauri } from "./locale.js";
+import { getLocale } from "./locale.js";
+import { t } from "./i18n.js";
 
 const API_BASE = "https://apis.corelegacy.gg/changelog.php";
-
-const LOCALE_MAP = {
-  es: "esES",
-  "en-gb": "enGB",
-  "en-us": "enUS",
-  en: "enUS",
-};
-
-function resolveSystemLocale(raw) {
-  if (!raw) return "esES";
-  const lower = raw.toLowerCase().replace("_", "-");
-  if (LOCALE_MAP[lower]) return LOCALE_MAP[lower];
-  const lang = lower.split("-")[0];
-  return LOCALE_MAP[lang] ?? "esES";
-}
-
-async function resolveLocale() {
-  if (isTauri()) {
-    try {
-      const loc = await window.__TAURI__.os.locale();
-      return resolveSystemLocale(loc ?? navigator.language);
-    } catch (_) {}
-    return resolveSystemLocale(navigator.language);
-  }
-  return getLocale();
-}
 
 // Soporta: type: desc  |  type(scope): desc  |  type(scope) desc
 const COMMIT_RE = /^(\w+(?:\([^)]+\))?)(?::\s*|\s+)(.*?)(?:\s*\(#(\d+)\))?$/s;
@@ -55,8 +30,8 @@ function parseCommit(raw) {
 function formatGroupDate(isoDate, locale) {
   const [y, mo, d] = isoDate.split("-").map(Number);
   const date = new Date(y, mo - 1, d);
-  const dateLocale = locale === "enUS" ? "en-US" : "es-ES";
-  return new Intl.DateTimeFormat(dateLocale, {
+  const intlLocale = locale === "enUS" ? "en-US" : "es-ES";
+  return new Intl.DateTimeFormat(intlLocale, {
     weekday: "long",
     day: "numeric",
     month: "long",
@@ -115,7 +90,7 @@ function buildGroup(date, entries, locale) {
 export async function loadChangelog(container) {
   if (!container) return;
 
-  const locale = await resolveLocale();
+  const locale = getLocale();
 
   const clearContent = () => {
     [...container.children].forEach((el) => {
@@ -126,7 +101,7 @@ export async function loadChangelog(container) {
   clearContent();
   const placeholder = document.createElement("p");
   placeholder.className = "changelog__placeholder";
-  placeholder.textContent = "Cargando correcciones...";
+  placeholder.textContent = t("changelog.loading", locale);
   container.appendChild(placeholder);
 
   try {
@@ -141,7 +116,7 @@ export async function loadChangelog(container) {
     if (items.length === 0) {
       const empty = document.createElement("p");
       empty.className = "changelog__placeholder";
-      empty.textContent = "No hay correcciones disponibles.";
+      empty.textContent = t("changelog.empty", locale);
       container.appendChild(empty);
       return;
     }
@@ -157,7 +132,7 @@ export async function loadChangelog(container) {
     clearContent();
     const failed = document.createElement("p");
     failed.className = "changelog__placeholder";
-    failed.textContent = "No se pudieron cargar las correcciones.";
+    failed.textContent = t("changelog.error", locale);
     container.appendChild(failed);
   }
 }

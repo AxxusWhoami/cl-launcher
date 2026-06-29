@@ -1,4 +1,7 @@
 // Consulta el estado del reino y actualiza el widget de Server status.
+import { getLocale } from "./locale.js";
+import { t } from "./i18n.js";
+
 const STATUS_URL = "https://apis.corelegacy.gg/realm_status.php?function=getstatus";
 const REFRESH_MS = 60000;
 const TIMEOUT_MS = 8000;
@@ -17,7 +20,7 @@ function setUnknownIndicator(el) {
   el.classList.remove("is-online", "is-offline");
   el.classList.add("is-unknown");
   const state = el.querySelector(".realm-status__state");
-  if (state) state.textContent = "Desconocido";
+  if (state) state.textContent = t("status.unknown", getLocale());
 }
 
 function setText(el, value) {
@@ -67,4 +70,12 @@ export function startRealmStatus() {
 
   fetchStatus(refs);
   setInterval(() => fetchStatus(refs), REFRESH_MS);
+
+  // Actualizar el texto "Desconocido/Unknown" cuando cambia el idioma.
+  window.addEventListener("localechange", () => {
+    const unknowns = document.querySelectorAll(".realm-status__indicator.is-unknown .realm-status__state");
+    unknowns.forEach((el) => {
+      el.textContent = t("status.unknown", getLocale());
+    });
+  });
 }
