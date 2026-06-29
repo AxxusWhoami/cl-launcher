@@ -1,5 +1,5 @@
 // Descarga y renderiza el historial de correcciones desde la API de Core Legacy.
-// El locale se detecta del sistema (Tauri) con fallback a navigator.language.
+import { getLocale, isTauri } from "./locale.js";
 
 const API_BASE = "https://apis.corelegacy.gg/changelog.php";
 
@@ -10,7 +10,7 @@ const LOCALE_MAP = {
   en: "enUS",
 };
 
-function resolveLocale(raw) {
+function resolveSystemLocale(raw) {
   if (!raw) return "esES";
   const lower = raw.toLowerCase().replace("_", "-");
   if (LOCALE_MAP[lower]) return LOCALE_MAP[lower];
@@ -18,15 +18,15 @@ function resolveLocale(raw) {
   return LOCALE_MAP[lang] ?? "esES";
 }
 
-async function getSystemLocale() {
-  try {
-    const tauri = window.__TAURI__;
-    if (tauri?.os?.locale) {
-      const loc = await tauri.os.locale();
-      return loc ?? navigator.language;
-    }
-  } catch (_) {}
-  return navigator.language;
+async function resolveLocale() {
+  if (isTauri()) {
+    try {
+      const loc = await window.__TAURI__.os.locale();
+      return resolveSystemLocale(loc ?? navigator.language);
+    } catch (_) {}
+    return resolveSystemLocale(navigator.language);
+  }
+  return getLocale();
 }
 
 // Soporta: type: desc  |  type(scope): desc  |  type(scope) desc
@@ -44,7 +44,6 @@ const TYPE_META = {
 function parseCommit(raw) {
   const m = COMMIT_RE.exec((raw || "").trim());
   if (!m) return { type: null, meta: null, description: raw || "" };
-  // Strip scope (e.g. "arreglar(pvp)" → "arreglar") before TYPE_META lookup
   const type = m[1].toLowerCase().replace(/\([^)]*\)$/, "");
   return {
     type,
@@ -53,10 +52,11 @@ function parseCommit(raw) {
   };
 }
 
-function formatGroupDate(isoDate) {
+function formatGroupDate(isoDate, locale) {
   const [y, mo, d] = isoDate.split("-").map(Number);
   const date = new Date(y, mo - 1, d);
-  return new Intl.DateTimeFormat("es-ES", {
+  const dateLocale = locale === "enUS" ? "en-US" : "es-ES";
+  return new Intl.DateTimeFormat(dateLocale, {
     weekday: "long",
     day: "numeric",
     month: "long",
@@ -95,13 +95,13 @@ function groupByDate(items) {
   return map;
 }
 
-function buildGroup(date, entries) {
+function buildGroup(date, entries, locale) {
   const section = document.createElement("div");
   section.className = "changelog__group";
 
   const heading = document.createElement("h3");
   heading.className = "changelog__date";
-  heading.textContent = formatGroupDate(date);
+  heading.textContent = formatGroupDate(date, locale);
   section.appendChild(heading);
 
   const ul = document.createElement("ul");
@@ -115,8 +115,7 @@ function buildGroup(date, entries) {
 export async function loadChangelog(container) {
   if (!container) return;
 
-  const rawLocale = await getSystemLocale();
-  const locale = resolveLocale(rawLocale);
+  const locale = await resolveLocale();
 
   const clearContent = () => {
     [...container.children].forEach((el) => {
@@ -150,7 +149,7 @@ export async function loadChangelog(container) {
     const groups = groupByDate(items);
     const fragment = document.createDocumentFragment();
     for (const [date, entries] of groups) {
-      fragment.appendChild(buildGroup(date, entries));
+      fragment.appendChild(buildGroup(date, entries, locale));
     }
     container.appendChild(fragment);
   } catch (err) {

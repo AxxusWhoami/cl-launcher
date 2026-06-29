@@ -5,6 +5,7 @@ import { loadNews } from "./src/news.js";
 import { loadChangelog } from "./src/changelog.js";
 import { startRealmStatus } from "./src/realm-status.js";
 import { startSnow } from "./src/snow.js";
+import { isTauri, getLocale, toggleLocale } from "./src/locale.js";
 
 const ui = new LauncherUI({
   playButton: document.querySelector("#play-button"),
@@ -23,6 +24,8 @@ ui.onPlay(async () => {
 const tabs = document.querySelectorAll(".ice-tab");
 const views = document.querySelectorAll(".view");
 let changelogLoaded = false;
+
+const changelogContainer = document.querySelector("#changelog-list");
 
 tabs.forEach((tab) => {
   tab.addEventListener("click", () => {
@@ -43,9 +46,44 @@ tabs.forEach((tab) => {
 
     if (target === "correcciones" && !changelogLoaded) {
       changelogLoaded = true;
-      loadChangelog(document.querySelector("#changelog-list"));
+      loadChangelog(changelogContainer);
     }
   });
+});
+
+// Botón de idioma: visible solo fuera de Tauri.
+const langToggleBtn = document.querySelector("#lang-toggle");
+const langLabel = document.querySelector("#lang-label");
+
+function updateLangButton(locale) {
+  if (langLabel) langLabel.textContent = locale === "esES" ? "ES" : "EN";
+}
+
+if (!isTauri() && langToggleBtn) {
+  langToggleBtn.hidden = false;
+  updateLangButton(getLocale());
+
+  langToggleBtn.addEventListener("click", () => {
+    const next = toggleLocale();
+    updateLangButton(next);
+    // Si el changelog ya fue cargado, refrescarlo con el nuevo idioma.
+    if (changelogLoaded) {
+      changelogLoaded = false;
+      const changelogTab = document.querySelector(".ice-tab[data-view='correcciones']");
+      const isVisible = !document.querySelector(".view[data-view='correcciones']")?.hidden;
+      if (isVisible) {
+        changelogLoaded = true;
+        loadChangelog(changelogContainer);
+      }
+    }
+  });
+}
+
+window.addEventListener("localechange", () => {
+  if (changelogLoaded) {
+    const isVisible = !document.querySelector(".view[data-view='correcciones']")?.hidden;
+    if (isVisible) loadChangelog(changelogContainer);
+  }
 });
 
 // Envío de formularios de cuenta (la lógica real se conectará vía API).
