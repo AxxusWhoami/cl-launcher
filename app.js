@@ -2,6 +2,7 @@
 import { LauncherUI } from "./src/ui.js";
 import { launchGame } from "./src/launcher.js";
 import { loadNews } from "./src/news.js";
+import { loadChangelog } from "./src/changelog.js";
 import { startRealmStatus } from "./src/realm-status.js";
 import { startSnow } from "./src/snow.js";
 
@@ -21,6 +22,8 @@ ui.onPlay(async () => {
 // Menú de hielo: mantiene una sola pestaña activa y muestra su vista.
 const tabs = document.querySelectorAll(".ice-tab");
 const views = document.querySelectorAll(".view");
+let changelogLoaded = false;
+
 tabs.forEach((tab) => {
   tab.addEventListener("click", () => {
     tabs.forEach((other) => {
@@ -36,6 +39,11 @@ tabs.forEach((tab) => {
       views.forEach((view) => {
         view.hidden = view.dataset.view !== target;
       });
+    }
+
+    if (target === "correcciones" && !changelogLoaded) {
+      changelogLoaded = true;
+      loadChangelog(document.querySelector("#changelog-list"));
     }
   });
 });
