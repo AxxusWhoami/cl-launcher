@@ -47,7 +47,7 @@ function parseCommit(raw) {
   return {
     type,
     meta: TYPE_META[type] ?? { label: type, cls: "changelog-badge--chore" },
-    description: m[2].trim(),
+    description: m[2].trim().replace(/^./, (c) => c.toUpperCase()),
     pr: m[3] ?? null,
   };
 }
