@@ -51,6 +51,14 @@ tabs.forEach((tab) => {
 // Envío de formularios de cuenta (la lógica real se conectará vía API).
 document.querySelector("#login-form")?.addEventListener("submit", (e) => e.preventDefault());
 document.querySelector("#register-form")?.addEventListener("submit", (e) => e.preventDefault());
+document.querySelector("#recovery-form")?.addEventListener("submit", (e) => e.preventDefault());
+
+// Toggle formulario de recuperación de contraseña.
+document.querySelector("#forgot-toggle")?.addEventListener("click", () => {
+  const panel = document.querySelector("#recovery-panel");
+  if (!panel) return;
+  panel.hidden = !panel.hidden;
+});
 
 // Pestañas de cuenta: alterna entre Iniciar sesión y Crear cuenta.
 const accountTabs = document.querySelectorAll(".account__tab");

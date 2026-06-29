@@ -110,11 +110,20 @@
                   </button>
                 </div>
               </div>
-              <a class="account__forgot" href="https://accounts.corelegacy.gg" target="_blank" rel="noopener">
-                ¿Olvidaste tu contraseña?
-              </a>
+              <button class="account__forgot" type="button" id="forgot-toggle">¿Olvidaste tu contraseña?</button>
               <button class="account__submit" type="submit">Iniciar sesión</button>
             </form>
+
+            <div class="account__recovery" id="recovery-panel" hidden>
+              <form class="account__form" id="recovery-form" novalidate>
+                <div class="account__field">
+                  <label class="account__label" for="recovery-email">Correo electrónico</label>
+                  <input class="account__input" id="recovery-email" name="email"
+                    type="email" inputmode="email" autocomplete="email" placeholder="tu@correo.com" required />
+                </div>
+                <button class="account__submit" type="submit">Enviar link recuperación</button>
+              </form>
+            </div>
           </div>
 
           <div class="account__panel" id="panel-register" role="tabpanel" hidden>
@@ -126,10 +135,6 @@
               </div>
               <button class="account__submit" type="submit">Crear cuenta</button>
             </form>
-            <p class="account__manage">
-              Gestiona tu cuenta en
-              <a class="account__link" href="https://accounts.corelegacy.gg" target="_blank" rel="noopener">accounts.corelegacy.gg</a>
-            </p>
           </div>
 
         </div>

@@ -669,9 +669,12 @@ body {
   font-family: var(--font-ui);
   font-size: 0.8rem;
   color: var(--text-dim);
-  text-decoration: none;
+  background: none;
+  border: none;
+  padding: 0;
   letter-spacing: 0.03em;
   margin-top: -4px;
+  cursor: pointer;
   transition: color 0.2s ease;
 }
 
@@ -679,9 +682,15 @@ body {
   color: var(--ice);
 }
 
+.account__recovery {
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(200, 162, 74, 0.15);
+}
+
 .account__submit {
   margin-top: 4px;
-  font-family: var(--font-classic);
+  font-family: var(--font-morpheus);
   font-weight: 700;
   font-size: 0.95rem;
   letter-spacing: 0.1em;
