@@ -681,14 +681,25 @@ body {
 }
 
 .account__recovery {
-  display: none;
-  margin-top: 20px;
-  padding-top: 20px;
-  border-top: 1px solid rgba(200, 162, 74, 0.15);
+  border-top: none;
 }
 
-.account__recovery.is-open {
-  display: block;
+.account__back {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-ui);
+  font-size: 0.8rem;
+  color: var(--text-dim);
+  background: none;
+  border: none;
+  padding: 0 0 16px;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.account__back:hover {
+  color: var(--ice);
 }
 
 .account__submit {

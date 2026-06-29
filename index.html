@@ -113,17 +113,6 @@
               <button class="account__forgot" type="button" id="forgot-toggle">¿Olvidaste tu contraseña?</button>
               <button class="account__submit" type="submit">Iniciar sesión</button>
             </form>
-
-            <div class="account__recovery" id="recovery-panel">
-              <form class="account__form" id="recovery-form" novalidate>
-                <div class="account__field">
-                  <label class="account__label" for="recovery-email">Correo electrónico</label>
-                  <input class="account__input" id="recovery-email" name="email"
-                    type="email" inputmode="email" autocomplete="email" placeholder="tu@correo.com" required />
-                </div>
-                <button class="account__submit" type="submit">Enviar link recuperación</button>
-              </form>
-            </div>
           </div>
 
           <div class="account__panel" id="panel-register" role="tabpanel" hidden>
@@ -134,6 +123,20 @@
                   type="email" inputmode="email" autocomplete="email" placeholder="tu@correo.com" required />
               </div>
               <button class="account__submit" type="submit">Crear cuenta</button>
+            </form>
+          </div>
+
+          <div class="account__panel account__recovery" id="panel-recovery" hidden>
+            <button class="account__back" type="button" id="recovery-back">
+              <i class="fa-solid fa-arrow-left"></i> Volver
+            </button>
+            <form class="account__form" id="recovery-form" novalidate>
+              <div class="account__field">
+                <label class="account__label" for="recovery-email">Correo electrónico</label>
+                <input class="account__input" id="recovery-email" name="email"
+                  type="email" inputmode="email" autocomplete="email" placeholder="tu@correo.com" required />
+              </div>
+              <button class="account__submit" type="submit">Enviar link recuperación</button>
             </form>
           </div>
 

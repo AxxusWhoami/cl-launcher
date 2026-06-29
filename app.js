@@ -54,16 +54,26 @@ document.querySelector("#register-form")?.addEventListener("submit", (e) => e.pr
 document.querySelector("#recovery-form")?.addEventListener("submit", (e) => e.preventDefault());
 
 // Toggle formulario de recuperación de contraseña.
-document.querySelector("#forgot-toggle")?.addEventListener("click", () => {
-  const panel = document.querySelector("#recovery-panel");
+function showRecovery(open) {
   const tabs = document.querySelector(".account__tabs");
-  const loginForm = document.querySelector("#login-form");
-  if (!panel) return;
-  const opening = !panel.classList.contains("is-open");
-  panel.classList.toggle("is-open");
-  if (tabs) tabs.hidden = opening;
-  if (loginForm) loginForm.hidden = opening;
-});
+  const panels = document.querySelectorAll(".account__panel:not(#panel-recovery)");
+  const recoveryPanel = document.querySelector("#panel-recovery");
+  if (!recoveryPanel) return;
+  recoveryPanel.hidden = !open;
+  if (tabs) tabs.hidden = open;
+  panels.forEach((p) => { p.hidden = open ? true : p.id !== "panel-login"; });
+  if (!open) {
+    // Restaurar pestaña activa correctamente
+    const activeTab = document.querySelector(".account__tab.is-active");
+    const target = activeTab?.dataset.tab ?? "login";
+    document.querySelectorAll(".account__panel:not(#panel-recovery)").forEach((p) => {
+      p.hidden = p.id !== `panel-${target}`;
+    });
+  }
+}
+
+document.querySelector("#forgot-toggle")?.addEventListener("click", () => showRecovery(true));
+document.querySelector("#recovery-back")?.addEventListener("click", () => showRecovery(false));
 
 // Pestañas de cuenta: alterna entre Iniciar sesión y Crear cuenta.
 const accountTabs = document.querySelectorAll(".account__tab");
