@@ -56,8 +56,13 @@ document.querySelector("#recovery-form")?.addEventListener("submit", (e) => e.pr
 // Toggle formulario de recuperación de contraseña.
 document.querySelector("#forgot-toggle")?.addEventListener("click", () => {
   const panel = document.querySelector("#recovery-panel");
+  const tabs = document.querySelector(".account__tabs");
+  const loginForm = document.querySelector("#login-form");
   if (!panel) return;
+  const opening = !panel.classList.contains("is-open");
   panel.classList.toggle("is-open");
+  if (tabs) tabs.hidden = opening;
+  if (loginForm) loginForm.hidden = opening;
 });
 
 // Pestañas de cuenta: alterna entre Iniciar sesión y Crear cuenta.
