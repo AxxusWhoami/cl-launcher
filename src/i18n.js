@@ -68,7 +68,7 @@ const TRANSLATIONS = {
     "nav.forums":      "Forums",
 
     // News
-    "news.heading":       "Kingdom News",
+    "news.heading":       "Realm News",
     "news.loading":       "Loading news...",
     "news.empty":         "No news available.",
     "news.error":         "Could not load news.",
