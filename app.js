@@ -22,6 +22,7 @@ ui.onPlay(async () => {
 // Menú de hielo: mantiene una sola pestaña activa y muestra su vista.
 const tabs = document.querySelectorAll(".ice-tab");
 const views = document.querySelectorAll(".view");
+const changelogBackdrop = document.querySelector("#changelog-backdrop");
 let changelogLoaded = false;
 
 tabs.forEach((tab) => {
@@ -40,6 +41,8 @@ tabs.forEach((tab) => {
         view.hidden = view.dataset.view !== target;
       });
     }
+
+    changelogBackdrop?.classList.toggle("is-visible", target === "correcciones");
 
     if (target === "correcciones" && !changelogLoaded) {
       changelogLoaded = true;
