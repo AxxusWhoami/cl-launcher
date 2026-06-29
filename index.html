@@ -79,27 +79,84 @@
         </aside>
       </section>
 
-      <section class="account view" data-view="cuenta" aria-label="Crear cuenta" hidden>
+      <section class="account view" data-view="cuenta" aria-label="Cuenta" hidden>
         <div class="account__card">
-          <h2 class="account__title">Crea tu cuenta - Juega gratis ya</h2>
-          <form class="account__form" id="account-form" novalidate>
-            <label class="account__label" for="account-email">Correo electrónico</label>
-            <input
-              class="account__input"
-              id="account-email"
-              name="email"
-              type="email"
-              inputmode="email"
-              autocomplete="email"
-              placeholder="tu@correo.com"
-              required
-            />
-            <button class="account__submit" type="submit">Crear cuenta</button>
-          </form>
-          <p class="account__manage">
-            ¿Ya tienes cuenta y quieres gestionarla?
-            <a class="account__link" href="https://accounts.corelegacy.gg">Ir a gestión de cuentas</a>
-          </p>
+
+          <div class="account__tabs" role="tablist" aria-label="Sección de cuenta">
+            <button class="account__tab is-active" type="button" role="tab"
+              data-tab="login" aria-selected="true" aria-controls="panel-login">
+              Iniciar sesión
+            </button>
+            <button class="account__tab" type="button" role="tab"
+              data-tab="register" aria-selected="false" aria-controls="panel-register">
+              Crear cuenta
+            </button>
+          </div>
+
+          <div class="account__panel" id="panel-login" role="tabpanel">
+            <form class="account__form" id="login-form" novalidate>
+              <div class="account__field">
+                <label class="account__label" for="login-user">Usuario o correo</label>
+                <input class="account__input" id="login-user" name="username"
+                  type="text" autocomplete="username" placeholder="Tu usuario o correo" required />
+              </div>
+              <div class="account__field">
+                <label class="account__label" for="login-password">Contraseña</label>
+                <div class="account__input-wrap">
+                  <input class="account__input" id="login-password" name="password"
+                    type="password" autocomplete="current-password" placeholder="Tu contraseña" required />
+                  <button class="account__eye" type="button" aria-label="Mostrar contraseña" data-target="login-password">
+                    <i class="fa-solid fa-eye"></i>
+                  </button>
+                </div>
+              </div>
+              <a class="account__forgot" href="https://accounts.corelegacy.gg" target="_blank" rel="noopener">
+                ¿Olvidaste tu contraseña?
+              </a>
+              <button class="account__submit" type="submit">Iniciar sesión</button>
+            </form>
+          </div>
+
+          <div class="account__panel" id="panel-register" role="tabpanel" hidden>
+            <form class="account__form" id="register-form" novalidate>
+              <div class="account__field">
+                <label class="account__label" for="reg-user">Nombre de usuario</label>
+                <input class="account__input" id="reg-user" name="username"
+                  type="text" autocomplete="username" placeholder="Elige un nombre de usuario" required />
+              </div>
+              <div class="account__field">
+                <label class="account__label" for="reg-email">Correo electrónico</label>
+                <input class="account__input" id="reg-email" name="email"
+                  type="email" inputmode="email" autocomplete="email" placeholder="tu@correo.com" required />
+              </div>
+              <div class="account__field">
+                <label class="account__label" for="reg-password">Contraseña</label>
+                <div class="account__input-wrap">
+                  <input class="account__input" id="reg-password" name="password"
+                    type="password" autocomplete="new-password" placeholder="Mínimo 8 caracteres" required />
+                  <button class="account__eye" type="button" aria-label="Mostrar contraseña" data-target="reg-password">
+                    <i class="fa-solid fa-eye"></i>
+                  </button>
+                </div>
+              </div>
+              <div class="account__field">
+                <label class="account__label" for="reg-confirm">Confirmar contraseña</label>
+                <div class="account__input-wrap">
+                  <input class="account__input" id="reg-confirm" name="confirm"
+                    type="password" autocomplete="new-password" placeholder="Repite tu contraseña" required />
+                  <button class="account__eye" type="button" aria-label="Mostrar contraseña" data-target="reg-confirm">
+                    <i class="fa-solid fa-eye"></i>
+                  </button>
+                </div>
+              </div>
+              <button class="account__submit" type="submit">Crear cuenta</button>
+            </form>
+            <p class="account__manage">
+              Gestiona tu cuenta en
+              <a class="account__link" href="https://accounts.corelegacy.gg" target="_blank" rel="noopener">accounts.corelegacy.gg</a>
+            </p>
+          </div>
+
         </div>
       </section>
 

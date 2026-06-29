@@ -48,10 +48,38 @@ tabs.forEach((tab) => {
   });
 });
 
-// Envío del formulario de cuenta (la creación real se hará vía API más adelante).
-const accountForm = document.querySelector("#account-form");
-accountForm?.addEventListener("submit", (event) => {
-  event.preventDefault();
+// Envío de formularios de cuenta (la lógica real se conectará vía API).
+document.querySelector("#login-form")?.addEventListener("submit", (e) => e.preventDefault());
+document.querySelector("#register-form")?.addEventListener("submit", (e) => e.preventDefault());
+
+// Pestañas de cuenta: alterna entre Iniciar sesión y Crear cuenta.
+const accountTabs = document.querySelectorAll(".account__tab");
+accountTabs.forEach((tab) => {
+  tab.addEventListener("click", () => {
+    accountTabs.forEach((t) => {
+      t.classList.remove("is-active");
+      t.setAttribute("aria-selected", "false");
+    });
+    tab.classList.add("is-active");
+    tab.setAttribute("aria-selected", "true");
+
+    const target = tab.dataset.tab;
+    document.querySelectorAll(".account__panel").forEach((panel) => {
+      panel.hidden = panel.id !== `panel-${target}`;
+    });
+  });
+});
+
+// Toggle visibilidad de contraseña.
+document.querySelectorAll(".account__eye").forEach((btn) => {
+  btn.addEventListener("click", () => {
+    const input = document.getElementById(btn.dataset.target);
+    if (!input) return;
+    const isPassword = input.type === "password";
+    input.type = isPassword ? "text" : "password";
+    btn.setAttribute("aria-label", isPassword ? "Ocultar contraseña" : "Mostrar contraseña");
+    btn.querySelector("i").className = isPassword ? "fa-solid fa-eye-slash" : "fa-solid fa-eye";
+  });
 });
 
 // Carga las noticias del reino al iniciar el lanzador.
