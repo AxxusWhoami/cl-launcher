@@ -769,22 +769,6 @@ body {
 }
 
 /* ===== Vista de correcciones ===== */
-.changelog-backdrop {
-  position: fixed;
-  inset: 0;
-  z-index: 3;
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity 0.2s ease;
-  background:
-    radial-gradient(ellipse 80% 60% at 50% 30%, rgba(10, 20, 40, 0.82) 0%, transparent 100%),
-    linear-gradient(180deg, rgba(5, 12, 28, 0.78) 0%, rgba(3, 8, 20, 0.88) 100%);
-}
-
-.changelog-backdrop.is-visible {
-  opacity: 1;
-}
-
 .changelog {
   flex: 1;
   min-height: 0;
@@ -792,8 +776,10 @@ body {
   flex-direction: column;
   padding: 20px 8px 8px;
   position: relative;
-  z-index: 4;
   overflow-y: auto;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 30%, rgba(10, 20, 40, 0.82) 0%, transparent 100%),
+    linear-gradient(180deg, rgba(5, 12, 28, 0.78) 0%, rgba(3, 8, 20, 0.88) 100%);
 
   scrollbar-width: thin;
   scrollbar-color: var(--ice-deep) var(--abyss);
