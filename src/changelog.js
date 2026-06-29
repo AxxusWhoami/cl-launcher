@@ -29,7 +29,8 @@ async function getSystemLocale() {
   return navigator.language;
 }
 
-const COMMIT_RE = /^(\w+)(?:\([^)]+\))?:\s*(.*?)(?:\s*\(#(\d+)\))?$/s;
+// Soporta: type: desc  |  type(scope): desc  |  type(scope) desc
+const COMMIT_RE = /^(\w+(?:\([^)]+\))?)(?::\s*|\s+)(.*?)(?:\s*\(#(\d+)\))?$/s;
 
 const TYPE_META = {
   fix:      { label: "fix",      cls: "changelog-badge--fix" },
@@ -43,7 +44,8 @@ const TYPE_META = {
 function parseCommit(raw) {
   const m = COMMIT_RE.exec((raw || "").trim());
   if (!m) return { type: null, meta: null, description: raw || "" };
-  const type = m[1].toLowerCase();
+  // Strip scope (e.g. "arreglar(pvp)" → "arreglar") before TYPE_META lookup
+  const type = m[1].toLowerCase().replace(/\([^)]*\)$/, "");
   return {
     type,
     meta: TYPE_META[type] ?? { label: type, cls: "changelog-badge--chore" },
