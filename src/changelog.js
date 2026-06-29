@@ -42,13 +42,12 @@ const TYPE_META = {
 
 function parseCommit(raw) {
   const m = COMMIT_RE.exec((raw || "").trim());
-  if (!m) return { type: null, meta: null, description: raw || "", pr: null };
+  if (!m) return { type: null, meta: null, description: raw || "" };
   const type = m[1].toLowerCase();
   return {
     type,
     meta: TYPE_META[type] ?? { label: type, cls: "changelog-badge--chore" },
     description: m[2].trim().replace(/^./, (c) => c.toUpperCase()),
-    pr: m[3] ?? null,
   };
 }
 
@@ -64,7 +63,7 @@ function formatGroupDate(isoDate) {
 }
 
 function buildItem(entry) {
-  const { meta, description, pr } = parseCommit(entry.commit);
+  const { meta, description } = parseCommit(entry.commit);
 
   const li = document.createElement("li");
   li.className = "changelog__item";
@@ -80,13 +79,6 @@ function buildItem(entry) {
   text.className = "changelog__desc";
   text.textContent = description;
   li.appendChild(text);
-
-  if (pr) {
-    const prLink = document.createElement("span");
-    prLink.className = "changelog__pr";
-    prLink.textContent = `#${pr}`;
-    li.appendChild(prLink);
-  }
 
   return li;
 }
