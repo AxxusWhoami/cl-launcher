@@ -57,7 +57,7 @@ document.querySelector("#recovery-form")?.addEventListener("submit", (e) => e.pr
 document.querySelector("#forgot-toggle")?.addEventListener("click", () => {
   const panel = document.querySelector("#recovery-panel");
   if (!panel) return;
-  panel.hidden = !panel.hidden;
+  panel.classList.toggle("is-open");
 });
 
 // Pestañas de cuenta: alterna entre Iniciar sesión y Crear cuenta.
