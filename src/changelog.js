@@ -118,7 +118,13 @@ export async function loadChangelog(container) {
   const rawLocale = await getSystemLocale();
   const locale = resolveLocale(rawLocale);
 
-  container.innerHTML = "";
+  const clearContent = () => {
+    [...container.children].forEach((el) => {
+      if (!el.classList.contains("news__heading")) el.remove();
+    });
+  };
+
+  clearContent();
   const placeholder = document.createElement("p");
   placeholder.className = "changelog__placeholder";
   placeholder.textContent = "Cargando correcciones...";
@@ -131,7 +137,7 @@ export async function loadChangelog(container) {
     const payload = await res.json();
     const items = Array.isArray(payload?.data) ? payload.data : [];
 
-    container.innerHTML = "";
+    clearContent();
 
     if (items.length === 0) {
       const empty = document.createElement("p");
@@ -149,7 +155,7 @@ export async function loadChangelog(container) {
     container.appendChild(fragment);
   } catch (err) {
     console.error("No se pudieron cargar las correcciones:", err);
-    container.innerHTML = "";
+    clearContent();
     const failed = document.createElement("p");
     failed.className = "changelog__placeholder";
     failed.textContent = "No se pudieron cargar las correcciones.";
