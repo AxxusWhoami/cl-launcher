@@ -18,12 +18,23 @@ const TYPE_META = {
 
 function parseCommit(raw) {
   const m = COMMIT_RE.exec((raw || "").trim());
-  if (!m) return { type: null, meta: null, description: raw || "" };
+  if (!m) {
+    const desc = (raw || "").replace(/\s*\(#\d+\)\s*$/g, "").trim();
+    return {
+      type: null,
+      meta: TYPE_META.fix,
+      description: desc.replace(/^./, (c) => c.toUpperCase()),
+    };
+  }
   const type = m[1].toLowerCase().replace(/\([^)]*\)$/, "");
+  const description = m[2]
+    .replace(/\s*\(#\d+\)/g, "")
+    .trim()
+    .replace(/^./, (c) => c.toUpperCase());
   return {
     type,
-    meta: TYPE_META[type] ?? { label: type, cls: "changelog-badge--chore" },
-    description: m[2].trim().replace(/^./, (c) => c.toUpperCase()),
+    meta: TYPE_META[type] ?? TYPE_META.fix,
+    description,
   };
 }
 
@@ -45,12 +56,10 @@ function buildItem(entry, locale) {
   const li = document.createElement("li");
   li.className = "changelog__item";
 
-  if (meta) {
-    const badge = document.createElement("span");
-    badge.className = `changelog-badge ${meta.cls}`;
-    badge.textContent = meta.i18nKey ? t(meta.i18nKey, locale) : meta.label;
-    li.appendChild(badge);
-  }
+  const badge = document.createElement("span");
+  badge.className = `changelog-badge ${meta.cls}`;
+  badge.textContent = meta.i18nKey ? t(meta.i18nKey, locale) : meta.label;
+  li.appendChild(badge);
 
   const text = document.createElement("span");
   text.className = "changelog__desc";
