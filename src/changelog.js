@@ -14,6 +14,7 @@ const TYPE_META = {
   tarea:    { i18nKey: "badge.chore", cls: "changelog-badge--chore" },
   chore:    { i18nKey: "badge.chore", cls: "changelog-badge--chore" },
   refactor: { label: "refactor", cls: "changelog-badge--refactor" },
+  bots:     { label: "bots",     cls: "changelog-badge--bots" },
 };
 
 function parseCommit(raw) {
