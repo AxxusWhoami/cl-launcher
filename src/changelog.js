@@ -147,6 +147,12 @@ function buildFilters(container, allItems, locale) {
   } else {
     container.prepend(toolbar);
   }
+}
+
+function attachFilterHandlers(container) {
+  const filters = container.querySelector(".changelog__filters");
+  const search = container.querySelector(".changelog__search");
+  if (!filters || !search) return;
 
   let activeFilter = "";
   let searchQuery = "";
@@ -226,6 +232,9 @@ export async function loadChangelog(container) {
       fragment.appendChild(buildGroup(date, entries, locale));
     }
     container.appendChild(fragment);
+
+    // Activar filtros ahora que los items están en el DOM
+    attachFilterHandlers(container);
   } catch (err) {
     console.error("No se pudieron cargar las correcciones:", err);
     clearContent();
