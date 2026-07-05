@@ -1132,6 +1132,12 @@ body {
   to { transform: rotate(360deg); }
 }
 
+.realm-status__updated-icon {
+  font-size: 0.7rem;
+  color: var(--gold);
+  opacity: 0.75;
+}
+
 .realm-status__updated {
   flex: 1;
 }
