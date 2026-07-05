@@ -8,14 +8,16 @@ const API_BASE = "https://apis.corelegacy.gg/changelog.php";
 const COMMIT_RE = /^(\w+(?:\([^)]+\))?)(?::\s*|\s+)(.*?)(?:\s*\(#(\d+)\))?$/s;
 
 const TYPE_META = {
-  fix:      { label: "fix",      cls: "changelog-badge--fix" },
-  arreglar: { label: "fix",      cls: "changelog-badge--fix" },
-  feat:     { label: "feat",     cls: "changelog-badge--feat" },
-  tarea:    { i18nKey: "badge.chore", cls: "changelog-badge--chore" },
-  chore:    { i18nKey: "badge.chore", cls: "changelog-badge--chore" },
-  refactor: { label: "refactor", cls: "changelog-badge--refactor" },
-  bots:     { label: "bots",     cls: "changelog-badge--bots" },
+  fix:      { label: "fix",      cls: "changelog-badge--fix",      key: "fix" },
+  arreglar: { label: "fix",      cls: "changelog-badge--fix",      key: "fix" },
+  feat:     { label: "feat",     cls: "changelog-badge--feat",     key: "feat" },
+  tarea:    { i18nKey: "badge.chore", cls: "changelog-badge--chore",   key: "chore" },
+  chore:    { i18nKey: "badge.chore", cls: "changelog-badge--chore",   key: "chore" },
+  refactor: { label: "refactor", cls: "changelog-badge--refactor", key: "refactor" },
+  bots:     { label: "bots",     cls: "changelog-badge--bots",     key: "bots" },
 };
+
+const FALLBACK_META = { label: "fix", cls: "changelog-badge--fix", key: "fix" };
 
 function parseCommit(raw) {
   const m = COMMIT_RE.exec((raw || "").trim());
@@ -23,7 +25,7 @@ function parseCommit(raw) {
     const desc = (raw || "").replace(/\s*\(#\d+\)\s*$/g, "").trim();
     return {
       type: null,
-      meta: TYPE_META.fix,
+      meta: FALLBACK_META,
       description: desc.replace(/^./, (c) => c.toUpperCase()),
     };
   }
@@ -34,7 +36,7 @@ function parseCommit(raw) {
     .replace(/^./, (c) => c.toUpperCase());
   return {
     type,
-    meta: TYPE_META[type] ?? TYPE_META.fix,
+    meta: TYPE_META[type] ?? FALLBACK_META,
     description,
   };
 }
@@ -56,7 +58,8 @@ function buildItem(entry, locale) {
 
   const li = document.createElement("li");
   li.className = "changelog__item";
-  li.dataset.badge = meta.i18nKey ? t(meta.i18nKey, locale) : meta.label;
+  // Usar la clave estable (key) para el filtro, nunca el label traducido
+  li.dataset.badge = meta.key;
   li.dataset.desc = description.toLowerCase();
 
   const badge = document.createElement("span");
@@ -103,11 +106,13 @@ function buildFilters(container, allItems, locale) {
   const existing = container.querySelector(".changelog__toolbar");
   if (existing) existing.remove();
 
-  const badgeLabels = new Set();
+  // Recopilar claves únicas presentes en los datos
+  const seen = new Map(); // key → label visible
   allItems.forEach((item) => {
     const { meta } = parseCommit(item.commit);
-    const label = meta.i18nKey ? t(meta.i18nKey, locale) : meta.label;
-    badgeLabels.add(label);
+    if (!seen.has(meta.key)) {
+      seen.set(meta.key, meta.i18nKey ? t(meta.i18nKey, locale) : meta.label);
+    }
   });
 
   const toolbar = document.createElement("div");
@@ -130,14 +135,17 @@ function buildFilters(container, allItems, locale) {
   allBtn.textContent = t("changelog.filter.all", locale);
   filters.appendChild(allBtn);
 
-  [...badgeLabels].sort().forEach((label) => {
-    const btn = document.createElement("button");
-    btn.type = "button";
-    btn.className = "changelog__filter-btn";
-    btn.dataset.filter = label;
-    btn.textContent = label;
-    filters.appendChild(btn);
-  });
+  // Ordenar por label visible para consistencia
+  [...seen.entries()]
+    .sort((a, b) => a[1].localeCompare(b[1]))
+    .forEach(([key, label]) => {
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "changelog__filter-btn";
+      btn.dataset.filter = key; // clave estable, no el label
+      btn.textContent = label;
+      filters.appendChild(btn);
+    });
 
   toolbar.appendChild(filters);
 
@@ -162,6 +170,7 @@ function attachFilterHandlers(container) {
     groups.forEach((group) => {
       let groupVisible = false;
       group.querySelectorAll(".changelog__item").forEach((li) => {
+        // data-badge contiene la clave estable; data-filter del botón también
         const matchFilter = !activeFilter || li.dataset.badge === activeFilter;
         const matchSearch = !searchQuery || li.dataset.desc.includes(searchQuery);
         const visible = matchFilter && matchSearch;
@@ -233,7 +242,7 @@ export async function loadChangelog(container) {
     }
     container.appendChild(fragment);
 
-    // Activar filtros ahora que los items están en el DOM
+    // Conectar handlers después de que los items existan en el DOM
     attachFilterHandlers(container);
   } catch (err) {
     console.error("No se pudieron cargar las correcciones:", err);
