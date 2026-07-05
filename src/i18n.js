@@ -74,6 +74,12 @@ const TRANSLATIONS = {
     // Idioma
     "lang.toggle": "Cambiar idioma",
 
+    // Características
+    "features.heading": "Características",
+    "features.loading": "Cargando características...",
+    "features.empty":   "No hay características disponibles.",
+    "features.error":   "No se pudieron cargar las características.",
+
     // Modal de actualización
     "update.title":   "Nueva versión disponible",
     "update.body":    "Hay una nueva versión del lanzador. ¿Deseas actualizar?",
@@ -152,6 +158,12 @@ const TRANSLATIONS = {
 
     // Language
     "lang.toggle": "Change language",
+
+    // Features
+    "features.heading": "Features",
+    "features.loading": "Loading features...",
+    "features.empty":   "No features available.",
+    "features.error":   "Could not load features.",
 
     // Update modal
     "update.title":   "New version available",

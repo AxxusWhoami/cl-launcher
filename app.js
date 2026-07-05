@@ -3,6 +3,7 @@ import { LauncherUI } from "./src/ui.js";
 import { launchGame } from "./src/launcher.js";
 import { loadNews } from "./src/news.js";
 import { loadChangelog } from "./src/changelog.js";
+import { loadFeatures } from "./src/features.js";
 import { startRealmStatus } from "./src/realm-status.js";
 import { startSnow } from "./src/snow.js";
 import { isTauri, getLocale, toggleLocale, initLocale } from "./src/locale.js";
@@ -277,6 +278,7 @@ const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   window.__openUpdateModal = openUpdateModal;
 
   // --- Carga inicial ----------------------------------------------------------
+  loadFeatures(document.querySelector("#features-list"));
   startRealmStatus();
   startSnow(document.querySelector(".snow-layer"));
 })();
