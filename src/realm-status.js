@@ -34,7 +34,21 @@ function showUnknown(refs) {
   setText(refs.uptime, "-");
 }
 
+function updateLastRefreshed(el) {
+  if (!el) return;
+  const locale = getLocale();
+  const intlLocale = locale === "enUS" ? "en-US" : "es-ES";
+  const now = new Date();
+  el.textContent = new Intl.DateTimeFormat(intlLocale, {
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
+  }).format(now);
+  el.setAttribute("datetime", now.toISOString());
+}
+
 async function fetchStatus(refs) {
+  if (refs.spinner) refs.spinner.classList.add("is-spinning");
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), TIMEOUT_MS);
   try {
@@ -52,11 +66,13 @@ async function fetchStatus(refs) {
     setIndicator(refs.server, Number(data.server_status) === 1);
     setText(refs.players, String(data.players_online ?? 0));
     setText(refs.uptime, data.uptime || "-");
+    updateLastRefreshed(refs.lastUpdated);
   } catch (error) {
     console.error("No se pudo cargar el estado del reino:", error);
     showUnknown(refs);
   } finally {
     clearTimeout(timeout);
+    if (refs.spinner) refs.spinner.classList.remove("is-spinning");
   }
 }
 
@@ -66,16 +82,19 @@ export function startRealmStatus() {
     server: document.querySelector("#status-server"),
     players: document.querySelector("#status-players"),
     uptime: document.querySelector("#status-uptime"),
+    lastUpdated: document.querySelector("#status-last-updated"),
+    spinner: document.querySelector("#status-spinner"),
   };
 
   fetchStatus(refs);
-  setInterval(() => fetchStatus(refs), REFRESH_MS);
+  const intervalId = setInterval(() => fetchStatus(refs), REFRESH_MS);
 
-  // Actualizar el texto "Desconocido/Unknown" cuando cambia el idioma.
   window.addEventListener("localechange", () => {
     const unknowns = document.querySelectorAll(".realm-status__indicator.is-unknown .realm-status__state");
     unknowns.forEach((el) => {
       el.textContent = t("status.unknown", getLocale());
     });
   });
+
+  return () => clearInterval(intervalId);
 }

@@ -38,6 +38,7 @@ export function startSnow(canvas) {
   }
 
   let lastTime = performance.now();
+  let rafId = 0;
 
   function frame(now) {
     const dt = Math.min((now - lastTime) / 1000, 0.05);
@@ -68,15 +69,15 @@ export function startSnow(canvas) {
     rafId = requestAnimationFrame(frame);
   }
 
-  let rafId = 0;
-
   function start() {
+    cancelAnimationFrame(rafId);
     if (reduceMotion.matches) {
-      resize();
+      canvas.hidden = true;
       return;
     }
+    canvas.hidden = false;
+    if (document.hidden) return;
     lastTime = performance.now();
-    cancelAnimationFrame(rafId);
     rafId = requestAnimationFrame(frame);
   }
 
@@ -85,4 +86,13 @@ export function startSnow(canvas) {
 
   window.addEventListener("resize", resize);
   reduceMotion.addEventListener?.("change", start);
+
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden) {
+      cancelAnimationFrame(rafId);
+    } else if (!reduceMotion.matches) {
+      lastTime = performance.now();
+      rafId = requestAnimationFrame(frame);
+    }
+  });
 }

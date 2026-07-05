@@ -8,6 +8,9 @@ import { startSnow } from "./src/snow.js";
 import { isTauri, getLocale, toggleLocale, initLocale } from "./src/locale.js";
 import { applyTranslations, t } from "./src/i18n.js";
 
+const AUDIO_STORAGE_KEY = "launcher_audio_muted";
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
 (async () => {
   // --- Inicialización de idioma -----------------------------------------------
   const locale = await initLocale();
@@ -65,6 +68,9 @@ import { applyTranslations, t } from "./src/i18n.js";
 
   function updateLangButton(loc) {
     if (langLabel) langLabel.textContent = loc === "esES" ? "ES" : "EN";
+    if (langToggleBtn) {
+      langToggleBtn.setAttribute("aria-label", t("lang.toggle", loc));
+    }
   }
 
   if (!isTauri() && langToggleBtn) {
@@ -82,6 +88,8 @@ import { applyTranslations, t } from "./src/i18n.js";
     const loc = e.detail?.locale ?? getLocale();
     applyTranslations(loc);
     document.documentElement.lang = loc === "enUS" ? "en" : "es";
+    updateLangButton(loc);
+    updateAudioButton();
 
     if (changelogLoaded) {
       changelogLoaded = false;
@@ -95,10 +103,83 @@ import { applyTranslations, t } from "./src/i18n.js";
     loadNews(document.querySelector("#news-list"));
   });
 
+  // --- Audio ambiente ----------------------------------------------------------
+  const ambientAudio = new Audio("/corelegacy_launcher.mp3");
+  ambientAudio.loop = true;
+  let muted = localStorage.getItem(AUDIO_STORAGE_KEY) === "true";
+  ambientAudio.volume = muted ? 0 : 0.5;
+
+  const audioToggleBtn = document.querySelector("#audio-toggle");
+
+  function updateAudioButton() {
+    if (!audioToggleBtn) return;
+    const loc = getLocale();
+    const icon = audioToggleBtn.querySelector("i");
+    if (muted) {
+      icon.className = "fa-solid fa-volume-xmark";
+      audioToggleBtn.setAttribute("aria-label", t("audio.unmute", loc));
+    } else {
+      icon.className = "fa-solid fa-volume-high";
+      audioToggleBtn.setAttribute("aria-label", t("audio.mute", loc));
+    }
+  }
+
+  function setMuted(value) {
+    muted = value;
+    ambientAudio.volume = muted ? 0 : 0.5;
+    localStorage.setItem(AUDIO_STORAGE_KEY, String(muted));
+    updateAudioButton();
+  }
+
+  updateAudioButton();
+
+  audioToggleBtn?.addEventListener("click", () => setMuted(!muted));
+
+  if (!muted) {
+    ambientAudio.play().catch(() => {
+      const resume = () => {
+        if (!muted) ambientAudio.play().catch(() => {});
+        document.removeEventListener("click", resume);
+        document.removeEventListener("keydown", resume);
+      };
+      document.addEventListener("click", resume);
+      document.addEventListener("keydown", resume);
+    });
+  }
+
   // --- Formularios de cuenta --------------------------------------------------
-  document.querySelector("#login-form")?.addEventListener("submit", (e) => e.preventDefault());
-  document.querySelector("#register-form")?.addEventListener("submit", (e) => e.preventDefault());
-  document.querySelector("#recovery-form")?.addEventListener("submit", (e) => e.preventDefault());
+  function showFormError(errorEl, message) {
+    if (!errorEl) return;
+    errorEl.textContent = message;
+    errorEl.hidden = !message;
+  }
+
+  document.querySelector("#login-form")?.addEventListener("submit", (e) => {
+    e.preventDefault();
+    showFormError(document.querySelector("#login-error"), "");
+  });
+
+  document.querySelector("#register-form")?.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const emailInput = document.querySelector("#reg-email");
+    const errorEl = document.querySelector("#register-error");
+    if (!EMAIL_RE.test(emailInput?.value || "")) {
+      showFormError(errorEl, getLocale() === "enUS" ? "Enter a valid email address." : "Introduce un correo válido.");
+      return;
+    }
+    showFormError(errorEl, "");
+  });
+
+  document.querySelector("#recovery-form")?.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const emailInput = document.querySelector("#recovery-email");
+    const errorEl = document.querySelector("#recovery-error");
+    if (!EMAIL_RE.test(emailInput?.value || "")) {
+      showFormError(errorEl, getLocale() === "enUS" ? "Enter a valid email address." : "Introduce un correo válido.");
+      return;
+    }
+    showFormError(errorEl, "");
+  });
 
   function showRecovery(open) {
     const accountTabs = document.querySelector(".account__tabs");
@@ -133,6 +214,9 @@ import { applyTranslations, t } from "./src/i18n.js";
       const target = tab.dataset.tab;
       document.querySelectorAll(".account__panel").forEach((panel) => {
         panel.hidden = panel.id !== `panel-${target}`;
+        // Limpiar campos e errores al cambiar pestaña
+        panel.querySelectorAll("input").forEach((input) => { input.value = ""; });
+        panel.querySelectorAll(".account__field-error").forEach((el) => { el.hidden = true; el.textContent = ""; });
       });
     });
   });
@@ -153,17 +237,4 @@ import { applyTranslations, t } from "./src/i18n.js";
   loadNews(document.querySelector("#news-list"));
   startRealmStatus();
   startSnow(document.querySelector(".snow-layer"));
-
-  const ambientAudio = new Audio("/corelegacy_launcher.mp3");
-  ambientAudio.volume = 0.5;
-
-  ambientAudio.play().catch(() => {
-    const resume = () => {
-      ambientAudio.play().catch(() => {});
-      document.removeEventListener("click", resume);
-      document.removeEventListener("keydown", resume);
-    };
-    document.addEventListener("click", resume);
-    document.addEventListener("keydown", resume);
-  });
 })();

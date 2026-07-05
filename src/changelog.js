@@ -56,6 +56,8 @@ function buildItem(entry, locale) {
 
   const li = document.createElement("li");
   li.className = "changelog__item";
+  li.dataset.badge = meta.i18nKey ? t(meta.i18nKey, locale) : meta.label;
+  li.dataset.desc = description.toLowerCase();
 
   const badge = document.createElement("span");
   badge.className = `changelog-badge ${meta.cls}`;
@@ -97,6 +99,88 @@ function buildGroup(date, entries, locale) {
   return section;
 }
 
+function buildFilters(container, allItems, locale) {
+  const existing = container.querySelector(".changelog__toolbar");
+  if (existing) existing.remove();
+
+  const badgeLabels = new Set();
+  allItems.forEach((item) => {
+    const { meta } = parseCommit(item.commit);
+    const label = meta.i18nKey ? t(meta.i18nKey, locale) : meta.label;
+    badgeLabels.add(label);
+  });
+
+  const toolbar = document.createElement("div");
+  toolbar.className = "changelog__toolbar";
+
+  const search = document.createElement("input");
+  search.type = "search";
+  search.className = "changelog__search";
+  search.placeholder = t("changelog.search", locale);
+  search.setAttribute("aria-label", t("changelog.search", locale));
+  toolbar.appendChild(search);
+
+  const filters = document.createElement("div");
+  filters.className = "changelog__filters";
+
+  const allBtn = document.createElement("button");
+  allBtn.type = "button";
+  allBtn.className = "changelog__filter-btn is-active";
+  allBtn.dataset.filter = "";
+  allBtn.textContent = t("changelog.filter.all", locale);
+  filters.appendChild(allBtn);
+
+  [...badgeLabels].sort().forEach((label) => {
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "changelog__filter-btn";
+    btn.dataset.filter = label;
+    btn.textContent = label;
+    filters.appendChild(btn);
+  });
+
+  toolbar.appendChild(filters);
+
+  const heading = container.querySelector(".news__heading");
+  if (heading) {
+    heading.after(toolbar);
+  } else {
+    container.prepend(toolbar);
+  }
+
+  let activeFilter = "";
+  let searchQuery = "";
+
+  function applyFilter() {
+    const groups = container.querySelectorAll(".changelog__group");
+    groups.forEach((group) => {
+      let groupVisible = false;
+      group.querySelectorAll(".changelog__item").forEach((li) => {
+        const matchFilter = !activeFilter || li.dataset.badge === activeFilter;
+        const matchSearch = !searchQuery || li.dataset.desc.includes(searchQuery);
+        const visible = matchFilter && matchSearch;
+        li.hidden = !visible;
+        if (visible) groupVisible = true;
+      });
+      group.hidden = !groupVisible;
+    });
+  }
+
+  filters.addEventListener("click", (e) => {
+    const btn = e.target.closest(".changelog__filter-btn");
+    if (!btn) return;
+    filters.querySelectorAll(".changelog__filter-btn").forEach((b) => b.classList.remove("is-active"));
+    btn.classList.add("is-active");
+    activeFilter = btn.dataset.filter;
+    applyFilter();
+  });
+
+  search.addEventListener("input", () => {
+    searchQuery = search.value.toLowerCase().trim();
+    applyFilter();
+  });
+}
+
 export async function loadChangelog(container) {
   if (!container) return;
 
@@ -111,6 +195,8 @@ export async function loadChangelog(container) {
   clearContent();
   const placeholder = document.createElement("p");
   placeholder.className = "changelog__placeholder";
+  placeholder.setAttribute("role", "status");
+  placeholder.setAttribute("aria-live", "polite");
   placeholder.textContent = t("changelog.loading", locale);
   container.appendChild(placeholder);
 
@@ -126,10 +212,13 @@ export async function loadChangelog(container) {
     if (items.length === 0) {
       const empty = document.createElement("p");
       empty.className = "changelog__placeholder";
+      empty.setAttribute("role", "status");
       empty.textContent = t("changelog.empty", locale);
       container.appendChild(empty);
       return;
     }
+
+    buildFilters(container, items, locale);
 
     const groups = groupByDate(items);
     const fragment = document.createDocumentFragment();
@@ -142,6 +231,7 @@ export async function loadChangelog(container) {
     clearContent();
     const failed = document.createElement("p");
     failed.className = "changelog__placeholder";
+    failed.setAttribute("role", "status");
     failed.textContent = t("changelog.error", locale);
     container.appendChild(failed);
   }

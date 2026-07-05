@@ -30,17 +30,22 @@
             <li><button class="ice-tab" type="button" data-view="tienda" data-i18n="nav.store">Tienda</button></li>
             <li><button class="ice-tab" type="button" data-view="foros" data-i18n="nav.forums">Foros</button></li>
           </ul>
-          <button class="lang-toggle" id="lang-toggle" type="button" aria-label="Cambiar idioma" hidden>
-            <i class="fa-solid fa-globe"></i>
-            <span class="lang-toggle__label" id="lang-label">ES</span>
-          </button>
+          <div class="nav-controls">
+            <button class="audio-toggle" id="audio-toggle" type="button" data-i18n-aria-label="audio.mute" aria-label="Silenciar música">
+              <i class="fa-solid fa-volume-high"></i>
+            </button>
+            <button class="lang-toggle" id="lang-toggle" type="button" data-i18n-aria-label="lang.toggle" aria-label="Cambiar idioma" hidden>
+              <i class="fa-solid fa-globe"></i>
+              <span class="lang-toggle__label" id="lang-label">ES</span>
+            </button>
+          </div>
         </nav>
       </header>
 
       <section class="news view" data-view="inicio" aria-label="Noticias y parches">
         <div class="news__main">
           <h2 class="news__heading" data-i18n="news.heading">Noticias del Reino</h2>
-          <div class="news__list" id="news-list">
+          <div class="news__list" id="news-list" aria-live="polite">
             <p class="news__placeholder" id="news-placeholder" data-i18n="news.loading">Cargando noticias...</p>
           </div>
         </div>
@@ -79,6 +84,11 @@
                 <span class="realm-status__value" id="status-uptime">-</span>
               </li>
             </ul>
+            <div class="realm-status__footer">
+              <i class="fa-solid fa-rotate realm-status__spinner" id="status-spinner" aria-hidden="true"></i>
+              <span class="realm-status__updated" data-i18n="status.updated">Actualizado</span>
+              <time class="realm-status__updated-time" id="status-last-updated">--:--:--</time>
+            </div>
           </div>
         </aside>
       </section>
@@ -124,6 +134,7 @@
               </div>
               <button class="account__forgot" type="button" id="forgot-toggle" data-i18n="account.login.forgot">¿Olvidaste tu contraseña?</button>
               <button class="account__submit" type="submit" data-i18n="account.login.submit">Iniciar sesión</button>
+              <p class="account__field-error" id="login-error" role="alert" hidden></p>
             </form>
           </div>
 
@@ -137,6 +148,7 @@
                   placeholder="tu@correo.com" required />
               </div>
               <button class="account__submit" type="submit" data-i18n="account.register.submit">Crear cuenta</button>
+              <p class="account__field-error" id="register-error" role="alert" hidden></p>
             </form>
           </div>
 
@@ -153,6 +165,7 @@
                   placeholder="tu@correo.com" required />
               </div>
               <button class="account__submit" type="submit" data-i18n="account.recovery.submit">Enviar link recuperación</button>
+              <p class="account__field-error" id="recovery-error" role="alert" hidden></p>
             </form>
           </div>
 

@@ -1,4 +1,7 @@
 // Controla los elementos del DOM del lanzador: botón, barra de progreso y estado.
+import { getLocale } from "./locale.js";
+import { t } from "./i18n.js";
+
 export class LauncherUI {
   constructor({ playButton, progressBar, status, percent }) {
     this.playButton = playButton;
@@ -15,7 +18,7 @@ export class LauncherUI {
       try {
         await handler();
       } catch (error) {
-        this.setProgress(0, "Error al iniciar el juego");
+        this.setProgress(0, t("launcher.error", getLocale()));
         console.error(error);
       } finally {
         this.setBusy(false);
@@ -26,9 +29,6 @@ export class LauncherUI {
   setBusy(busy) {
     this.busy = busy;
     this.playButton.disabled = busy;
-    this.playButton.querySelector(".play-button__label").textContent = busy
-      ? "Iniciando..."
-      : "Jugar";
   }
 
   setProgress(percent, message) {

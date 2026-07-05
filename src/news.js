@@ -15,6 +15,13 @@ function tagClass(badget) {
   return TAG_CLASSES[key] || "news-card__tag--fix";
 }
 
+function isoDate(value) {
+  if (!value) return "";
+  const d = new Date((value || "").replace(" ", "T"));
+  if (Number.isNaN(d.getTime())) return "";
+  return d.toISOString().slice(0, 10);
+}
+
 function formatDate(value) {
   const locale = getLocale();
   const intlLocale = locale === "enUS" ? "en-US" : "es-ES";
@@ -52,6 +59,8 @@ function buildCard(item) {
 
   const date = document.createElement("time");
   date.className = "news-card__date";
+  const iso = isoDate(item.publish_date);
+  if (iso) date.setAttribute("datetime", iso);
   date.textContent = formatDate(item.publish_date);
   footer.appendChild(date);
 
@@ -86,6 +95,7 @@ export async function loadNews(container) {
     if (items.length === 0) {
       const empty = document.createElement("p");
       empty.className = "news__placeholder";
+      empty.setAttribute("role", "status");
       empty.textContent = t("news.empty", locale);
       container.appendChild(empty);
       return;
@@ -99,6 +109,7 @@ export async function loadNews(container) {
     container.innerHTML = "";
     const failed = document.createElement("p");
     failed.className = "news__placeholder";
+    failed.setAttribute("role", "status");
     failed.textContent = t("news.error", locale);
     container.appendChild(failed);
   }

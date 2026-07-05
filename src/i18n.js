@@ -20,12 +20,15 @@ const TRANSLATIONS = {
     // Estado del reino
     "status.heading":     "Estado del servidor",
     "status.unknown":     "Desconocido",
+    "status.updated":     "Actualizado",
 
     // Changelog
     "changelog.heading":  "Historial de correcciones",
     "changelog.loading":  "Cargando correcciones...",
     "changelog.empty":    "No hay correcciones disponibles.",
     "changelog.error":    "No se pudieron cargar las correcciones.",
+    "changelog.search":   "Buscar...",
+    "changelog.filter.all": "Todos",
 
     // Cuenta — pestañas
     "account.tabs.label":     "Sección de cuenta",
@@ -60,6 +63,16 @@ const TRANSLATIONS = {
     "footer.status":   "Mensaje de estado ...",
     "footer.size":     "1 GB de 40 GB",
     "footer.speed":    "Transferencia 0 kbps",
+
+    // Lanzador
+    "launcher.error":  "Error al iniciar el juego",
+
+    // Audio
+    "audio.mute":   "Silenciar música",
+    "audio.unmute": "Activar música",
+
+    // Idioma
+    "lang.toggle": "Cambiar idioma",
   },
 
   enUS: {
@@ -80,12 +93,15 @@ const TRANSLATIONS = {
     // Realm status
     "status.heading":     "Server Status",
     "status.unknown":     "Unknown",
+    "status.updated":     "Updated",
 
     // Changelog
     "changelog.heading":  "Patch Notes",
     "changelog.loading":  "Loading patch notes...",
     "changelog.empty":    "No patch notes available.",
     "changelog.error":    "Could not load patch notes.",
+    "changelog.search":   "Search...",
+    "changelog.filter.all": "All",
 
     // Account — tabs
     "account.tabs.label":     "Account section",
@@ -120,6 +136,16 @@ const TRANSLATIONS = {
     "footer.status":   "Status message ...",
     "footer.size":     "1 GB of 40 GB",
     "footer.speed":    "Transfer 0 kbps",
+
+    // Launcher
+    "launcher.error":  "Error launching game",
+
+    // Audio
+    "audio.mute":   "Mute music",
+    "audio.unmute": "Unmute music",
+
+    // Language
+    "lang.toggle": "Change language",
   },
 };
 
@@ -135,7 +161,6 @@ export function t(key, locale) {
  *   data-i18n="key"              → element.textContent
  *   data-i18n-placeholder="key"  → element.placeholder
  *   data-i18n-aria-label="key"   → element.ariaLabel
- *   data-i18n-aria-controls="key" (unused, kept for forward compat)
  */
 export function applyTranslations(locale) {
   const loc = TRANSLATIONS[locale] ? locale : "esES";
