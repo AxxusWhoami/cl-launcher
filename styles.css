@@ -1291,9 +1291,13 @@ body {
   min-width: 0;
 }
 
+.features .news__heading {
+  font-family: var(--font-morpheus);
+}
+
 .feature-card__title {
   margin: 0 0 5px;
-  font-family: var(--font-classic);
+  font-family: var(--font-morpheus);
   font-size: 0.88rem;
   font-weight: 700;
   letter-spacing: 0.05em;
