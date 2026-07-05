@@ -73,6 +73,12 @@ const TRANSLATIONS = {
 
     // Idioma
     "lang.toggle": "Cambiar idioma",
+
+    // Modal de actualización
+    "update.title":   "Nueva versión disponible",
+    "update.body":    "Hay una nueva versión del lanzador. ¿Deseas actualizar?",
+    "update.later":   "Después",
+    "update.confirm": "Sí",
   },
 
   enUS: {
@@ -146,6 +152,12 @@ const TRANSLATIONS = {
 
     // Language
     "lang.toggle": "Change language",
+
+    // Update modal
+    "update.title":   "New version available",
+    "update.body":    "There is a new launcher version. Do you want to update?",
+    "update.later":   "Later",
+    "update.confirm": "Yes",
   },
 };
 

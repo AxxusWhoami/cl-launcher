@@ -245,6 +245,37 @@ const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     });
   });
 
+  // --- Modal de actualización ------------------------------------------------
+  const updateModal = document.querySelector("#update-modal");
+  const updateLaterBtn = document.querySelector("#update-later");
+  const updateConfirmBtn = document.querySelector("#update-confirm");
+
+  function openUpdateModal() {
+    if (!updateModal) return;
+    updateModal.hidden = false;
+    updateModal.removeAttribute("hidden");
+    updateLaterBtn?.focus();
+  }
+
+  function closeUpdateModal() {
+    if (!updateModal) return;
+    updateModal.hidden = true;
+  }
+
+  updateLaterBtn?.addEventListener("click", closeUpdateModal);
+  updateConfirmBtn?.addEventListener("click", closeUpdateModal);
+
+  updateModal?.addEventListener("click", (e) => {
+    if (e.target === updateModal) closeUpdateModal();
+  });
+
+  updateModal?.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") closeUpdateModal();
+  });
+
+  // Exponer para uso desde el entorno Tauri / pruebas
+  window.__openUpdateModal = openUpdateModal;
+
   // --- Carga inicial ----------------------------------------------------------
   startRealmStatus();
   startSnow(document.querySelector(".snow-layer"));

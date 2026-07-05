@@ -211,5 +211,17 @@
     </main>
 
     <script type="module" src="/app.js"></script>
+
+    <dialog class="update-modal" id="update-modal" aria-labelledby="update-modal-title" aria-modal="true" hidden>
+      <div class="update-modal__box">
+        <i class="fa-solid fa-arrow-up-from-bracket update-modal__icon" aria-hidden="true"></i>
+        <h2 class="update-modal__title" id="update-modal-title" data-i18n="update.title">Nueva versión disponible</h2>
+        <p class="update-modal__body" data-i18n="update.body">Hay una nueva versión del lanzador. ¿Deseas actualizar?</p>
+        <div class="update-modal__actions">
+          <button class="update-modal__btn update-modal__btn--later" id="update-later" type="button" data-i18n="update.later">Después</button>
+          <button class="update-modal__btn update-modal__btn--confirm" id="update-confirm" type="button" data-i18n="update.confirm">Sí</button>
+        </div>
+      </div>
+    </dialog>
   </body>
 </html>
