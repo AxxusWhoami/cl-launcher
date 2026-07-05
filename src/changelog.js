@@ -24,7 +24,6 @@ function parseCommit(raw) {
   if (!m) {
     const desc = (raw || "").replace(/\s*\(#\d+\)\s*$/g, "").trim();
     return {
-      type: null,
       meta: FALLBACK_META,
       description: desc.replace(/^./, (c) => c.toUpperCase()),
     };
@@ -35,7 +34,6 @@ function parseCommit(raw) {
     .trim()
     .replace(/^./, (c) => c.toUpperCase());
   return {
-    type,
     meta: TYPE_META[type] ?? FALLBACK_META,
     description,
   };
@@ -58,9 +56,6 @@ function buildItem(entry, locale) {
 
   const li = document.createElement("li");
   li.className = "changelog__item";
-  // Usar la clave estable (key) para el filtro, nunca el label traducido
-  li.dataset.badge = meta.key;
-  li.dataset.desc = description.toLowerCase();
 
   const badge = document.createElement("span");
   badge.className = `changelog-badge ${meta.cls}`;
@@ -102,100 +97,6 @@ function buildGroup(date, entries, locale) {
   return section;
 }
 
-function buildFilters(container, allItems, locale) {
-  const existing = container.querySelector(".changelog__toolbar");
-  if (existing) existing.remove();
-
-  // Recopilar claves únicas presentes en los datos
-  const seen = new Map(); // key → label visible
-  allItems.forEach((item) => {
-    const { meta } = parseCommit(item.commit);
-    if (!seen.has(meta.key)) {
-      seen.set(meta.key, meta.i18nKey ? t(meta.i18nKey, locale) : meta.label);
-    }
-  });
-
-  const toolbar = document.createElement("div");
-  toolbar.className = "changelog__toolbar";
-
-  const search = document.createElement("input");
-  search.type = "search";
-  search.className = "changelog__search";
-  search.placeholder = t("changelog.search", locale);
-  search.setAttribute("aria-label", t("changelog.search", locale));
-  toolbar.appendChild(search);
-
-  const filters = document.createElement("div");
-  filters.className = "changelog__filters";
-
-  const allBtn = document.createElement("button");
-  allBtn.type = "button";
-  allBtn.className = "changelog__filter-btn is-active";
-  allBtn.dataset.filter = "";
-  allBtn.textContent = t("changelog.filter.all", locale);
-  filters.appendChild(allBtn);
-
-  // Ordenar por label visible para consistencia
-  [...seen.entries()]
-    .sort((a, b) => a[1].localeCompare(b[1]))
-    .forEach(([key, label]) => {
-      const btn = document.createElement("button");
-      btn.type = "button";
-      btn.className = "changelog__filter-btn";
-      btn.dataset.filter = key; // clave estable, no el label
-      btn.textContent = label;
-      filters.appendChild(btn);
-    });
-
-  toolbar.appendChild(filters);
-
-  const heading = container.querySelector(".news__heading");
-  if (heading) {
-    heading.after(toolbar);
-  } else {
-    container.prepend(toolbar);
-  }
-}
-
-function attachFilterHandlers(container) {
-  const filters = container.querySelector(".changelog__filters");
-  const search = container.querySelector(".changelog__search");
-  if (!filters || !search) return;
-
-  let activeFilter = "";
-  let searchQuery = "";
-
-  function applyFilter() {
-    const groups = container.querySelectorAll(".changelog__group");
-    groups.forEach((group) => {
-      let groupVisible = false;
-      group.querySelectorAll(".changelog__item").forEach((li) => {
-        // data-badge contiene la clave estable; data-filter del botón también
-        const matchFilter = !activeFilter || li.dataset.badge === activeFilter;
-        const matchSearch = !searchQuery || li.dataset.desc.includes(searchQuery);
-        const visible = matchFilter && matchSearch;
-        li.hidden = !visible;
-        if (visible) groupVisible = true;
-      });
-      group.hidden = !groupVisible;
-    });
-  }
-
-  filters.addEventListener("click", (e) => {
-    const btn = e.target.closest(".changelog__filter-btn");
-    if (!btn) return;
-    filters.querySelectorAll(".changelog__filter-btn").forEach((b) => b.classList.remove("is-active"));
-    btn.classList.add("is-active");
-    activeFilter = btn.dataset.filter;
-    applyFilter();
-  });
-
-  search.addEventListener("input", () => {
-    searchQuery = search.value.toLowerCase().trim();
-    applyFilter();
-  });
-}
-
 export async function loadChangelog(container) {
   if (!container) return;
 
@@ -233,17 +134,12 @@ export async function loadChangelog(container) {
       return;
     }
 
-    buildFilters(container, items, locale);
-
     const groups = groupByDate(items);
     const fragment = document.createDocumentFragment();
     for (const [date, entries] of groups) {
       fragment.appendChild(buildGroup(date, entries, locale));
     }
     container.appendChild(fragment);
-
-    // Conectar handlers después de que los items existan en el DOM
-    attachFilterHandlers(container);
   } catch (err) {
     console.error("No se pudieron cargar las correcciones:", err);
     clearContent();
