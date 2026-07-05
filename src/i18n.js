@@ -6,9 +6,9 @@ const TRANSLATIONS = {
     // Navegación
     "nav.home":        "Inicio",
     "nav.changelog":   "Correcciones",
+    "nav.news":        "Noticias",
     "nav.account":     "Cuenta",
     "nav.store":       "Tienda",
-    "nav.forums":      "Foros",
 
     // Noticias
     "news.heading":       "Noticias del Reino",
@@ -79,9 +79,9 @@ const TRANSLATIONS = {
     // Navigation
     "nav.home":        "Home",
     "nav.changelog":   "Patch Notes",
+    "nav.news":        "News",
     "nav.account":     "Account",
     "nav.store":       "Store",
-    "nav.forums":      "Forums",
 
     // News
     "news.heading":       "Realm News",

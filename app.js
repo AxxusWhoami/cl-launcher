@@ -35,8 +35,10 @@ const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   const tabs = document.querySelectorAll(".ice-tab");
   const views = document.querySelectorAll(".view");
   let changelogLoaded = false;
+  let newsLoaded = false;
 
   const changelogContainer = document.querySelector("#changelog-list");
+  const newsList = document.querySelector("#news-list");
 
   tabs.forEach((tab) => {
     tab.addEventListener("click", () => {
@@ -58,6 +60,11 @@ const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       if (target === "correcciones" && !changelogLoaded) {
         changelogLoaded = true;
         loadChangelog(changelogContainer);
+      }
+
+      if (target === "noticias" && !newsLoaded) {
+        newsLoaded = true;
+        loadNews(newsList);
       }
     });
   });
@@ -100,7 +107,12 @@ const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       }
     }
 
-    loadNews(document.querySelector("#news-list"));
+    const newsVisible = !document.querySelector(".view[data-view='noticias']")?.hidden;
+    if (newsVisible) {
+      loadNews(newsList);
+    } else {
+      newsLoaded = false;
+    }
   });
 
   // --- Audio ambiente ----------------------------------------------------------
@@ -234,7 +246,6 @@ const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   });
 
   // --- Carga inicial ----------------------------------------------------------
-  loadNews(document.querySelector("#news-list"));
   startRealmStatus();
   startSnow(document.querySelector(".snow-layer"));
 })();

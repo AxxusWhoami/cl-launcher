@@ -25,10 +25,10 @@
           </span>
           <ul class="ice-nav__list">
             <li><button class="ice-tab is-active" type="button" data-view="inicio" aria-current="page" data-i18n="nav.home">Inicio</button></li>
+            <li><button class="ice-tab" type="button" data-view="noticias" data-i18n="nav.news">Noticias</button></li>
             <li><button class="ice-tab" type="button" data-view="correcciones" data-i18n="nav.changelog">Correcciones</button></li>
             <li><button class="ice-tab" type="button" data-view="cuenta" data-i18n="nav.account">Cuenta</button></li>
             <li><button class="ice-tab" type="button" data-view="tienda" data-i18n="nav.store">Tienda</button></li>
-            <li><button class="ice-tab" type="button" data-view="foros" data-i18n="nav.forums">Foros</button></li>
           </ul>
           <div class="nav-controls">
             <button class="audio-toggle" id="audio-toggle" type="button" data-i18n-aria-label="audio.mute" aria-label="Silenciar música">
@@ -42,13 +42,7 @@
         </nav>
       </header>
 
-      <section class="news view" data-view="inicio" aria-label="Noticias y parches">
-        <div class="news__main">
-          <h2 class="news__heading" data-i18n="news.heading">Noticias del Reino</h2>
-          <div class="news__list" id="news-list" aria-live="polite">
-            <p class="news__placeholder" id="news-placeholder" data-i18n="news.loading">Cargando noticias...</p>
-          </div>
-        </div>
+      <section class="news view" data-view="inicio" aria-label="Inicio">
         <aside class="realm-status" aria-label="Estado del reino">
           <h2 class="news__heading" data-i18n="status.heading">Estado del servidor</h2>
           <div class="realm-status__body">
@@ -92,6 +86,15 @@
               </div>
           </div>
         </aside>
+      </section>
+
+      <section class="news view" data-view="noticias" aria-label="Noticias" hidden>
+        <div class="news__main">
+          <h2 class="news__heading" data-i18n="news.heading">Noticias del Reino</h2>
+          <div class="news__list" id="news-list" aria-live="polite">
+            <p class="news__placeholder" id="news-placeholder" data-i18n="news.loading">Cargando noticias...</p>
+          </div>
+        </div>
       </section>
 
       <section class="account view" data-view="cuenta" aria-label="Cuenta" hidden>
