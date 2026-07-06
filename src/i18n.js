@@ -105,6 +105,9 @@ const TRANSLATIONS = {
     "settings.cpucores.desc":       "Número de núcleos de CPU asignados al proceso del juego cuando CPU Affinity está activo.",
     "settings.dxvk.label":          "DXVK (Vulkan)",
     "settings.dxvk.desc":           "Traduce llamadas Direct3D a Vulkan mediante DXVK. Puede mejorar significativamente el rendimiento en sistemas Linux y en equipos con drivers Vulkan modernos.",
+    "progress.installing.dxvk":     "Instalando DXVK (Vulkan)...",
+    "progress.uninstalling.dxvk":   "Desinstalando DXVK (Vulkan)...",
+    "progress.applying":            "Aplicando...",
   },
 
   enUS: {
@@ -210,6 +213,9 @@ const TRANSLATIONS = {
     "settings.cpucores.desc":       "Number of CPU cores assigned to the game process when CPU Affinity is active.",
     "settings.dxvk.label":          "DXVK (Vulkan)",
     "settings.dxvk.desc":           "Translates Direct3D calls to Vulkan via DXVK. Can significantly improve performance on Linux systems and hardware with modern Vulkan drivers.",
+    "progress.installing.dxvk":     "Installing DXVK (Vulkan)...",
+    "progress.uninstalling.dxvk":   "Uninstalling DXVK (Vulkan)...",
+    "progress.applying":            "Applying...",
   },
 
   frFR: {
@@ -307,6 +313,9 @@ const TRANSLATIONS = {
     "settings.cpucores.desc":       "Nombre de cœurs CPU assignés au processus du jeu lorsque l'affinité CPU est active.",
     "settings.dxvk.label":          "DXVK (Vulkan)",
     "settings.dxvk.desc":           "Traduit les appels Direct3D en Vulkan via DXVK. Peut améliorer significativement les performances sur Linux et les systèmes avec des pilotes Vulkan modernes.",
+    "progress.installing.dxvk":     "Installation de DXVK (Vulkan)...",
+    "progress.uninstalling.dxvk":   "Désinstallation de DXVK (Vulkan)...",
+    "progress.applying":            "Application en cours...",
   },
 
   deDE: {
@@ -404,6 +413,9 @@ const TRANSLATIONS = {
     "settings.cpucores.desc":       "Anzahl der dem Spielprozess zugewiesenen CPU-Kerne, wenn die CPU-Affinität aktiv ist.",
     "settings.dxvk.label":          "DXVK (Vulkan)",
     "settings.dxvk.desc":           "Übersetzt Direct3D-Aufrufe über DXVK nach Vulkan. Kann die Leistung auf Linux und Systemen mit modernen Vulkan-Treibern erheblich verbessern.",
+    "progress.installing.dxvk":     "DXVK (Vulkan) wird installiert...",
+    "progress.uninstalling.dxvk":   "DXVK (Vulkan) wird deinstalliert...",
+    "progress.applying":            "Wird angewendet...",
   },
 };
 

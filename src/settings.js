@@ -1,5 +1,6 @@
 // Gestión de la configuración del lanzador (persistida en localStorage).
 import { getLocale, setLocale } from "./locale.js";
+import { t } from "./i18n.js";
 
 const STORAGE_KEY = "launcher_settings";
 
@@ -22,6 +23,23 @@ export function loadSettings() {
 
 export function saveSettings(settings) {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(settings));
+}
+
+const progressModal = () => document.querySelector("#progress-modal");
+const progressMsg   = () => document.querySelector("#progress-modal-msg");
+
+export function showProgress(messageKey) {
+  const el = progressModal();
+  if (!el) return;
+  const msgEl = progressMsg();
+  if (msgEl) msgEl.textContent = t(messageKey);
+  el.hidden = false;
+  el.removeAttribute("hidden");
+}
+
+export function hideProgress() {
+  const el = progressModal();
+  if (el) el.hidden = true;
 }
 
 export function initSettingsModal() {
@@ -75,6 +93,7 @@ export function initSettingsModal() {
     // Implementar con RUST
     settings.laa = e.target.checked;
     saveSettings(settings);
+    showProgress("progress.applying");
   });
 
   // --- CPU Affinity Mask -------------------------------------------------------
@@ -82,6 +101,7 @@ export function initSettingsModal() {
     // Implementar con RUST
     settings.cpuAffinity = e.target.checked;
     saveSettings(settings);
+    showProgress("progress.applying");
   });
 
   // --- TCP No Delay ------------------------------------------------------------
@@ -89,6 +109,7 @@ export function initSettingsModal() {
     // Implementar con RUST
     settings.tcpNoDelay = e.target.checked;
     saveSettings(settings);
+    showProgress("progress.applying");
   });
 
   // --- CPU Cores ---------------------------------------------------------------
@@ -96,6 +117,7 @@ export function initSettingsModal() {
     // Implementar con RUST
     settings.cpuCores = Number(e.target.value);
     saveSettings(settings);
+    showProgress("progress.applying");
   });
 
   // --- DXVK (Vulkan) -----------------------------------------------------------
@@ -103,5 +125,6 @@ export function initSettingsModal() {
     // Implementar con RUST
     settings.dxvk = e.target.checked;
     saveSettings(settings);
+    showProgress(settings.dxvk ? "progress.installing.dxvk" : "progress.uninstalling.dxvk");
   });
 }
