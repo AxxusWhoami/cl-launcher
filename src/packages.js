@@ -23,17 +23,14 @@ const PACKAGE_DEFS = [
   {
     id: "hd-creatures", section: "hd", icon: "fa-dragon",
     nameKey: "pkgmgr.hd-creatures.name",
-    descKeys: ["pkgmgr.hd-creatures.desc.1", "pkgmgr.hd-creatures.desc.2"],
   },
   {
     id: "hd-trees", section: "hd", icon: "fa-tree",
     nameKey: "pkgmgr.hd-trees.name",
-    descKey: "pkgmgr.hd-trees.desc",
   },
   {
     id: "hd-spells", section: "hd", icon: "fa-wand-magic-sparkles",
     nameKey: "pkgmgr.hd-spells.name",
-    descKey: "pkgmgr.hd-spells.desc",
   },
 ];
 
@@ -72,7 +69,7 @@ function buildItem(def, locale) {
 
   if (def.descKeys) {
     info.appendChild(buildDescList(def.descKeys, locale));
-  } else {
+  } else if (def.descKey) {
     const desc = document.createElement("span");
     desc.className = "pkg-item__desc";
     desc.textContent = t(def.descKey, locale);
