@@ -88,7 +88,7 @@ export async function loadNews(container) {
     if (!response.ok) throw new Error(`HTTP ${response.status}`);
 
     const payload = await response.json();
-    const items = Array.isArray(payload?.data) ? payload.data.slice(-2) : [];
+    const items = Array.isArray(payload?.data) ? payload.data : [];
 
     container.innerHTML = "";
 
