@@ -89,6 +89,12 @@ const TRANSLATIONS = {
     // Configuración
     "settings.open":                "Configuración",
     "settings.title":               "Configuración del lanzador",
+    "settings.language.label":      "Idioma",
+    "settings.language.desc":       "Idioma de la interfaz del lanzador.",
+    "settings.language.es":         "Español",
+    "settings.language.en":         "Inglés",
+    "settings.language.fr":         "Francés",
+    "settings.language.de":         "Alemán",
     "settings.laa.label":           "Patch 4GB (LAA)",
     "settings.laa.desc":            "Permite al cliente usar hasta 4 GB de RAM en lugar del límite de 2 GB. Requiere sistema operativo de 64 bits.",
     "settings.affinity.label":      "CPU Affinity Mask",
@@ -188,6 +194,12 @@ const TRANSLATIONS = {
     // Settings
     "settings.open":                "Settings",
     "settings.title":               "Launcher Settings",
+    "settings.language.label":      "Language",
+    "settings.language.desc":       "Interface language of the launcher.",
+    "settings.language.es":         "Spanish",
+    "settings.language.en":         "English",
+    "settings.language.fr":         "French",
+    "settings.language.de":         "German",
     "settings.laa.label":           "4GB Patch (LAA)",
     "settings.laa.desc":            "Allows the client to use up to 4 GB of RAM instead of the 2 GB limit. Requires a 64-bit operating system.",
     "settings.affinity.label":      "CPU Affinity Mask",
@@ -198,6 +210,200 @@ const TRANSLATIONS = {
     "settings.cpucores.desc":       "Number of CPU cores assigned to the game process when CPU Affinity is active.",
     "settings.dxvk.label":          "DXVK (Vulkan)",
     "settings.dxvk.desc":           "Translates Direct3D calls to Vulkan via DXVK. Can significantly improve performance on Linux systems and hardware with modern Vulkan drivers.",
+  },
+
+  frFR: {
+    // Navigation
+    "nav.home":        "Accueil",
+    "nav.changelog":   "Correctifs",
+    "nav.news":        "Actualités",
+    "nav.account":     "Compte",
+    "nav.store":       "Boutique",
+
+    // News
+    "news.heading":       "Actualités du Royaume",
+    "news.loading":       "Chargement des actualités...",
+    "news.empty":         "Aucune actualité disponible.",
+    "news.error":         "Impossible de charger les actualités.",
+    "news.readmore":      "Lire la suite...",
+
+    // Realm status
+    "status.heading":     "État du serveur",
+    "status.unknown":     "Inconnu",
+    "status.updated":     "Mis à jour",
+
+    // Changelog
+    "changelog.heading":  "Historique des correctifs",
+    "changelog.loading":  "Chargement des correctifs...",
+    "changelog.empty":    "Aucun correctif disponible.",
+    "changelog.error":    "Impossible de charger les correctifs.",
+
+    // Account
+    "account.tabs.label":     "Section compte",
+    "account.tab.login":      "Se connecter",
+    "account.tab.register":   "Créer un compte",
+    "account.login.user.label":       "Nom d'utilisateur ou e-mail",
+    "account.login.user.placeholder": "Votre identifiant ou e-mail",
+    "account.login.pass.label":       "Mot de passe",
+    "account.login.pass.placeholder": "Votre mot de passe",
+    "account.login.show":             "Afficher le mot de passe",
+    "account.login.hide":             "Masquer le mot de passe",
+    "account.login.forgot":           "Mot de passe oublié ?",
+    "account.login.submit":           "Se connecter",
+    "account.register.email.label":       "Adresse e-mail",
+    "account.register.email.placeholder": "vous@email.com",
+    "account.register.submit":            "Créer un compte",
+    "account.recovery.back":              "Retour",
+    "account.recovery.email.label":       "Adresse e-mail",
+    "account.recovery.email.placeholder": "vous@email.com",
+    "account.recovery.submit":            "Envoyer le lien de récupération",
+
+    // Badges
+    "badge.chore": "tâche",
+
+    // Footer
+    "footer.status":   "Message d'état...",
+    "footer.size":     "1 Go sur 40 Go",
+    "footer.speed":    "Transfert 0 kbps",
+
+    // Launcher
+    "launcher.error":  "Erreur lors du lancement du jeu",
+
+    // Audio
+    "audio.mute":   "Couper la musique",
+    "audio.unmute": "Activer la musique",
+
+    // Language
+    "lang.toggle": "Changer de langue",
+
+    // Features
+    "features.heading": "Fonctionnalités",
+    "features.loading": "Chargement des fonctionnalités...",
+    "features.empty":   "Aucune fonctionnalité disponible.",
+    "features.error":   "Impossible de charger les fonctionnalités.",
+
+    // Update modal
+    "update.title":   "Nouvelle version disponible",
+    "update.body":    "Une nouvelle version du lanceur est disponible. Voulez-vous mettre à jour ?",
+    "update.later":   "Plus tard",
+    "update.confirm": "Oui",
+
+    // Settings
+    "settings.open":                "Paramètres",
+    "settings.title":               "Paramètres du lanceur",
+    "settings.language.label":      "Langue",
+    "settings.language.desc":       "Langue de l'interface du lanceur.",
+    "settings.language.es":         "Espagnol",
+    "settings.language.en":         "Anglais",
+    "settings.language.fr":         "Français",
+    "settings.language.de":         "Allemand",
+    "settings.laa.label":           "Patch 4 Go (LAA)",
+    "settings.laa.desc":            "Permet au client d'utiliser jusqu'à 4 Go de RAM au lieu de la limite de 2 Go. Nécessite un système d'exploitation 64 bits.",
+    "settings.affinity.label":      "Masque d'affinité CPU",
+    "settings.affinity.desc":       "Fixe le processus du jeu à des cœurs CPU spécifiques pour réduire les changements de contexte et améliorer la stabilité de la latence.",
+    "settings.tcpnodelay.label":    "TCP No Delay",
+    "settings.tcpnodelay.desc":     "Désactive l'algorithme de Nagle pour envoyer les paquets réseau immédiatement. Réduit la latence TCP au détriment d'une plus grande utilisation de la bande passante.",
+    "settings.cpucores.label":      "Cœurs CPU",
+    "settings.cpucores.desc":       "Nombre de cœurs CPU assignés au processus du jeu lorsque l'affinité CPU est active.",
+    "settings.dxvk.label":          "DXVK (Vulkan)",
+    "settings.dxvk.desc":           "Traduit les appels Direct3D en Vulkan via DXVK. Peut améliorer significativement les performances sur Linux et les systèmes avec des pilotes Vulkan modernes.",
+  },
+
+  deDE: {
+    // Navigation
+    "nav.home":        "Start",
+    "nav.changelog":   "Korrekturen",
+    "nav.news":        "Neuigkeiten",
+    "nav.account":     "Konto",
+    "nav.store":       "Shop",
+
+    // News
+    "news.heading":       "Neuigkeiten aus dem Reich",
+    "news.loading":       "Neuigkeiten werden geladen...",
+    "news.empty":         "Keine Neuigkeiten verfügbar.",
+    "news.error":         "Neuigkeiten konnten nicht geladen werden.",
+    "news.readmore":      "Weiterlesen...",
+
+    // Realm status
+    "status.heading":     "Serverstatus",
+    "status.unknown":     "Unbekannt",
+    "status.updated":     "Aktualisiert",
+
+    // Changelog
+    "changelog.heading":  "Korrekturverlauf",
+    "changelog.loading":  "Korrekturen werden geladen...",
+    "changelog.empty":    "Keine Korrekturen verfügbar.",
+    "changelog.error":    "Korrekturen konnten nicht geladen werden.",
+
+    // Account
+    "account.tabs.label":     "Kontobereich",
+    "account.tab.login":      "Anmelden",
+    "account.tab.register":   "Konto erstellen",
+    "account.login.user.label":       "Benutzername oder E-Mail",
+    "account.login.user.placeholder": "Dein Benutzername oder E-Mail",
+    "account.login.pass.label":       "Passwort",
+    "account.login.pass.placeholder": "Dein Passwort",
+    "account.login.show":             "Passwort anzeigen",
+    "account.login.hide":             "Passwort verbergen",
+    "account.login.forgot":           "Passwort vergessen?",
+    "account.login.submit":           "Anmelden",
+    "account.register.email.label":       "E-Mail-Adresse",
+    "account.register.email.placeholder": "du@email.com",
+    "account.register.submit":            "Konto erstellen",
+    "account.recovery.back":              "Zurück",
+    "account.recovery.email.label":       "E-Mail-Adresse",
+    "account.recovery.email.placeholder": "du@email.com",
+    "account.recovery.submit":            "Wiederherstellungslink senden",
+
+    // Badges
+    "badge.chore": "Aufgabe",
+
+    // Footer
+    "footer.status":   "Statusmeldung...",
+    "footer.size":     "1 GB von 40 GB",
+    "footer.speed":    "Übertragung 0 kbps",
+
+    // Launcher
+    "launcher.error":  "Fehler beim Starten des Spiels",
+
+    // Audio
+    "audio.mute":   "Musik stumm schalten",
+    "audio.unmute": "Musik aktivieren",
+
+    // Language
+    "lang.toggle": "Sprache wechseln",
+
+    // Features
+    "features.heading": "Funktionen",
+    "features.loading": "Funktionen werden geladen...",
+    "features.empty":   "Keine Funktionen verfügbar.",
+    "features.error":   "Funktionen konnten nicht geladen werden.",
+
+    // Update modal
+    "update.title":   "Neue Version verfügbar",
+    "update.body":    "Eine neue Launcher-Version ist verfügbar. Möchtest du aktualisieren?",
+    "update.later":   "Später",
+    "update.confirm": "Ja",
+
+    // Settings
+    "settings.open":                "Einstellungen",
+    "settings.title":               "Launcher-Einstellungen",
+    "settings.language.label":      "Sprache",
+    "settings.language.desc":       "Sprache der Launcher-Oberfläche.",
+    "settings.language.es":         "Spanisch",
+    "settings.language.en":         "Englisch",
+    "settings.language.fr":         "Französisch",
+    "settings.language.de":         "Deutsch",
+    "settings.laa.label":           "4-GB-Patch (LAA)",
+    "settings.laa.desc":            "Ermöglicht dem Client die Nutzung von bis zu 4 GB RAM anstelle des 2-GB-Limits. Erfordert ein 64-Bit-Betriebssystem.",
+    "settings.affinity.label":      "CPU-Affinitätsmaske",
+    "settings.affinity.desc":       "Bindet den Spielprozess an bestimmte CPU-Kerne, um Kontextwechsel zu reduzieren und die Latenzstabilität zu verbessern.",
+    "settings.tcpnodelay.label":    "TCP No Delay",
+    "settings.tcpnodelay.desc":     "Deaktiviert den Nagle-Algorithmus, um Netzwerkpakete sofort zu senden. Reduziert die TCP-Latenz auf Kosten einer höheren Bandbreitennutzung.",
+    "settings.cpucores.label":      "CPU-Kerne",
+    "settings.cpucores.desc":       "Anzahl der dem Spielprozess zugewiesenen CPU-Kerne, wenn die CPU-Affinität aktiv ist.",
+    "settings.dxvk.label":          "DXVK (Vulkan)",
+    "settings.dxvk.desc":           "Übersetzt Direct3D-Aufrufe über DXVK nach Vulkan. Kann die Leistung auf Linux und Systemen mit modernen Vulkan-Treibern erheblich verbessern.",
   },
 };
 

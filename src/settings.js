@@ -1,4 +1,6 @@
 // Gestión de la configuración del lanzador (persistida en localStorage).
+import { getLocale, setLocale } from "./locale.js";
+
 const STORAGE_KEY = "launcher_settings";
 
 const DEFAULTS = {
@@ -23,15 +25,16 @@ export function saveSettings(settings) {
 }
 
 export function initSettingsModal() {
-  const modal   = document.querySelector("#settings-modal");
-  const openBtn = document.querySelector("#settings-toggle");
+  const modal    = document.querySelector("#settings-modal");
+  const openBtn  = document.querySelector("#settings-toggle");
   const closeBtn = document.querySelector("#settings-close");
   if (!modal || !openBtn) return;
 
   let settings = loadSettings();
 
   function applyToDOM() {
-    document.querySelector("#setting-laa").checked        = settings.laa;
+    document.querySelector("#setting-language").value       = getLocale();
+    document.querySelector("#setting-laa").checked          = settings.laa;
     document.querySelector("#setting-cpu-affinity").checked = settings.cpuAffinity;
     document.querySelector("#setting-tcp-nodelay").checked  = settings.tcpNoDelay;
     document.querySelector("#setting-cpu-cores").value      = String(settings.cpuCores);
@@ -59,6 +62,12 @@ export function initSettingsModal() {
 
   modal.addEventListener("keydown", (e) => {
     if (e.key === "Escape") closeModal();
+  });
+
+  // --- Idioma ------------------------------------------------------------------
+  document.querySelector("#setting-language")?.addEventListener("change", (e) => {
+    // Implementar con RUST
+    setLocale(e.target.value);
   });
 
   // --- Patch 4GB (LAA) ---------------------------------------------------------

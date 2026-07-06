@@ -18,6 +18,14 @@ const LOCALE_MAP = {
   "en-gb": "enUS",
   "en-au": "enUS",
   "en-ca": "enUS",
+  fr: "frFR",
+  "fr-fr": "frFR",
+  "fr-be": "frFR",
+  "fr-ca": "frFR",
+  de: "deDE",
+  "de-de": "deDE",
+  "de-at": "deDE",
+  "de-ch": "deDE",
 };
 
 function mapLocale(raw) {
