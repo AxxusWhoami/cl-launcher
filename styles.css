@@ -2028,6 +2028,23 @@ body {
   border-color: rgba(231, 86, 79, 0.4);
 }
 
+.pkg-btn--update {
+  color: #f5a623;
+  border-color: rgba(245, 166, 35, 0.2);
+  background: rgba(245, 166, 35, 0.06);
+}
+
+.pkg-btn--update:hover {
+  background: rgba(245, 166, 35, 0.14);
+  border-color: rgba(245, 166, 35, 0.4);
+}
+
+.pkg-item__badge--update {
+  background: rgba(245, 166, 35, 0.15);
+  color: #f5a623;
+  border-color: rgba(245, 166, 35, 0.3);
+}
+
 /* ── Spinner por ítem ── */
 .pkg-item__spinner {
   display: block;

@@ -125,8 +125,10 @@ const TRANSLATIONS = {
     "pkgmgr.hd-trees.name":      "Modelos de árboles",
     "pkgmgr.hd-spells.name":     "Efectos visuales de hechizos",
     "pkgmgr.status.installed":   "Instalado",
+    "pkgmgr.status.update":      "Actualización disponible",
     "pkgmgr.action.download":    "Descargar",
     "pkgmgr.action.delete":      "Eliminar",
+    "pkgmgr.action.update":      "Actualizar",
     "pkgmgr.action.busy":        "En progreso...",
   },
 
@@ -253,8 +255,10 @@ const TRANSLATIONS = {
     "pkgmgr.hd-trees.name":      "Tree Models",
     "pkgmgr.hd-spells.name":     "Spell Visual Effects",
     "pkgmgr.status.installed":   "Installed",
+    "pkgmgr.status.update":      "Update available",
     "pkgmgr.action.download":    "Download",
     "pkgmgr.action.delete":      "Delete",
+    "pkgmgr.action.update":      "Update",
     "pkgmgr.action.busy":        "In progress...",
   },
 
@@ -373,8 +377,10 @@ const TRANSLATIONS = {
     "pkgmgr.hd-trees.name":      "Modèles d'arbres",
     "pkgmgr.hd-spells.name":     "Effets visuels de sorts",
     "pkgmgr.status.installed":   "Installé",
+    "pkgmgr.status.update":      "Mise à jour disponible",
     "pkgmgr.action.download":    "Télécharger",
     "pkgmgr.action.delete":      "Supprimer",
+    "pkgmgr.action.update":      "Mettre à jour",
     "pkgmgr.action.busy":        "En cours...",
   },
 
@@ -493,8 +499,10 @@ const TRANSLATIONS = {
     "pkgmgr.hd-trees.name":      "Baummodelle",
     "pkgmgr.hd-spells.name":     "Zauber-Visualeffekte",
     "pkgmgr.status.installed":   "Installiert",
+    "pkgmgr.status.update":      "Update verfügbar",
     "pkgmgr.action.download":    "Herunterladen",
     "pkgmgr.action.delete":      "Löschen",
+    "pkgmgr.action.update":      "Aktualisieren",
     "pkgmgr.action.busy":        "In Bearbeitung...",
   },
 };

@@ -34,7 +34,7 @@ const PACKAGE_DEFS = [
   },
 ];
 
-// Estado por paquete: "uninstalled" | "installed" | "busy"
+// Estado por paquete: "uninstalled" | "installed" | "update" | "busy"
 const pkgState = Object.fromEntries(PACKAGE_DEFS.map((p) => [p.id, "uninstalled"]));
 
 let isModalOpen = false;
@@ -108,12 +108,27 @@ function updateItemUI(id, locale) {
     spinner.setAttribute("aria-label", t("pkgmgr.action.busy", locale));
     actionSlot.appendChild(spinner);
     item.classList.add("pkg-item--busy");
-    item.classList.remove("pkg-item--installed");
+    item.classList.remove("pkg-item--installed", "pkg-item--update");
+  } else if (state === "update") {
+    badge.textContent = t("pkgmgr.status.update", locale);
+    badge.hidden = false;
+    badge.className = "pkg-item__badge pkg-item__badge--update";
+    item.classList.add("pkg-item--installed", "pkg-item--update");
+    item.classList.remove("pkg-item--busy");
+
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "pkg-btn pkg-btn--update";
+    btn.setAttribute("aria-label", t("pkgmgr.action.update", locale));
+    btn.innerHTML = `<i class="fa-solid fa-arrows-rotate" aria-hidden="true"></i>`;
+    btn.addEventListener("click", () => triggerAction(id, "update"));
+    actionSlot.appendChild(btn);
   } else if (state === "installed") {
     badge.textContent = t("pkgmgr.status.installed", locale);
     badge.hidden = false;
+    badge.className = "pkg-item__badge";
     item.classList.add("pkg-item--installed");
-    item.classList.remove("pkg-item--busy");
+    item.classList.remove("pkg-item--busy", "pkg-item--update");
 
     const btn = document.createElement("button");
     btn.type = "button";
@@ -124,7 +139,8 @@ function updateItemUI(id, locale) {
     actionSlot.appendChild(btn);
   } else {
     badge.hidden = true;
-    item.classList.remove("pkg-item--installed", "pkg-item--busy");
+    badge.className = "pkg-item__badge";
+    item.classList.remove("pkg-item--installed", "pkg-item--busy", "pkg-item--update");
 
     const btn = document.createElement("button");
     btn.type = "button";
@@ -141,6 +157,8 @@ function triggerAction(id, action) {
   updateItemUI(id, getLocale());
   if (action === "download") {
     window.__onDownloadPackage?.(id);
+  } else if (action === "update") {
+    window.__onUpdatePackage?.(id);
   } else {
     window.__onDeletePackage?.(id);
   }
