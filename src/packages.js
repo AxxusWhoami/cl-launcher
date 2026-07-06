@@ -13,7 +13,7 @@ const PACKAGE_DEFS = [
   {
     id: "hd", section: "hd", icon: "fa-image",
     nameKey: "pkgmgr.hd.name",
-    descKeys: ["pkgmgr.hd.desc.1", "pkgmgr.hd.desc.2", "pkgmgr.hd.desc.3", "pkgmgr.hd.desc.4"],
+    descKey: "pkgmgr.hd.desc",
   },
   {
     id: "hd-armor", section: "hd", icon: "fa-shield-halved",
