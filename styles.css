@@ -462,7 +462,7 @@ body {
   margin: 0 0 16px;
   font-family: var(--font-classic);
   font-weight: 700;
-  font-size: 1.2rem;
+  font-size: 0.95rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--gold-bright);
