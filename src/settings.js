@@ -5,11 +5,12 @@ import { t } from "./i18n.js";
 const STORAGE_KEY = "launcher_settings";
 
 const DEFAULTS = {
-  laa:         false,
-  cpuAffinity: false,
-  tcpNoDelay:  false,
-  cpuCores:    1,
-  dxvk:        false,
+  laa:          false,
+  cpuAffinity:  false,
+  tcpNoDelay:   false,
+  cpuCores:     1,
+  dxvk:         false,
+  gameLanguage: null,
 };
 
 export function loadSettings() {
@@ -42,6 +43,24 @@ export function hideProgress() {
   if (el) el.hidden = true;
 }
 
+/**
+ * Called by Rust to unlock the language options whose packs are installed.
+ * Example: window.__setAvailableGameLanguages(["esES", "enUS"])
+ * Pass an empty array to disable all options.
+ */
+export function setAvailableGameLanguages(available) {
+  const picker = document.querySelector("#game-lang-picker");
+  if (!picker) return;
+  picker.querySelectorAll("input[type='radio']").forEach((input) => {
+    const isAvailable = available.includes(input.value);
+    input.disabled = !isAvailable;
+    const label = input.closest(".game-lang-option");
+    if (label) {
+      label.setAttribute("aria-disabled", String(!isAvailable));
+    }
+  });
+}
+
 export function initSettingsModal() {
   const modal    = document.querySelector("#settings-modal");
   const openBtn  = document.querySelector("#settings-toggle");
@@ -57,6 +76,10 @@ export function initSettingsModal() {
     document.querySelector("#setting-tcp-nodelay").checked  = settings.tcpNoDelay;
     document.querySelector("#setting-cpu-cores").value      = String(settings.cpuCores);
     document.querySelector("#setting-dxvk").checked         = settings.dxvk;
+    if (settings.gameLanguage) {
+      const radio = document.querySelector(`input[name="game-lang"][value="${settings.gameLanguage}"]`);
+      if (radio && !radio.disabled) radio.checked = true;
+    }
   }
 
   function openModal() {
@@ -126,5 +149,14 @@ export function initSettingsModal() {
     settings.dxvk = e.target.checked;
     saveSettings(settings);
     showProgress(settings.dxvk ? "progress.installing.dxvk" : "progress.uninstalling.dxvk");
+  });
+
+  // --- Idioma del juego --------------------------------------------------------
+  document.querySelector("#game-lang-picker")?.addEventListener("change", (e) => {
+    if (e.target.name !== "game-lang") return;
+    // Implementar con RUST
+    settings.gameLanguage = e.target.value;
+    saveSettings(settings);
+    showProgress("progress.applying");
   });
 }

@@ -1500,7 +1500,105 @@ body {
   line-height: 1.5;
 }
 
-/* ===== Switch ===== */
+/* setting-row variant: control below the label */
+.setting-row--block {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.setting-row--block .setting-row__info {
+  flex: none;
+  width: 100%;
+}
+
+/* ===== Selector de idioma del juego ===== */
+.game-lang-picker {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  width: 100%;
+}
+
+.game-lang-option {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 7px 14px 7px 10px;
+  border: 1px solid var(--panel-edge);
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.03);
+  cursor: not-allowed;
+  opacity: 0.42;
+  transition: border-color 0.15s, background 0.15s, opacity 0.15s;
+  user-select: none;
+}
+
+.game-lang-option input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+}
+
+/* enabled (not disabled) */
+.game-lang-option:has(input:not([disabled])) {
+  cursor: pointer;
+  opacity: 1;
+}
+
+.game-lang-option:has(input:not([disabled])):hover {
+  border-color: rgba(111, 216, 255, 0.35);
+  background: rgba(111, 216, 255, 0.06);
+}
+
+/* selected */
+.game-lang-option:has(input:checked) {
+  border-color: var(--ice);
+  background: rgba(111, 216, 255, 0.1);
+  box-shadow: 0 0 0 1px rgba(111, 216, 255, 0.2);
+}
+
+.game-lang-option__code {
+  font-family: var(--font-ui);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  color: var(--ice);
+  background: rgba(111, 216, 255, 0.12);
+  border-radius: 3px;
+  padding: 1px 5px;
+  flex-shrink: 0;
+}
+
+.game-lang-option:has(input:not(:checked)) .game-lang-option__code {
+  color: var(--text-dim);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.game-lang-option__name {
+  font-family: var(--font-ui);
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--text);
+  white-space: nowrap;
+}
+
+.game-lang-option__lock {
+  font-size: 0.65rem;
+  color: var(--text-dim);
+  margin-left: 2px;
+  flex-shrink: 0;
+}
+
+/* hide lock icon when the option is enabled */
+.game-lang-option:has(input:not([disabled])) .game-lang-option__lock {
+  display: none;
+}
+
+
 .setting-switch {
   flex-shrink: 0;
   display: inline-flex;

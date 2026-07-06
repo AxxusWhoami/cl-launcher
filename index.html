@@ -241,6 +241,39 @@
             </select>
           </div>
 
+          <div class="setting-row setting-row--block">
+            <div class="setting-row__info">
+              <span class="setting-row__label" data-i18n="settings.gamelang.label">Idioma del juego</span>
+              <span class="setting-row__desc" data-i18n="settings.gamelang.desc">Idioma de los textos del cliente. Solo están disponibles los paquetes de idioma instalados en el Gestor de descargas.</span>
+            </div>
+            <div class="game-lang-picker" id="game-lang-picker" role="radiogroup" aria-label="Idioma del juego">
+              <label class="game-lang-option" data-lang="esES">
+                <input type="radio" name="game-lang" id="game-lang-es" value="esES" disabled />
+                <span class="game-lang-option__code">ES</span>
+                <span class="game-lang-option__name" data-i18n="settings.language.es">Español</span>
+                <i class="fa-solid fa-lock game-lang-option__lock" aria-hidden="true"></i>
+              </label>
+              <label class="game-lang-option" data-lang="enUS">
+                <input type="radio" name="game-lang" id="game-lang-en" value="enUS" disabled />
+                <span class="game-lang-option__code">EN</span>
+                <span class="game-lang-option__name" data-i18n="settings.language.en">Inglés</span>
+                <i class="fa-solid fa-lock game-lang-option__lock" aria-hidden="true"></i>
+              </label>
+              <label class="game-lang-option" data-lang="frFR">
+                <input type="radio" name="game-lang" id="game-lang-fr" value="frFR" disabled />
+                <span class="game-lang-option__code">FR</span>
+                <span class="game-lang-option__name" data-i18n="settings.language.fr">Francés</span>
+                <i class="fa-solid fa-lock game-lang-option__lock" aria-hidden="true"></i>
+              </label>
+              <label class="game-lang-option" data-lang="deDE">
+                <input type="radio" name="game-lang" id="game-lang-de" value="deDE" disabled />
+                <span class="game-lang-option__code">DE</span>
+                <span class="game-lang-option__name" data-i18n="settings.language.de">Alemán</span>
+                <i class="fa-solid fa-lock game-lang-option__lock" aria-hidden="true"></i>
+              </label>
+            </div>
+          </div>
+
           <div class="setting-row">
             <div class="setting-row__info">
               <span class="setting-row__label" data-i18n="settings.laa.label">Patch 4GB (LAA)</span>
