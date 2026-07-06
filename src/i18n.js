@@ -67,6 +67,18 @@ const TRANSLATIONS = {
     // Lanzador
     "launcher.error":  "Error al iniciar el juego",
 
+    // Modal de registro
+    "register.title":               "¿Aún no tienes cuenta?",
+    "register.subtitle":            "Regístrate y juega gratis",
+    "register.email.label":         "Correo electrónico",
+    "register.email.placeholder":   "tu@correo.com",
+    "register.cta":                 "Crear cuenta",
+    "register.sending":             "Creando tu cuenta...",
+    "register.success":             "¡Cuenta creada! Revisa tu correo para activarla.",
+    "register.error.invalid_email": "Introduce un correo electrónico válido.",
+    "register.error.generic":       "No se pudo crear la cuenta. Inténtalo de nuevo.",
+    "modal.close":                  "Cerrar",
+
     // Audio
     "audio.mute":   "Silenciar música",
     "audio.unmute": "Activar música",
@@ -208,6 +220,18 @@ const TRANSLATIONS = {
     // Launcher
     "launcher.error":  "Error launching game",
 
+    // Registration modal
+    "register.title":               "Don't have an account yet?",
+    "register.subtitle":            "Sign up and play for free",
+    "register.email.label":         "Email address",
+    "register.email.placeholder":   "you@email.com",
+    "register.cta":                 "Create account",
+    "register.sending":             "Creating your account...",
+    "register.success":             "Account created! Check your email to activate it.",
+    "register.error.invalid_email": "Enter a valid email address.",
+    "register.error.generic":       "Could not create account. Please try again.",
+    "modal.close":                  "Close",
+
     // Audio
     "audio.mute":   "Mute music",
     "audio.unmute": "Unmute music",
@@ -341,6 +365,18 @@ const TRANSLATIONS = {
     // Launcher
     "launcher.error":  "Erreur lors du lancement du jeu",
 
+    // Modal d'inscription
+    "register.title":               "Pas encore de compte ?",
+    "register.subtitle":            "Inscris-toi et joue gratuitement",
+    "register.email.label":         "Adresse e-mail",
+    "register.email.placeholder":   "toi@email.com",
+    "register.cta":                 "Créer un compte",
+    "register.sending":             "Création de votre compte...",
+    "register.success":             "Compte créé ! Vérifiez vos e-mails pour l'activer.",
+    "register.error.invalid_email": "Entrez une adresse e-mail valide.",
+    "register.error.generic":       "Impossible de créer le compte. Veuillez réessayer.",
+    "modal.close":                  "Fermer",
+
     // Audio
     "audio.mute":   "Couper la musique",
     "audio.unmute": "Activer la musique",
@@ -473,6 +509,18 @@ const TRANSLATIONS = {
 
     // Launcher
     "launcher.error":  "Fehler beim Starten des Spiels",
+
+    // Registrierungsmodal
+    "register.title":               "Noch kein Konto?",
+    "register.subtitle":            "Registriere dich und spiele kostenlos",
+    "register.email.label":         "E-Mail-Adresse",
+    "register.email.placeholder":   "du@email.com",
+    "register.cta":                 "Konto erstellen",
+    "register.sending":             "Konto wird erstellt...",
+    "register.success":             "Konto erstellt! Prüfe deine E-Mails zur Aktivierung.",
+    "register.error.invalid_email": "Gib eine gültige E-Mail-Adresse ein.",
+    "register.error.generic":       "Konto konnte nicht erstellt werden. Bitte erneut versuchen.",
+    "modal.close":                  "Schließen",
 
     // Audio
     "audio.mute":   "Musik stumm schalten",

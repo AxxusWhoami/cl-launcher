@@ -10,6 +10,7 @@ import { isTauri, getLocale, initLocale } from "./src/locale.js";
 import { applyTranslations, t } from "./src/i18n.js";
 import { initSettingsModal, setAvailableGameLanguages, setGameInstalled as setSettingsGameInstalled } from "./src/settings.js";
 import { initPackagesModal, setInstalledPackages, onPackageStateChange, onPackageProgress, setGameInstalled, setGameActionBusy } from "./src/packages.js";
+import { initRegisterModal, onCreateAccountResult } from "./src/register.js";
 
 const AUDIO_STORAGE_KEY = "launcher_audio_muted";
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -268,11 +269,18 @@ const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   // Uso desde Rust: window.__onGameActionDone()
   window.__onGameActionDone = () => setGameActionBusy(false);
 
+  // Puente para el registro de cuenta.
+  // Rust llama con el resultado: window.__onCreateAccountResult(true, "mensaje")
+  window.__onCreateAccountResult = onCreateAccountResult;
+
   // --- Modal de configuración ------------------------------------------------
   initSettingsModal();
 
   // --- Gestor de paquetes ----------------------------------------------------
   initPackagesModal();
+
+  // --- Modal de registro (botón Instalar) ------------------------------------
+  initRegisterModal();
 
   // --- Carga inicial ----------------------------------------------------------
   loadFeatures(document.querySelector("#features-list"));

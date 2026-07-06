@@ -390,5 +390,32 @@
         </div>
       </div>
     </dialog>
+
+    <dialog class="register-modal" id="register-modal" aria-labelledby="register-modal-title" aria-modal="true" hidden>
+      <div class="register-modal__box">
+        <button class="register-modal__close" id="register-modal-close" type="button" data-i18n-aria-label="modal.close" aria-label="Cerrar">
+          <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+        </button>
+        <i class="fa-solid fa-user-plus register-modal__hero-icon" aria-hidden="true"></i>
+        <h2 class="register-modal__title" id="register-modal-title" data-i18n="register.title">¿Aún no tienes cuenta?</h2>
+        <p class="register-modal__subtitle" data-i18n="register.subtitle">Regístrate y juega gratis</p>
+        <form class="register-modal__form" id="register-modal-form" novalidate>
+          <div class="register-modal__field">
+            <label class="register-modal__label" for="register-modal-email" data-i18n="register.email.label">Correo electrónico</label>
+            <input class="register-modal__input" id="register-modal-email" type="email" autocomplete="email" required
+                   data-i18n-placeholder="register.email.placeholder" placeholder="tu@correo.com" />
+            <span class="register-modal__error" id="register-modal-error" role="alert" hidden></span>
+          </div>
+          <button class="register-modal__submit" id="register-modal-submit" type="submit">
+            <span class="register-modal__submit-label" data-i18n="register.cta">Crear cuenta</span>
+            <span class="register-modal__submit-spinner" aria-hidden="true"></span>
+          </button>
+        </form>
+        <div class="register-modal__result" id="register-modal-result" hidden>
+          <i id="register-modal-result-icon" class="fa-solid fa-circle-check register-modal__result-icon" aria-hidden="true"></i>
+          <p class="register-modal__result-msg" id="register-modal-result-msg"></p>
+        </div>
+      </div>
+    </dialog>
   </body>
 </html>
