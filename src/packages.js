@@ -242,6 +242,20 @@ function buildModalBody(locale) {
 
 // ── Public bridge functions (exposed on window in app.js) ────────────────────
 
+export function setGameActionBusy(busy) {
+  const pkgBtn      = document.querySelector("#pkgmgr-toggle");
+  const settingsBtn = document.querySelector("#settings-toggle");
+  [pkgBtn, settingsBtn].forEach((btn) => {
+    if (!btn) return;
+    btn.disabled = busy;
+    if (busy) {
+      btn.dataset.busyDisabled = "true";
+    } else {
+      delete btn.dataset.busyDisabled;
+    }
+  });
+}
+
 export function setGameInstalled(installed) {
   gameInstalled = installed;
   if (!isTauri()) return;
@@ -389,6 +403,7 @@ export function initPackagesModal() {
     pendingAction?.();
     closeConfirmModal();
     closeModal();
+    setGameActionBusy(true);
   });
 
   confirmModal?.addEventListener("click", (e) => {

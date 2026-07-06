@@ -9,7 +9,7 @@ import { startSnow } from "./src/snow.js";
 import { isTauri, getLocale, initLocale } from "./src/locale.js";
 import { applyTranslations, t } from "./src/i18n.js";
 import { initSettingsModal, setAvailableGameLanguages, setGameInstalled as setSettingsGameInstalled } from "./src/settings.js";
-import { initPackagesModal, setInstalledPackages, onPackageStateChange, onPackageProgress, setGameInstalled } from "./src/packages.js";
+import { initPackagesModal, setInstalledPackages, onPackageStateChange, onPackageProgress, setGameInstalled, setGameActionBusy } from "./src/packages.js";
 
 const AUDIO_STORAGE_KEY = "launcher_audio_muted";
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -264,6 +264,9 @@ const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     setGameInstalled(installed);
     setSettingsGameInstalled(installed);
   };
+  // Rust llama esto cuando termina una reparación o desinstalación.
+  // Uso desde Rust: window.__onGameActionDone()
+  window.__onGameActionDone = () => setGameActionBusy(false);
 
   // --- Modal de configuración ------------------------------------------------
   initSettingsModal();
