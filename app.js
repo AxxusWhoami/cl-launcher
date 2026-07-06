@@ -8,6 +8,7 @@ import { startRealmStatus } from "./src/realm-status.js";
 import { startSnow } from "./src/snow.js";
 import { isTauri, getLocale, toggleLocale, initLocale } from "./src/locale.js";
 import { applyTranslations, t } from "./src/i18n.js";
+import { initSettingsModal } from "./src/settings.js";
 
 const AUDIO_STORAGE_KEY = "launcher_audio_muted";
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -276,6 +277,9 @@ const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
   // Exponer para uso desde el entorno Tauri / pruebas
   window.__openUpdateModal = openUpdateModal;
+
+  // --- Modal de configuración ------------------------------------------------
+  initSettingsModal();
 
   // --- Carga inicial ----------------------------------------------------------
   loadFeatures(document.querySelector("#features-list"));

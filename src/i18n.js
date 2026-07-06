@@ -85,6 +85,20 @@ const TRANSLATIONS = {
     "update.body":    "Hay una nueva versión del lanzador. ¿Deseas actualizar?",
     "update.later":   "Después",
     "update.confirm": "Sí",
+
+    // Configuración
+    "settings.open":                "Configuración",
+    "settings.title":               "Configuración del lanzador",
+    "settings.laa.label":           "Patch 4GB (LAA)",
+    "settings.laa.desc":            "Permite al cliente usar hasta 4 GB de RAM en lugar del límite de 2 GB. Requiere sistema operativo de 64 bits.",
+    "settings.affinity.label":      "CPU Affinity Mask",
+    "settings.affinity.desc":       "Fija el proceso del juego a núcleos de CPU específicos para reducir cambios de contexto y mejorar la estabilidad de latencia.",
+    "settings.tcpnodelay.label":    "TCP No Delay",
+    "settings.tcpnodelay.desc":     "Desactiva el algoritmo de Nagle para enviar paquetes de red de inmediato. Reduce la latencia en conexiones TCP a costa de mayor ancho de banda.",
+    "settings.cpucores.label":      "CPU Cores",
+    "settings.cpucores.desc":       "Número de núcleos de CPU asignados al proceso del juego cuando CPU Affinity está activo.",
+    "settings.dxvk.label":          "DXVK (Vulkan)",
+    "settings.dxvk.desc":           "Traduce llamadas Direct3D a Vulkan mediante DXVK. Puede mejorar significativamente el rendimiento en sistemas Linux y en equipos con drivers Vulkan modernos.",
   },
 
   enUS: {
@@ -170,6 +184,20 @@ const TRANSLATIONS = {
     "update.body":    "There is a new launcher version. Do you want to update?",
     "update.later":   "Later",
     "update.confirm": "Yes",
+
+    // Settings
+    "settings.open":                "Settings",
+    "settings.title":               "Launcher Settings",
+    "settings.laa.label":           "4GB Patch (LAA)",
+    "settings.laa.desc":            "Allows the client to use up to 4 GB of RAM instead of the 2 GB limit. Requires a 64-bit operating system.",
+    "settings.affinity.label":      "CPU Affinity Mask",
+    "settings.affinity.desc":       "Pins the game process to specific CPU cores to reduce context switches and improve latency stability.",
+    "settings.tcpnodelay.label":    "TCP No Delay",
+    "settings.tcpnodelay.desc":     "Disables the Nagle algorithm to send network packets immediately. Reduces TCP latency at the cost of higher bandwidth usage.",
+    "settings.cpucores.label":      "CPU Cores",
+    "settings.cpucores.desc":       "Number of CPU cores assigned to the game process when CPU Affinity is active.",
+    "settings.dxvk.label":          "DXVK (Vulkan)",
+    "settings.dxvk.desc":           "Translates Direct3D calls to Vulkan via DXVK. Can significantly improve performance on Linux systems and hardware with modern Vulkan drivers.",
   },
 };
 

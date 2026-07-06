@@ -31,6 +31,9 @@
             <li><button class="ice-tab" type="button" data-view="tienda" data-i18n="nav.store">Tienda</button></li>
           </ul>
           <div class="nav-controls">
+            <button class="audio-toggle" id="settings-toggle" type="button" aria-label="Configuración">
+              <i class="fa-solid fa-gear"></i>
+            </button>
             <button class="audio-toggle" id="audio-toggle" type="button" data-i18n-aria-label="audio.mute" aria-label="Silenciar música">
               <i class="fa-solid fa-volume-high"></i>
             </button>
@@ -217,6 +220,77 @@
     </main>
 
     <script type="module" src="/app.js"></script>
+
+    <dialog class="settings-modal" id="settings-modal" aria-labelledby="settings-modal-title" aria-modal="true" hidden>
+      <div class="settings-modal__box">
+        <div class="settings-modal__header">
+          <i class="fa-solid fa-gear settings-modal__icon" aria-hidden="true"></i>
+          <h2 class="settings-modal__title" id="settings-modal-title" data-i18n="settings.title">Configuración del lanzador</h2>
+          <button class="settings-modal__close" id="settings-close" type="button" aria-label="Cerrar">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+        <div class="settings-modal__body">
+
+          <div class="setting-row">
+            <div class="setting-row__info">
+              <span class="setting-row__label" data-i18n="settings.laa.label">Patch 4GB (LAA)</span>
+              <span class="setting-row__desc" data-i18n="settings.laa.desc">Permite al cliente usar hasta 4 GB de RAM en lugar del límite de 2 GB. Requiere sistema operativo de 64 bits.</span>
+            </div>
+            <label class="setting-switch" aria-label="Patch 4GB (LAA)">
+              <input type="checkbox" id="setting-laa" />
+              <span class="setting-switch__track"><span class="setting-switch__thumb"></span></span>
+            </label>
+          </div>
+
+          <div class="setting-row">
+            <div class="setting-row__info">
+              <span class="setting-row__label" data-i18n="settings.affinity.label">CPU Affinity Mask</span>
+              <span class="setting-row__desc" data-i18n="settings.affinity.desc">Fija el proceso del juego a núcleos de CPU específicos para reducir cambios de contexto y mejorar la estabilidad de latencia.</span>
+            </div>
+            <label class="setting-switch" aria-label="CPU Affinity Mask">
+              <input type="checkbox" id="setting-cpu-affinity" />
+              <span class="setting-switch__track"><span class="setting-switch__thumb"></span></span>
+            </label>
+          </div>
+
+          <div class="setting-row">
+            <div class="setting-row__info">
+              <span class="setting-row__label" data-i18n="settings.tcpnodelay.label">TCP No Delay</span>
+              <span class="setting-row__desc" data-i18n="settings.tcpnodelay.desc">Desactiva el algoritmo de Nagle para enviar paquetes de red de inmediato. Reduce la latencia en conexiones TCP a costa de mayor ancho de banda.</span>
+            </div>
+            <label class="setting-switch" aria-label="TCP No Delay">
+              <input type="checkbox" id="setting-tcp-nodelay" />
+              <span class="setting-switch__track"><span class="setting-switch__thumb"></span></span>
+            </label>
+          </div>
+
+          <div class="setting-row">
+            <div class="setting-row__info">
+              <span class="setting-row__label" data-i18n="settings.cpucores.label">CPU Cores</span>
+              <span class="setting-row__desc" data-i18n="settings.cpucores.desc">Número de núcleos de CPU asignados al proceso del juego cuando CPU Affinity está activo.</span>
+            </div>
+            <select class="setting-select" id="setting-cpu-cores" aria-label="CPU Cores">
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="4">4</option>
+            </select>
+          </div>
+
+          <div class="setting-row">
+            <div class="setting-row__info">
+              <span class="setting-row__label" data-i18n="settings.dxvk.label">DXVK (Vulkan)</span>
+              <span class="setting-row__desc" data-i18n="settings.dxvk.desc">Traduce llamadas Direct3D a Vulkan mediante DXVK. Puede mejorar significativamente el rendimiento en sistemas Linux y en equipos con drivers Vulkan modernos.</span>
+            </div>
+            <label class="setting-switch" aria-label="DXVK (Vulkan)">
+              <input type="checkbox" id="setting-dxvk" />
+              <span class="setting-switch__track"><span class="setting-switch__thumb"></span></span>
+            </label>
+          </div>
+
+        </div>
+      </div>
+    </dialog>
 
     <dialog class="update-modal" id="update-modal" aria-labelledby="update-modal-title" aria-modal="true" hidden>
       <div class="update-modal__box">
