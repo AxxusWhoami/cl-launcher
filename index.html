@@ -37,9 +37,6 @@
             <button class="audio-toggle" id="settings-toggle" type="button" aria-label="Configuración">
               <i class="fa-solid fa-gear"></i>
             </button>
-            <button class="audio-toggle" id="audio-toggle" type="button" data-i18n-aria-label="audio.mute" aria-label="Silenciar música">
-              <i class="fa-solid fa-volume-high"></i>
-            </button>
           </div>
         </nav>
       </header>
@@ -338,11 +335,20 @@
             </label>
           </div>
 
+          <div class="setting-row">
+            <div class="setting-row__info">
+              <span class="setting-row__label" data-i18n="settings.music.label">Música del lanzador</span>
+              <span class="setting-row__desc" data-i18n="settings.music.desc">Reproduce la música de ambiente al iniciar el lanzador.</span>
+            </div>
+            <label class="setting-switch" aria-label="Música del lanzador">
+              <input type="checkbox" id="setting-audio" />
+              <span class="setting-switch__track"><span class="setting-switch__thumb"></span></span>
+            </label>
+          </div>
+
         </div>
       </div>
-    </dialog>
-
-    <dialog class="progress-modal" id="progress-modal" aria-labelledby="progress-modal-msg" aria-modal="true" aria-live="assertive" hidden>
+    </dialog> id="progress-modal" aria-labelledby="progress-modal-msg" aria-modal="true" aria-live="assertive" hidden>
       <div class="progress-modal__box">
         <div class="progress-modal__spinner" aria-hidden="true"></div>
         <p class="progress-modal__msg" id="progress-modal-msg"></p>

@@ -79,7 +79,6 @@ const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const loc = e.detail?.locale ?? getLocale();
     applyTranslations(loc);
     document.documentElement.lang = LOCALE_LANG[loc] ?? "es";
-    updateAudioButton();
 
     if (changelogLoaded) {
       changelogLoaded = false;
@@ -104,31 +103,21 @@ const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   let muted = localStorage.getItem(AUDIO_STORAGE_KEY) === "true";
   ambientAudio.volume = muted ? 0 : 0.5;
 
-  const audioToggleBtn = document.querySelector("#audio-toggle");
-
-  function updateAudioButton() {
-    if (!audioToggleBtn) return;
-    const loc = getLocale();
-    const icon = audioToggleBtn.querySelector("i");
-    if (muted) {
-      icon.className = "fa-solid fa-volume-xmark";
-      audioToggleBtn.setAttribute("aria-label", t("audio.unmute", loc));
-    } else {
-      icon.className = "fa-solid fa-volume-high";
-      audioToggleBtn.setAttribute("aria-label", t("audio.mute", loc));
-    }
+  function syncAudioCheckbox() {
+    const cb = document.querySelector("#setting-audio");
+    if (cb) cb.checked = !muted;
   }
 
   function setMuted(value) {
     muted = value;
     ambientAudio.volume = muted ? 0 : 0.5;
     localStorage.setItem(AUDIO_STORAGE_KEY, String(muted));
-    updateAudioButton();
+    syncAudioCheckbox();
   }
 
-  updateAudioButton();
+  syncAudioCheckbox();
 
-  audioToggleBtn?.addEventListener("click", () => setMuted(!muted));
+  document.querySelector("#setting-audio")?.addEventListener("change", (e) => setMuted(!e.target.checked));
 
   if (!muted) {
     ambientAudio.play().catch(() => {

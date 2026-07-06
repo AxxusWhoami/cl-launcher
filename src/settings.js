@@ -94,6 +94,8 @@ export function initSettingsModal() {
     document.querySelector("#setting-cpu-cores").value           = String(settings.cpuCores);
     document.querySelector("#setting-dxvk").checked              = settings.dxvk;
     document.querySelector("#setting-download-speed").value      = String(settings.downloadSpeedLimit);
+    const audioEl = document.querySelector("#setting-audio");
+    if (audioEl) audioEl.checked = localStorage.getItem("launcher_audio_muted") !== "true";
     if (settings.gameLanguage) {
       const radio = document.querySelector(`input[name="game-lang"][value="${settings.gameLanguage}"]`);
       if (radio && !radio.disabled) radio.checked = true;
