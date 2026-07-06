@@ -110,6 +110,22 @@ const TRANSLATIONS = {
     "progress.installing.dxvk":     "Instalando DXVK (Vulkan)...",
     "progress.uninstalling.dxvk":   "Desinstalando DXVK (Vulkan)...",
     "progress.applying":            "Aplicando...",
+
+    // Gestor de paquetes
+    "pkgmgr.open":               "Gestor de paquetes",
+    "pkgmgr.title":              "Gestor de paquetes",
+    "pkgmgr.section.languages":  "Paquetes de idioma",
+    "pkgmgr.section.hd":         "Modelos y Texturas en HD",
+    "pkgmgr.lang.desc":          "Paquete de idioma del juego",
+    "pkgmgr.hd.name":            "Modelos y Texturas en HD",
+    "pkgmgr.hd.desc.1":          "Modelos en HD para Personajes",
+    "pkgmgr.hd.desc.2":          "Modelos en HD para NPCs",
+    "pkgmgr.hd.desc.3":          "Texturas de mayor resolución para NPCs",
+    "pkgmgr.hd.desc.4":          "Texturas de mayor resolución para Ciudades y Entornos",
+    "pkgmgr.status.installed":   "Instalado",
+    "pkgmgr.action.download":    "Descargar",
+    "pkgmgr.action.delete":      "Eliminar",
+    "pkgmgr.action.busy":        "En progreso...",
   },
 
   enUS: {
@@ -220,6 +236,22 @@ const TRANSLATIONS = {
     "progress.installing.dxvk":     "Installing DXVK (Vulkan)...",
     "progress.uninstalling.dxvk":   "Uninstalling DXVK (Vulkan)...",
     "progress.applying":            "Applying...",
+
+    // Package Manager
+    "pkgmgr.open":               "Package Manager",
+    "pkgmgr.title":              "Package Manager",
+    "pkgmgr.section.languages":  "Language Packs",
+    "pkgmgr.section.hd":         "HD Models & Textures",
+    "pkgmgr.lang.desc":          "Game language pack",
+    "pkgmgr.hd.name":            "HD Models & Textures",
+    "pkgmgr.hd.desc.1":          "HD Models for Characters",
+    "pkgmgr.hd.desc.2":          "HD Models for NPCs",
+    "pkgmgr.hd.desc.3":          "Textures with higher resolution for NPCs",
+    "pkgmgr.hd.desc.4":          "Textures with higher resolution for Cities and Surroundings",
+    "pkgmgr.status.installed":   "Installed",
+    "pkgmgr.action.download":    "Download",
+    "pkgmgr.action.delete":      "Delete",
+    "pkgmgr.action.busy":        "In progress...",
   },
 
   frFR: {
@@ -322,6 +354,22 @@ const TRANSLATIONS = {
     "progress.installing.dxvk":     "Installation de DXVK (Vulkan)...",
     "progress.uninstalling.dxvk":   "Désinstallation de DXVK (Vulkan)...",
     "progress.applying":            "Application en cours...",
+
+    // Gestionnaire de paquets
+    "pkgmgr.open":               "Gestionnaire de paquets",
+    "pkgmgr.title":              "Gestionnaire de paquets",
+    "pkgmgr.section.languages":  "Packs de langue",
+    "pkgmgr.section.hd":         "Modèles et textures HD",
+    "pkgmgr.lang.desc":          "Pack de langue du jeu",
+    "pkgmgr.hd.name":            "Modèles et textures HD",
+    "pkgmgr.hd.desc.1":          "Modèles HD pour les personnages",
+    "pkgmgr.hd.desc.2":          "Modèles HD pour les PNJ",
+    "pkgmgr.hd.desc.3":          "Textures haute résolution pour les PNJ",
+    "pkgmgr.hd.desc.4":          "Textures haute résolution pour les villes et les environnements",
+    "pkgmgr.status.installed":   "Installé",
+    "pkgmgr.action.download":    "Télécharger",
+    "pkgmgr.action.delete":      "Supprimer",
+    "pkgmgr.action.busy":        "En cours...",
   },
 
   deDE: {
@@ -424,6 +472,22 @@ const TRANSLATIONS = {
     "progress.installing.dxvk":     "DXVK (Vulkan) wird installiert...",
     "progress.uninstalling.dxvk":   "DXVK (Vulkan) wird deinstalliert...",
     "progress.applying":            "Wird angewendet...",
+
+    // Paket-Manager
+    "pkgmgr.open":               "Paket-Manager",
+    "pkgmgr.title":              "Paket-Manager",
+    "pkgmgr.section.languages":  "Sprachpakete",
+    "pkgmgr.section.hd":         "HD-Modelle und Texturen",
+    "pkgmgr.lang.desc":          "Sprachpaket für das Spiel",
+    "pkgmgr.hd.name":            "HD-Modelle und Texturen",
+    "pkgmgr.hd.desc.1":          "HD-Modelle für Charaktere",
+    "pkgmgr.hd.desc.2":          "HD-Modelle für NPCs",
+    "pkgmgr.hd.desc.3":          "Texturen mit höherer Auflösung für NPCs",
+    "pkgmgr.hd.desc.4":          "Texturen mit höherer Auflösung für Städte und Umgebungen",
+    "pkgmgr.status.installed":   "Installiert",
+    "pkgmgr.action.download":    "Herunterladen",
+    "pkgmgr.action.delete":      "Löschen",
+    "pkgmgr.action.busy":        "In Bearbeitung...",
   },
 };
 

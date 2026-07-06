@@ -9,6 +9,7 @@ import { startSnow } from "./src/snow.js";
 import { isTauri, getLocale, initLocale } from "./src/locale.js";
 import { applyTranslations, t } from "./src/i18n.js";
 import { initSettingsModal, setAvailableGameLanguages } from "./src/settings.js";
+import { initPackagesModal, setInstalledPackages, onPackageStateChange } from "./src/packages.js";
 
 const AUDIO_STORAGE_KEY = "launcher_audio_muted";
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -262,8 +263,17 @@ const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   // Uso desde Rust: window.__setAvailableGameLanguages(["esES", "enUS"])
   window.__setAvailableGameLanguages = setAvailableGameLanguages;
 
+  // Puentes para el Gestor de paquetes.
+  // Rust informa los paquetes ya instalados:  window.__setInstalledPackages(["lang-esES", "hd"])
+  // Rust notifica un cambio de estado:        window.__onPackageStateChange("hd", "installed")
+  window.__setInstalledPackages  = setInstalledPackages;
+  window.__onPackageStateChange  = onPackageStateChange;
+
   // --- Modal de configuración ------------------------------------------------
   initSettingsModal();
+
+  // --- Gestor de paquetes ----------------------------------------------------
+  initPackagesModal();
 
   // --- Carga inicial ----------------------------------------------------------
   loadFeatures(document.querySelector("#features-list"));

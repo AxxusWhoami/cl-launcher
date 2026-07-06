@@ -31,6 +31,9 @@
             <li><button class="ice-tab" type="button" data-view="tienda" data-i18n="nav.store">Tienda</button></li>
           </ul>
           <div class="nav-controls">
+            <button class="audio-toggle" id="pkgmgr-toggle" type="button" data-i18n-aria-label="pkgmgr.open" aria-label="Gestor de paquetes">
+              <i class="fa-solid fa-box-archive"></i>
+            </button>
             <button class="audio-toggle" id="settings-toggle" type="button" aria-label="Configuración">
               <i class="fa-solid fa-gear"></i>
             </button>
@@ -216,6 +219,21 @@
     </main>
 
     <script type="module" src="/app.js"></script>
+
+    <dialog class="pkgmgr-modal" id="pkgmgr-modal" aria-labelledby="pkgmgr-modal-title" aria-modal="true" hidden>
+      <div class="pkgmgr__box">
+        <div class="pkgmgr__header">
+          <i class="fa-solid fa-box-archive pkgmgr__icon" aria-hidden="true"></i>
+          <h2 class="pkgmgr__title" id="pkgmgr-modal-title" data-i18n="pkgmgr.title">Gestor de paquetes</h2>
+          <button class="pkgmgr__close" id="pkgmgr-close" type="button" aria-label="Cerrar">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+        <div class="pkgmgr__body" id="pkgmgr-body">
+          <!-- Construido dinámicamente por packages.js -->
+        </div>
+      </div>
+    </dialog>
 
     <dialog class="settings-modal" id="settings-modal" aria-labelledby="settings-modal-title" aria-modal="true" hidden>
       <div class="settings-modal__box">
