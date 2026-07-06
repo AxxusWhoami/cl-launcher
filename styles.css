@@ -2065,7 +2065,51 @@ body {
   border-color: rgba(245, 166, 35, 0.3);
 }
 
-/* ── Spinner por ítem ── */
+/* ── Barra de progreso por ítem ── */
+.pkg-item__progress-wrap {
+  flex-shrink: 0;
+  align-self: center;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.pkg-item__progress-track {
+  width: 90px;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.pkg-item__progress-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #6fd8ff 0%, #a8edff 100%);
+  border-radius: 2px;
+  transition: width 0.2s ease;
+}
+
+.pkg-item__progress-fill--indeterminate {
+  width: 40% !important;
+  animation: pkg-progress-indeterminate 1.2s ease-in-out infinite;
+}
+
+@keyframes pkg-progress-indeterminate {
+  0%   { transform: translateX(-100%); }
+  100% { transform: translateX(280%); }
+}
+
+.pkg-item__progress-pct {
+  font-family: var(--font-ui);
+  font-size: 0.68rem;
+  color: var(--text-dim);
+  min-width: 26px;
+  text-align: left;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ── Spinner por ítem (reservado) ── */
 .pkg-item__spinner {
   display: block;
   width: 18px;
@@ -2077,6 +2121,6 @@ body {
 }
 
 .pkg-item--busy {
-  opacity: 0.7;
+  opacity: 0.75;
   pointer-events: none;
 }

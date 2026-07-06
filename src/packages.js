@@ -2,6 +2,7 @@
 // Las acciones de descarga/borrado se delegan en Rust a través de window.__onDownloadPackage
 // y window.__onDeletePackage. Rust informa el estado instalado via window.__setInstalledPackages
 // y notifica cambios individuales via window.__onPackageStateChange.
+// Rust informa el progreso de descarga/instalación via window.__onPackageProgress(id, percent).
 import { getLocale, isTauri } from "./locale.js";
 import { t } from "./i18n.js";
 
@@ -35,7 +36,9 @@ const PACKAGE_DEFS = [
 ];
 
 // Estado por paquete: "uninstalled" | "installed" | "update" | "busy"
-const pkgState = Object.fromEntries(PACKAGE_DEFS.map((p) => [p.id, "uninstalled"]));
+const pkgState    = Object.fromEntries(PACKAGE_DEFS.map((p) => [p.id, "uninstalled"]));
+// Progreso por paquete (0-100). Solo relevante cuando state === "busy".
+const pkgProgress = Object.fromEntries(PACKAGE_DEFS.map((p) => [p.id, 0]));
 
 let isModalOpen = false;
 let gameInstalled = false;
@@ -81,36 +84,70 @@ function buildItem(def, locale) {
   badge.className = "pkg-item__badge";
   badge.hidden = true;
 
+  // Barra de progreso — visible solo durante estado "busy"
+  const progressWrap = document.createElement("div");
+  progressWrap.className = "pkg-item__progress-wrap";
+  progressWrap.hidden = true;
+  progressWrap.innerHTML = `
+    <div class="pkg-item__progress-track"
+         role="progressbar"
+         aria-valuemin="0"
+         aria-valuemax="100"
+         aria-valuenow="0">
+      <div class="pkg-item__progress-fill"></div>
+    </div>
+    <span class="pkg-item__progress-pct">0%</span>
+  `;
+
   const actionSlot = document.createElement("div");
   actionSlot.className = "pkg-item__action";
 
   item.appendChild(iconWrap);
   item.appendChild(info);
   item.appendChild(badge);
+  item.appendChild(progressWrap);
   item.appendChild(actionSlot);
 
   return item;
+}
+
+function setProgressBar(item, pct) {
+  const wrap  = item.querySelector(".pkg-item__progress-wrap");
+  if (!wrap) return;
+  const track = wrap.querySelector(".pkg-item__progress-track");
+  const fill  = wrap.querySelector(".pkg-item__progress-fill");
+  const label = wrap.querySelector(".pkg-item__progress-pct");
+  wrap.hidden = false;
+  if (track) track.setAttribute("aria-valuenow", String(pct));
+  if (fill)  {
+    fill.style.width = `${pct}%`;
+    fill.classList.toggle("pkg-item__progress-fill--indeterminate", pct === 0);
+  }
+  if (label) label.textContent = pct > 0 ? `${pct}%` : "";
+}
+
+function hideProgressBar(item) {
+  const wrap = item.querySelector(".pkg-item__progress-wrap");
+  if (wrap) wrap.hidden = true;
 }
 
 function updateItemUI(id, locale) {
   const item = document.querySelector(`.pkg-item[data-pkg-id="${id}"]`);
   if (!item) return;
 
-  const state = pkgState[id];
+  const state      = pkgState[id];
   const actionSlot = item.querySelector(".pkg-item__action");
-  const badge = item.querySelector(".pkg-item__badge");
+  const badge      = item.querySelector(".pkg-item__badge");
 
   actionSlot.innerHTML = "";
 
   if (state === "busy") {
     badge.hidden = true;
-    const spinner = document.createElement("span");
-    spinner.className = "pkg-item__spinner";
-    spinner.setAttribute("aria-label", t("pkgmgr.action.busy", locale));
-    actionSlot.appendChild(spinner);
     item.classList.add("pkg-item--busy");
     item.classList.remove("pkg-item--installed", "pkg-item--update");
+    setProgressBar(item, pkgProgress[id] ?? 0);
   } else if (state === "update") {
+    hideProgressBar(item);
     badge.textContent = t("pkgmgr.status.update", locale);
     badge.hidden = false;
     badge.className = "pkg-item__badge pkg-item__badge--update";
@@ -125,6 +162,7 @@ function updateItemUI(id, locale) {
     btn.addEventListener("click", () => triggerAction(id, "update"));
     actionSlot.appendChild(btn);
   } else if (state === "installed") {
+    hideProgressBar(item);
     badge.textContent = t("pkgmgr.status.installed", locale);
     badge.hidden = false;
     badge.className = "pkg-item__badge";
@@ -139,6 +177,7 @@ function updateItemUI(id, locale) {
     btn.addEventListener("click", () => triggerAction(id, "delete"));
     actionSlot.appendChild(btn);
   } else {
+    hideProgressBar(item);
     badge.hidden = true;
     badge.className = "pkg-item__badge";
     item.classList.remove("pkg-item--installed", "pkg-item--busy", "pkg-item--update");
@@ -154,6 +193,7 @@ function updateItemUI(id, locale) {
 }
 
 function triggerAction(id, action) {
+  pkgProgress[id] = 0;
   pkgState[id] = "busy";
   updateItemUI(id, getLocale());
   if (action === "download") {
@@ -233,6 +273,19 @@ export function onPackageStateChange(id, newState) {
   if (!(id in pkgState)) return;
   pkgState[id] = newState;
   if (isModalOpen) updateItemUI(id, getLocale());
+}
+
+/**
+ * Llamado desde Rust para actualizar el progreso de descarga/instalación de un paquete.
+ * El progreso avanza de 0 a 100. Varios paquetes pueden estar en progreso simultáneamente.
+ * Ejemplo desde Rust: window.__onPackageProgress("hd", 42)
+ */
+export function onPackageProgress(id, percent) {
+  if (!(id in pkgProgress)) return;
+  pkgProgress[id] = Math.max(0, Math.min(100, Math.round(percent)));
+  if (!isModalOpen || pkgState[id] !== "busy") return;
+  const item = document.querySelector(`.pkg-item[data-pkg-id="${id}"]`);
+  if (item) setProgressBar(item, pkgProgress[id]);
 }
 
 // ── Modal init ───────────────────────────────────────────────────────────────
