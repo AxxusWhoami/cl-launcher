@@ -6,11 +6,35 @@ import { getLocale } from "./locale.js";
 import { t } from "./i18n.js";
 
 const PACKAGE_DEFS = [
-  { id: "lang-esES", section: "languages", icon: "fa-language", nameKey: "settings.language.es", descKey: "pkgmgr.lang.desc" },
-  { id: "lang-enUS", section: "languages", icon: "fa-language", nameKey: "settings.language.en", descKey: "pkgmgr.lang.desc" },
-  { id: "lang-frFR", section: "languages", icon: "fa-language", nameKey: "settings.language.fr", descKey: "pkgmgr.lang.desc" },
-  { id: "lang-deDE", section: "languages", icon: "fa-language", nameKey: "settings.language.de", descKey: "pkgmgr.lang.desc" },
-  { id: "hd", section: "hd", icon: "fa-image",    nameKey: "pkgmgr.hd.name",         descKey: null },
+  { id: "lang-esES",    section: "languages", icon: "fa-language",           nameKey: "settings.language.es",      descKey: "pkgmgr.lang.desc" },
+  { id: "lang-enUS",    section: "languages", icon: "fa-language",           nameKey: "settings.language.en",      descKey: "pkgmgr.lang.desc" },
+  { id: "lang-frFR",    section: "languages", icon: "fa-language",           nameKey: "settings.language.fr",      descKey: "pkgmgr.lang.desc" },
+  { id: "lang-deDE",    section: "languages", icon: "fa-language",           nameKey: "settings.language.de",      descKey: "pkgmgr.lang.desc" },
+  {
+    id: "hd", section: "hd", icon: "fa-image",
+    nameKey: "pkgmgr.hd.name",
+    descKeys: ["pkgmgr.hd.desc.1", "pkgmgr.hd.desc.2", "pkgmgr.hd.desc.3", "pkgmgr.hd.desc.4"],
+  },
+  {
+    id: "hd-armor", section: "hd", icon: "fa-shield-halved",
+    nameKey: "pkgmgr.hd-armor.name",
+    descKey: "pkgmgr.hd-armor.desc",
+  },
+  {
+    id: "hd-creatures", section: "hd", icon: "fa-dragon",
+    nameKey: "pkgmgr.hd-creatures.name",
+    descKeys: ["pkgmgr.hd-creatures.desc.1", "pkgmgr.hd-creatures.desc.2"],
+  },
+  {
+    id: "hd-trees", section: "hd", icon: "fa-tree",
+    nameKey: "pkgmgr.hd-trees.name",
+    descKey: "pkgmgr.hd-trees.desc",
+  },
+  {
+    id: "hd-spells", section: "hd", icon: "fa-wand-magic-sparkles",
+    nameKey: "pkgmgr.hd-spells.name",
+    descKey: "pkgmgr.hd-spells.desc",
+  },
 ];
 
 // Estado por paquete: "uninstalled" | "installed" | "busy"
@@ -18,10 +42,10 @@ const pkgState = Object.fromEntries(PACKAGE_DEFS.map((p) => [p.id, "uninstalled"
 
 let isModalOpen = false;
 
-function buildHdDescList(locale) {
+function buildDescList(keys, locale) {
   const ul = document.createElement("ul");
   ul.className = "pkg-item__desc-list";
-  ["pkgmgr.hd.desc.1", "pkgmgr.hd.desc.2", "pkgmgr.hd.desc.3", "pkgmgr.hd.desc.4"].forEach((key) => {
+  keys.forEach((key) => {
     const li = document.createElement("li");
     li.textContent = t(key, locale);
     ul.appendChild(li);
@@ -46,8 +70,8 @@ function buildItem(def, locale) {
   name.textContent = t(def.nameKey, locale);
   info.appendChild(name);
 
-  if (def.id === "hd") {
-    info.appendChild(buildHdDescList(locale));
+  if (def.descKeys) {
+    info.appendChild(buildDescList(def.descKeys, locale));
   } else {
     const desc = document.createElement("span");
     desc.className = "pkg-item__desc";
