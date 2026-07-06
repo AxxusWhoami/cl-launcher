@@ -6,7 +6,7 @@ import { loadChangelog } from "./src/changelog.js";
 import { loadFeatures } from "./src/features.js";
 import { startRealmStatus } from "./src/realm-status.js";
 import { startSnow } from "./src/snow.js";
-import { isTauri, getLocale, toggleLocale, initLocale } from "./src/locale.js";
+import { isTauri, getLocale, initLocale } from "./src/locale.js";
 import { applyTranslations, t } from "./src/i18n.js";
 import { initSettingsModal } from "./src/settings.js";
 
@@ -15,9 +15,11 @@ const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 (async () => {
   // --- Inicialización de idioma -----------------------------------------------
+  const LOCALE_LANG = { esES: "es", enUS: "en", frFR: "fr", deDE: "de" };
+
   const locale = await initLocale();
   applyTranslations(locale);
-  document.documentElement.lang = locale === "enUS" ? "en" : "es";
+  document.documentElement.lang = LOCALE_LANG[locale] ?? "es";
 
   // --- Launcher UI ------------------------------------------------------------
   const ui = new LauncherUI({
@@ -71,33 +73,11 @@ const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     });
   });
 
-  // --- Botón de idioma (solo visible fuera de Tauri) --------------------------
-  const langToggleBtn = document.querySelector("#lang-toggle");
-  const langLabel = document.querySelector("#lang-label");
-
-  function updateLangButton(loc) {
-    if (langLabel) langLabel.textContent = loc === "esES" ? "ES" : "EN";
-    if (langToggleBtn) {
-      langToggleBtn.setAttribute("aria-label", t("lang.toggle", loc));
-    }
-  }
-
-  if (!isTauri() && langToggleBtn) {
-    langToggleBtn.hidden = false;
-    updateLangButton(getLocale());
-
-    langToggleBtn.addEventListener("click", () => {
-      const next = toggleLocale();
-      updateLangButton(next);
-    });
-  }
-
   // --- Reacción global a cambio de idioma ------------------------------------
   window.addEventListener("localechange", (e) => {
     const loc = e.detail?.locale ?? getLocale();
     applyTranslations(loc);
-    document.documentElement.lang = loc === "enUS" ? "en" : "es";
-    updateLangButton(loc);
+    document.documentElement.lang = LOCALE_LANG[loc] ?? "es";
     updateAudioButton();
 
     if (changelogLoaded) {
