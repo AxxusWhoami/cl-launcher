@@ -75,7 +75,7 @@ const TRANSLATIONS = {
     "lang.toggle": "Cambiar idioma",
 
     // Características
-    "features.heading": "Características",
+    "features.heading": "Características de CoRe Legacy",
     "features.loading": "Cargando características...",
     "features.empty":   "No hay características disponibles.",
     "features.error":   "No se pudieron cargar las características.",
@@ -180,7 +180,7 @@ const TRANSLATIONS = {
     "lang.toggle": "Change language",
 
     // Features
-    "features.heading": "Features",
+    "features.heading": "CoRe Legacy Features",
     "features.loading": "Loading features...",
     "features.empty":   "No features available.",
     "features.error":   "Could not load features.",
@@ -277,7 +277,7 @@ const TRANSLATIONS = {
     "lang.toggle": "Changer de langue",
 
     // Features
-    "features.heading": "Fonctionnalités",
+    "features.heading": "Fonctionnalités de CoRe Legacy",
     "features.loading": "Chargement des fonctionnalités...",
     "features.empty":   "Aucune fonctionnalité disponible.",
     "features.error":   "Impossible de charger les fonctionnalités.",
@@ -374,7 +374,7 @@ const TRANSLATIONS = {
     "lang.toggle": "Sprache wechseln",
 
     // Features
-    "features.heading": "Funktionen",
+    "features.heading": "CoRe Legacy Funktionen",
     "features.loading": "Funktionen werden geladen...",
     "features.empty":   "Keine Funktionen verfügbar.",
     "features.error":   "Funktionen konnten nicht geladen werden.",
