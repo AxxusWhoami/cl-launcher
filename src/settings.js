@@ -5,10 +5,11 @@ import { t } from "./i18n.js";
 const STORAGE_KEY = "launcher_settings";
 
 const DEFAULTS = {
-  cpuAffinity:  false,
-  cpuCores:     1,
-  dxvk:         false,
-  gameLanguage: null,
+  cpuAffinity:       false,
+  cpuCores:          1,
+  dxvk:              false,
+  downloadSpeedLimit: 0,
+  gameLanguage:      null,
 };
 
 export function loadSettings() {
@@ -89,9 +90,10 @@ export function initSettingsModal() {
 
   function applyToDOM() {
     document.querySelector("#setting-language").value       = getLocale();
-    document.querySelector("#setting-cpu-affinity").checked = settings.cpuAffinity;
-    document.querySelector("#setting-cpu-cores").value      = String(settings.cpuCores);
-    document.querySelector("#setting-dxvk").checked         = settings.dxvk;
+    document.querySelector("#setting-cpu-affinity").checked      = settings.cpuAffinity;
+    document.querySelector("#setting-cpu-cores").value           = String(settings.cpuCores);
+    document.querySelector("#setting-dxvk").checked              = settings.dxvk;
+    document.querySelector("#setting-download-speed").value      = String(settings.downloadSpeedLimit);
     if (settings.gameLanguage) {
       const radio = document.querySelector(`input[name="game-lang"][value="${settings.gameLanguage}"]`);
       if (radio && !radio.disabled) radio.checked = true;
@@ -160,6 +162,15 @@ export function initSettingsModal() {
     settings.dxvk = e.target.checked;
     saveSettings(settings);
     showProgress(settings.dxvk ? "progress.installing.dxvk" : "progress.uninstalling.dxvk");
+  });
+
+  // --- Límite de velocidad de descarga -----------------------------------------
+  document.querySelector("#setting-download-speed")?.addEventListener("change", (e) => {
+    // Implementar con RUST: invocar el throttler de descarga con el valor en MB/s.
+    // Si el valor es 0, desactivar el límite (descarga sin restricción).
+    // Ejemplo en Rust: set_download_speed_limit(value_mbps: u32)
+    settings.downloadSpeedLimit = Number(e.target.value);
+    saveSettings(settings);
   });
 
   // --- Idioma del juego --------------------------------------------------------

@@ -314,6 +314,22 @@
 
           <div class="setting-row">
             <div class="setting-row__info">
+              <span class="setting-row__label" data-i18n="settings.downloadspeed.label">Límite de velocidad de descarga</span>
+              <span class="setting-row__desc" data-i18n="settings.downloadspeed.desc">Limita el ancho de banda usado durante la descarga de parches y recursos. 0 significa sin límite.</span>
+            </div>
+            <select class="setting-select" id="setting-download-speed" aria-label="Límite de velocidad de descarga">
+              <option value="0" data-i18n="settings.downloadspeed.unlimited">Sin límite</option>
+              <option value="1">1 MB/s</option>
+              <option value="2">2 MB/s</option>
+              <option value="5">5 MB/s</option>
+              <option value="10">10 MB/s</option>
+              <option value="20">20 MB/s</option>
+              <option value="50">50 MB/s</option>
+            </select>
+          </div>
+
+          <div class="setting-row">
+            <div class="setting-row__info">
               <span class="setting-row__label" data-i18n="settings.dxvk.label">DXVK (Vulkan)</span>
               <span class="setting-row__desc" data-i18n="settings.dxvk.desc">Traduce llamadas Direct3D a Vulkan mediante DXVK. Puede mejorar significativamente el rendimiento en sistemas Linux y en equipos con drivers Vulkan modernos.</span>
             </div>
