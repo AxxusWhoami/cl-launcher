@@ -295,8 +295,8 @@ export function onPackageProgress(id, percent) {
 // ── Modal init ───────────────────────────────────────────────────────────────
 
 export function initPackagesModal() {
-  const modal   = document.querySelector("#pkgmgr-modal");
-  const openBtn = document.querySelector("#pkgmgr-toggle");
+  const modal    = document.querySelector("#pkgmgr-modal");
+  const openBtn  = document.querySelector("#pkgmgr-toggle");
   const closeBtn = document.querySelector("#pkgmgr-close");
   if (!modal || !openBtn) return;
 
@@ -335,5 +335,67 @@ export function initPackagesModal() {
       btn.title = tip;
       btn.setAttribute("aria-label", tip);
     }
+  });
+
+  // --- Game actions (Reparar / Desinstalar) -----------------------------------
+  const confirmModal  = document.querySelector("#game-confirm-modal");
+  const confirmTitle  = document.querySelector("#game-confirm-title");
+  const confirmBody   = document.querySelector("#game-confirm-body");
+  const confirmCancel = document.querySelector("#game-confirm-cancel");
+  const confirmOk     = document.querySelector("#game-confirm-ok");
+  let pendingAction   = null;
+
+  function showGameConfirm(titleKey, bodyKey, isDanger, action) {
+    const loc = getLocale();
+    if (confirmTitle) confirmTitle.textContent  = t(titleKey, loc);
+    if (confirmBody)  confirmBody.textContent   = t(bodyKey,  loc);
+    if (confirmCancel) confirmCancel.textContent = t("pkgmgr.confirm.cancel",  loc);
+    if (confirmOk)    confirmOk.textContent     = t("pkgmgr.confirm.proceed", loc);
+    confirmModal?.classList.toggle("game-confirm-modal--danger", isDanger);
+    pendingAction = action;
+    if (confirmModal) {
+      confirmModal.hidden = false;
+      confirmModal.removeAttribute("hidden");
+      confirmCancel?.focus();
+    }
+  }
+
+  function closeConfirmModal() {
+    if (confirmModal) confirmModal.hidden = true;
+    pendingAction = null;
+  }
+
+  document.querySelector("#pkgmgr-repair")?.addEventListener("click", () => {
+    showGameConfirm(
+      "pkgmgr.repair.confirm.title",
+      "pkgmgr.repair.confirm.body",
+      false,
+      () => window.__onRepairGame?.()
+    );
+  });
+
+  document.querySelector("#pkgmgr-uninstall")?.addEventListener("click", () => {
+    showGameConfirm(
+      "pkgmgr.uninstall.confirm.title",
+      "pkgmgr.uninstall.confirm.body",
+      true,
+      () => window.__onUninstallGame?.()
+    );
+  });
+
+  confirmCancel?.addEventListener("click", closeConfirmModal);
+
+  confirmOk?.addEventListener("click", () => {
+    pendingAction?.();
+    closeConfirmModal();
+    closeModal();
+  });
+
+  confirmModal?.addEventListener("click", (e) => {
+    if (e.target === confirmModal) closeConfirmModal();
+  });
+
+  confirmModal?.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") closeConfirmModal();
   });
 }

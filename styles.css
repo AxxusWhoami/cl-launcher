@@ -2117,3 +2117,78 @@ body {
   opacity: 0.75;
   pointer-events: none;
 }
+
+/* ── Footer del gestor de paquetes ── */
+.pkgmgr__footer {
+  display: flex;
+  gap: 8px;
+  padding: 12px 20px 18px;
+  border-top: 1px solid var(--panel-edge);
+}
+
+.pkgmgr__game-action-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: 9px 12px;
+  border-radius: 7px;
+  font-family: var(--font-classic);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.pkgmgr__game-action-btn--repair {
+  color: var(--ice);
+  background: rgba(111, 216, 255, 0.06);
+  border: 1px solid rgba(111, 216, 255, 0.2);
+}
+
+.pkgmgr__game-action-btn--repair:hover {
+  background: rgba(111, 216, 255, 0.12);
+  border-color: rgba(111, 216, 255, 0.35);
+}
+
+.pkgmgr__game-action-btn--uninstall {
+  color: #e05555;
+  background: rgba(220, 60, 60, 0.06);
+  border: 1px solid rgba(220, 60, 60, 0.22);
+}
+
+.pkgmgr__game-action-btn--uninstall:hover {
+  background: rgba(220, 60, 60, 0.12);
+  border-color: rgba(220, 60, 60, 0.38);
+}
+
+/* ── Variante peligrosa del modal de confirmación ── */
+.game-confirm-modal--danger .update-modal__box {
+  border-color: rgba(220, 60, 60, 0.38);
+  box-shadow:
+    0 0 0 1px rgba(220, 60, 60, 0.07),
+    0 20px 50px rgba(3, 6, 14, 0.8),
+    inset 0 1px 0 rgba(220, 60, 60, 0.12);
+}
+
+.game-confirm-modal--danger .update-modal__icon,
+.game-confirm-modal--danger .update-modal__title {
+  color: #e05555;
+  filter: drop-shadow(0 0 10px rgba(220, 60, 60, 0.45));
+  text-shadow: 0 0 12px rgba(220, 60, 60, 0.35);
+}
+
+.game-confirm-modal--danger .update-modal__btn--confirm {
+  background: rgba(220, 60, 60, 0.15);
+  border: 1px solid rgba(220, 60, 60, 0.4);
+  color: #e05555;
+}
+
+.game-confirm-modal--danger .update-modal__btn--confirm:hover {
+  background: rgba(220, 60, 60, 0.25);
+  box-shadow: 0 8px 20px rgba(220, 60, 60, 0.25);
+  filter: brightness(1.06);
+}

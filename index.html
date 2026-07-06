@@ -225,6 +225,28 @@
         <div class="pkgmgr__body" id="pkgmgr-body">
           <!-- Construido dinámicamente por packages.js -->
         </div>
+        <div class="pkgmgr__footer">
+          <button class="pkgmgr__game-action-btn pkgmgr__game-action-btn--repair" id="pkgmgr-repair" type="button">
+            <i class="fa-solid fa-screwdriver-wrench" aria-hidden="true"></i>
+            <span data-i18n="pkgmgr.repair.label">Reparar el juego</span>
+          </button>
+          <button class="pkgmgr__game-action-btn pkgmgr__game-action-btn--uninstall" id="pkgmgr-uninstall" type="button">
+            <i class="fa-solid fa-trash" aria-hidden="true"></i>
+            <span data-i18n="pkgmgr.uninstall.label">Desinstalar</span>
+          </button>
+        </div>
+      </div>
+    </dialog>
+
+    <dialog class="update-modal game-confirm-modal" id="game-confirm-modal" aria-labelledby="game-confirm-title" aria-modal="true" hidden>
+      <div class="update-modal__box">
+        <i class="fa-solid fa-triangle-exclamation update-modal__icon" aria-hidden="true"></i>
+        <h2 class="update-modal__title" id="game-confirm-title"></h2>
+        <p class="update-modal__body" id="game-confirm-body"></p>
+        <div class="update-modal__actions">
+          <button class="update-modal__btn update-modal__btn--later" id="game-confirm-cancel" type="button"></button>
+          <button class="update-modal__btn update-modal__btn--confirm" id="game-confirm-ok" type="button"></button>
+        </div>
       </div>
     </dialog>
 

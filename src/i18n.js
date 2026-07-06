@@ -133,6 +133,14 @@ const TRANSLATIONS = {
     "pkgmgr.action.delete":      "Eliminar",
     "pkgmgr.action.update":      "Actualizar",
     "pkgmgr.action.busy":        "En progreso...",
+    "pkgmgr.repair.label":              "Reparar el juego",
+    "pkgmgr.repair.confirm.title":      "¿Reparar el juego?",
+    "pkgmgr.repair.confirm.body":       "Se verificarán y restaurarán los archivos del cliente. El proceso puede tardar varios minutos.",
+    "pkgmgr.uninstall.label":           "Desinstalar",
+    "pkgmgr.uninstall.confirm.title":   "¿Desinstalar el juego?",
+    "pkgmgr.uninstall.confirm.body":    "Se eliminarán todos los archivos del cliente. Esta acción no se puede deshacer.",
+    "pkgmgr.confirm.cancel":            "Cancelar",
+    "pkgmgr.confirm.proceed":           "Proceder",
   },
 
   enUS: {
@@ -266,6 +274,14 @@ const TRANSLATIONS = {
     "pkgmgr.action.delete":      "Delete",
     "pkgmgr.action.update":      "Update",
     "pkgmgr.action.busy":        "In progress...",
+    "pkgmgr.repair.label":              "Repair Game",
+    "pkgmgr.repair.confirm.title":      "Repair the game?",
+    "pkgmgr.repair.confirm.body":       "Client files will be verified and restored. This process may take several minutes.",
+    "pkgmgr.uninstall.label":           "Uninstall",
+    "pkgmgr.uninstall.confirm.title":   "Uninstall the game?",
+    "pkgmgr.uninstall.confirm.body":    "All client files will be deleted. This action cannot be undone.",
+    "pkgmgr.confirm.cancel":            "Cancel",
+    "pkgmgr.confirm.proceed":           "Proceed",
   },
 
   frFR: {
@@ -391,6 +407,14 @@ const TRANSLATIONS = {
     "pkgmgr.action.delete":      "Supprimer",
     "pkgmgr.action.update":      "Mettre à jour",
     "pkgmgr.action.busy":        "En cours...",
+    "pkgmgr.repair.label":              "Réparer le jeu",
+    "pkgmgr.repair.confirm.title":      "Réparer le jeu ?",
+    "pkgmgr.repair.confirm.body":       "Les fichiers du client seront vérifiés et restaurés. Ce processus peut prendre plusieurs minutes.",
+    "pkgmgr.uninstall.label":           "Désinstaller",
+    "pkgmgr.uninstall.confirm.title":   "Désinstaller le jeu ?",
+    "pkgmgr.uninstall.confirm.body":    "Tous les fichiers du client seront supprimés. Cette action est irréversible.",
+    "pkgmgr.confirm.cancel":            "Annuler",
+    "pkgmgr.confirm.proceed":           "Procéder",
   },
 
   deDE: {
@@ -516,6 +540,14 @@ const TRANSLATIONS = {
     "pkgmgr.action.delete":      "Löschen",
     "pkgmgr.action.update":      "Aktualisieren",
     "pkgmgr.action.busy":        "In Bearbeitung...",
+    "pkgmgr.repair.label":              "Spiel reparieren",
+    "pkgmgr.repair.confirm.title":      "Spiel reparieren?",
+    "pkgmgr.repair.confirm.body":       "Die Client-Dateien werden überprüft und wiederhergestellt. Dieser Vorgang kann mehrere Minuten dauern.",
+    "pkgmgr.uninstall.label":           "Deinstallieren",
+    "pkgmgr.uninstall.confirm.title":   "Spiel deinstallieren?",
+    "pkgmgr.uninstall.confirm.body":    "Alle Client-Dateien werden gelöscht. Diese Aktion kann nicht rückgängig gemacht werden.",
+    "pkgmgr.confirm.cancel":            "Abbrechen",
+    "pkgmgr.confirm.proceed":           "Fortfahren",
   },
 };
 
