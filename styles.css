@@ -1085,9 +1085,7 @@ body {
   display: flex;
   align-items: center;
   gap: 5px;
-  margin-top: 14px;
-  padding-top: 10px;
-  border-top: 1px solid rgba(26, 39, 56, 0.7);
+  margin-top: 6px;
   font-size: 0.72rem;
   color: var(--text-dim);
   letter-spacing: 0.04em;
