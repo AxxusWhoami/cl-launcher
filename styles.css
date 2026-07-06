@@ -515,6 +515,26 @@ body {
   background: rgba(159, 176, 196, 0.1);
   border: 1px solid #2a3a4f;
 }
+.news-card__tag--danger {
+  color: #f08080;
+  background: rgba(220, 80, 80, 0.12);
+  border: 1px solid rgba(200, 60, 60, 0.45);
+}
+.news-card__tag--nature {
+  color: #7ecb8f;
+  background: rgba(80, 180, 100, 0.1);
+  border: 1px solid rgba(60, 160, 80, 0.4);
+}
+.news-card__tag--arcane {
+  color: #7fd4c8;
+  background: rgba(80, 190, 175, 0.1);
+  border: 1px solid rgba(60, 170, 155, 0.4);
+}
+.news-card__tag--fire {
+  color: #f0a060;
+  background: rgba(220, 120, 40, 0.12);
+  border: 1px solid rgba(200, 100, 30, 0.45);
+}
 
 .news-card__title {
   margin: 0 0 8px;

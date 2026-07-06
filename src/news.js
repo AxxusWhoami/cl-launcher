@@ -4,15 +4,18 @@ import { t } from "./i18n.js";
 
 const NEWS_URL = "https://apis.corelegacy.gg/news.php?function=getlaunchernews";
 
-const TAG_CLASSES = {
-  parche: "news-card__tag--patch",
-  evento: "news-card__tag--event",
-  ajustes: "news-card__tag--fix",
-};
+const TAG_COLOR_POOL = [
+  "news-card__tag--patch",
+  "news-card__tag--event",
+  "news-card__tag--fix",
+  "news-card__tag--danger",
+  "news-card__tag--nature",
+  "news-card__tag--arcane",
+  "news-card__tag--fire",
+];
 
-function tagClass(badget) {
-  const key = (badget || "").trim().toLowerCase();
-  return TAG_CLASSES[key] || "news-card__tag--fix";
+function tagClass() {
+  return TAG_COLOR_POOL[Math.floor(Math.random() * TAG_COLOR_POOL.length)];
 }
 
 function isoDate(value) {
@@ -40,7 +43,7 @@ function buildCard(item) {
   card.className = "news-card";
 
   const tag = document.createElement("span");
-  tag.className = `news-card__tag ${tagClass(item.badget)}`;
+  tag.className = `news-card__tag ${tagClass()}`;
   tag.textContent = item.badget || "Noticia";
   card.appendChild(tag);
 
