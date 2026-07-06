@@ -9,7 +9,7 @@ import { startSnow } from "./src/snow.js";
 import { isTauri, getLocale, initLocale } from "./src/locale.js";
 import { applyTranslations, t } from "./src/i18n.js";
 import { initSettingsModal, setAvailableGameLanguages } from "./src/settings.js";
-import { initPackagesModal, setInstalledPackages, onPackageStateChange } from "./src/packages.js";
+import { initPackagesModal, setInstalledPackages, onPackageStateChange, setGameInstalled } from "./src/packages.js";
 
 const AUDIO_STORAGE_KEY = "launcher_audio_muted";
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -266,8 +266,10 @@ const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   // Puentes para el Gestor de paquetes.
   // Rust informa los paquetes ya instalados:  window.__setInstalledPackages(["lang-esES", "hd"])
   // Rust notifica un cambio de estado:        window.__onPackageStateChange("hd", "installed")
+  // Rust informa si el juego está instalado:  window.__setGameInstalled(true)
   window.__setInstalledPackages  = setInstalledPackages;
   window.__onPackageStateChange  = onPackageStateChange;
+  window.__setGameInstalled      = setGameInstalled;
 
   // --- Modal de configuración ------------------------------------------------
   initSettingsModal();

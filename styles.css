@@ -267,6 +267,12 @@ body {
   background: rgba(111, 216, 255, 0.07);
 }
 
+.audio-toggle:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+  pointer-events: auto;
+}
+
 /* Botón de hielo: reposo */
 .ice-tab {
   position: relative;

@@ -38,6 +38,7 @@ const PACKAGE_DEFS = [
 const pkgState = Object.fromEntries(PACKAGE_DEFS.map((p) => [p.id, "uninstalled"]));
 
 let isModalOpen = false;
+let gameInstalled = false;
 
 function buildDescList(keys, locale) {
   const ul = document.createElement("ul");
@@ -197,6 +198,28 @@ function buildModalBody(locale) {
 
 // ── Public bridge functions (exposed on window in app.js) ────────────────────
 
+export function setGameInstalled(installed) {
+  gameInstalled = installed;
+  const btn = document.querySelector("#pkgmgr-toggle");
+  if (!btn) return;
+  const locale = getLocale();
+  if (installed) {
+    btn.disabled = false;
+    btn.title = "";
+    btn.setAttribute("aria-label", t("pkgmgr.open", locale));
+  } else {
+    if (isModalOpen) {
+      isModalOpen = false;
+      const modal = document.querySelector("#pkgmgr-modal");
+      if (modal) modal.hidden = true;
+    }
+    btn.disabled = true;
+    const tip = t("pkgmgr.disabled", locale);
+    btn.title = tip;
+    btn.setAttribute("aria-label", tip);
+  }
+}
+
 export function setInstalledPackages(installed) {
   const locale = getLocale();
   for (const id of Object.keys(pkgState)) {
@@ -220,6 +243,7 @@ export function initPackagesModal() {
   if (!modal || !openBtn) return;
 
   function openModal() {
+    if (!gameInstalled) return;
     isModalOpen = true;
     buildModalBody(getLocale());
     modal.hidden = false;
@@ -245,6 +269,13 @@ export function initPackagesModal() {
 
   // Si el modal está abierto cuando cambia el idioma, reconstruimos el cuerpo.
   window.addEventListener("localechange", (e) => {
-    if (isModalOpen) buildModalBody(e.detail?.locale ?? getLocale());
+    const loc = e.detail?.locale ?? getLocale();
+    if (isModalOpen) buildModalBody(loc);
+    const btn = document.querySelector("#pkgmgr-toggle");
+    if (btn && !gameInstalled) {
+      const tip = t("pkgmgr.disabled", loc);
+      btn.title = tip;
+      btn.setAttribute("aria-label", tip);
+    }
   });
 }

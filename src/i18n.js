@@ -113,6 +113,7 @@ const TRANSLATIONS = {
 
     // Gestor de paquetes
     "pkgmgr.open":               "Gestor de paquetes",
+    "pkgmgr.disabled":           "Requiere que el juego esté instalado",
     "pkgmgr.title":              "Gestor de paquetes",
     "pkgmgr.section.languages":  "Paquetes de idioma",
     "pkgmgr.section.hd":         "Modelos y Texturas",
@@ -243,6 +244,7 @@ const TRANSLATIONS = {
 
     // Package Manager
     "pkgmgr.open":               "Package Manager",
+    "pkgmgr.disabled":           "Requires the game to be installed",
     "pkgmgr.title":              "Package Manager",
     "pkgmgr.section.languages":  "Language Packs",
     "pkgmgr.section.hd":         "Models & Textures",
@@ -365,6 +367,7 @@ const TRANSLATIONS = {
 
     // Gestionnaire de paquets
     "pkgmgr.open":               "Gestionnaire de paquets",
+    "pkgmgr.disabled":           "Nécessite que le jeu soit installé",
     "pkgmgr.title":              "Gestionnaire de paquets",
     "pkgmgr.section.languages":  "Packs de langue",
     "pkgmgr.section.hd":         "Modèles et textures",
@@ -487,6 +490,7 @@ const TRANSLATIONS = {
 
     // Paket-Manager
     "pkgmgr.open":               "Paket-Manager",
+    "pkgmgr.disabled":           "Erfordert, dass das Spiel installiert ist",
     "pkgmgr.title":              "Paket-Manager",
     "pkgmgr.section.languages":  "Sprachpakete",
     "pkgmgr.section.hd":         "Modelle und Texturen",
