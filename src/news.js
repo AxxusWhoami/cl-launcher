@@ -84,7 +84,7 @@ export async function loadNews(container) {
   const locale = getLocale();
 
   try {
-    const response = await fetch(NEWS_URL);
+    const response = await fetch(`${NEWS_URL}&locale=${locale}`);
     if (!response.ok) throw new Error(`HTTP ${response.status}`);
 
     const payload = await response.json();

@@ -1,3 +1,4 @@
+import { getLocale } from "./locale.js";
 import { t } from "./i18n.js";
 
 const FEATURES_URL = "https://apis.corelegacy.gg/features.php";
@@ -44,8 +45,10 @@ function buildCard(item, index) {
 export async function loadFeatures(container) {
   if (!container) return;
 
+  const locale = getLocale();
+
   try {
-    const response = await fetch(FEATURES_URL);
+    const response = await fetch(`${FEATURES_URL}?locale=${locale}`);
     if (!response.ok) throw new Error(`HTTP ${response.status}`);
 
     const payload = await response.json();
@@ -56,7 +59,7 @@ export async function loadFeatures(container) {
     if (items.length === 0) {
       const empty = document.createElement("p");
       empty.className = "features__placeholder";
-      empty.textContent = t("features.empty", "esES");
+      empty.textContent = t("features.empty", locale);
       container.appendChild(empty);
       return;
     }
@@ -69,7 +72,7 @@ export async function loadFeatures(container) {
     container.innerHTML = "";
     const failed = document.createElement("p");
     failed.className = "features__placeholder";
-    failed.textContent = t("features.error", "esES");
+    failed.textContent = t("features.error", locale);
     container.appendChild(failed);
   }
 }
