@@ -2,7 +2,7 @@
 // Las acciones de descarga/borrado se delegan en Rust a través de window.__onDownloadPackage
 // y window.__onDeletePackage. Rust informa el estado instalado via window.__setInstalledPackages
 // y notifica cambios individuales via window.__onPackageStateChange.
-import { getLocale } from "./locale.js";
+import { getLocale, isTauri } from "./locale.js";
 import { t } from "./i18n.js";
 
 const PACKAGE_DEFS = [
@@ -200,6 +200,7 @@ function buildModalBody(locale) {
 
 export function setGameInstalled(installed) {
   gameInstalled = installed;
+  if (!isTauri()) return;
   const btn = document.querySelector("#pkgmgr-toggle");
   if (!btn) return;
   const locale = getLocale();
@@ -243,7 +244,7 @@ export function initPackagesModal() {
   if (!modal || !openBtn) return;
 
   function openModal() {
-    if (!gameInstalled) return;
+    if (isTauri() && !gameInstalled) return;
     isModalOpen = true;
     buildModalBody(getLocale());
     modal.hidden = false;
@@ -272,7 +273,7 @@ export function initPackagesModal() {
     const loc = e.detail?.locale ?? getLocale();
     if (isModalOpen) buildModalBody(loc);
     const btn = document.querySelector("#pkgmgr-toggle");
-    if (btn && !gameInstalled) {
+    if (btn && isTauri() && !gameInstalled) {
       const tip = t("pkgmgr.disabled", loc);
       btn.title = tip;
       btn.setAttribute("aria-label", tip);

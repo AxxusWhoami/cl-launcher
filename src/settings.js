@@ -1,5 +1,5 @@
 // Gestión de la configuración del lanzador (persistida en localStorage).
-import { getLocale, setLocale } from "./locale.js";
+import { getLocale, setLocale, isTauri } from "./locale.js";
 import { t } from "./i18n.js";
 
 const STORAGE_KEY = "launcher_settings";
@@ -65,6 +65,7 @@ export function setAvailableGameLanguages(available) {
 
 export function setGameInstalled(installed) {
   settingsGameInstalled = installed;
+  if (!isTauri()) return;
   const btn = document.querySelector("#settings-toggle");
   if (!btn) return;
   const locale = getLocale();
@@ -102,7 +103,7 @@ export function initSettingsModal() {
   }
 
   function openModal() {
-    if (!settingsGameInstalled) return;
+    if (isTauri() && !settingsGameInstalled) return;
     settings = loadSettings();
     applyToDOM();
     modal.hidden = false;
@@ -120,7 +121,7 @@ export function initSettingsModal() {
   window.addEventListener("localechange", (e) => {
     const loc = e.detail?.locale ?? getLocale();
     const btn = document.querySelector("#settings-toggle");
-    if (btn && !settingsGameInstalled) {
+    if (btn && isTauri() && !settingsGameInstalled) {
       const tip = t("settings.disabled", loc);
       btn.title = tip;
       btn.setAttribute("aria-label", tip);
