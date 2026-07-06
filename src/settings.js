@@ -5,9 +5,7 @@ import { t } from "./i18n.js";
 const STORAGE_KEY = "launcher_settings";
 
 const DEFAULTS = {
-  laa:          false,
   cpuAffinity:  false,
-  tcpNoDelay:   false,
   cpuCores:     1,
   dxvk:         false,
   gameLanguage: null,
@@ -91,9 +89,7 @@ export function initSettingsModal() {
 
   function applyToDOM() {
     document.querySelector("#setting-language").value       = getLocale();
-    document.querySelector("#setting-laa").checked          = settings.laa;
     document.querySelector("#setting-cpu-affinity").checked = settings.cpuAffinity;
-    document.querySelector("#setting-tcp-nodelay").checked  = settings.tcpNoDelay;
     document.querySelector("#setting-cpu-cores").value      = String(settings.cpuCores);
     document.querySelector("#setting-dxvk").checked         = settings.dxvk;
     if (settings.gameLanguage) {
@@ -142,26 +138,10 @@ export function initSettingsModal() {
     setLocale(e.target.value);
   });
 
-  // --- Patch 4GB (LAA) ---------------------------------------------------------
-  document.querySelector("#setting-laa")?.addEventListener("change", (e) => {
-    // Implementar con RUST
-    settings.laa = e.target.checked;
-    saveSettings(settings);
-    showProgress("progress.applying");
-  });
-
   // --- CPU Affinity Mask -------------------------------------------------------
   document.querySelector("#setting-cpu-affinity")?.addEventListener("change", (e) => {
     // Implementar con RUST
     settings.cpuAffinity = e.target.checked;
-    saveSettings(settings);
-    showProgress("progress.applying");
-  });
-
-  // --- TCP No Delay ------------------------------------------------------------
-  document.querySelector("#setting-tcp-nodelay")?.addEventListener("change", (e) => {
-    // Implementar con RUST
-    settings.tcpNoDelay = e.target.checked;
     saveSettings(settings);
     showProgress("progress.applying");
   });
