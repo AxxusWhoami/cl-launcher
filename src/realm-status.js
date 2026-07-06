@@ -35,7 +35,6 @@ function showUnknown(refs) {
 }
 
 async function fetchStatus(refs) {
-  if (refs.spinner) refs.spinner.classList.add("is-spinning");
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), TIMEOUT_MS);
   try {
@@ -58,7 +57,6 @@ async function fetchStatus(refs) {
     showUnknown(refs);
   } finally {
     clearTimeout(timeout);
-    if (refs.spinner) refs.spinner.classList.remove("is-spinning");
   }
 }
 
@@ -68,7 +66,6 @@ export function startRealmStatus() {
     server: document.querySelector("#status-server"),
     players: document.querySelector("#status-players"),
     uptime: document.querySelector("#status-uptime"),
-    spinner: document.querySelector("#status-spinner"),
   };
 
   fetchStatus(refs);

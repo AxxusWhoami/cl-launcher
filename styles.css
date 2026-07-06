@@ -1107,17 +1107,6 @@ body {
   letter-spacing: 0.04em;
 }
 
-.realm-status__spinner {
-  font-size: 0.7rem;
-  color: var(--text-dim);
-  opacity: 0;
-  transition: opacity 0.2s ease;
-}
-
-.realm-status__spinner.is-spinning {
-  opacity: 1;
-  animation: spin 0.9s linear infinite;
-}
 
 @keyframes spin {
   to { transform: rotate(360deg); }
