@@ -146,6 +146,10 @@ function updateItemUI(id, locale) {
     item.classList.add("pkg-item--busy");
     item.classList.remove("pkg-item--installed", "pkg-item--update");
     setProgressBar(item, pkgProgress[id] ?? 0);
+    const spinner = document.createElement("span");
+    spinner.className = "pkg-item__spinner";
+    spinner.setAttribute("aria-label", t("pkgmgr.action.busy", locale));
+    actionSlot.appendChild(spinner);
   } else if (state === "update") {
     hideProgressBar(item);
     badge.textContent = t("pkgmgr.status.update", locale);
