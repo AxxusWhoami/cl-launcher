@@ -88,6 +88,7 @@ const TRANSLATIONS = {
 
     // Configuración
     "settings.open":                "Configuración",
+    "settings.disabled":            "Requiere que el juego esté instalado",
     "settings.title":               "Configuración del lanzador",
     "settings.language.label":      "Idioma",
     "settings.language.desc":       "Idioma de la interfaz del lanzador.",
@@ -219,6 +220,7 @@ const TRANSLATIONS = {
 
     // Settings
     "settings.open":                "Settings",
+    "settings.disabled":            "Requires the game to be installed",
     "settings.title":               "Launcher Settings",
     "settings.language.label":      "Language",
     "settings.language.desc":       "Interface language of the launcher.",
@@ -342,6 +344,7 @@ const TRANSLATIONS = {
 
     // Settings
     "settings.open":                "Paramètres",
+    "settings.disabled":            "Nécessite que le jeu soit installé",
     "settings.title":               "Paramètres du lanceur",
     "settings.language.label":      "Langue",
     "settings.language.desc":       "Langue de l'interface du lanceur.",
@@ -465,6 +468,7 @@ const TRANSLATIONS = {
 
     // Settings
     "settings.open":                "Einstellungen",
+    "settings.disabled":            "Erfordert, dass das Spiel installiert ist",
     "settings.title":               "Launcher-Einstellungen",
     "settings.language.label":      "Sprache",
     "settings.language.desc":       "Sprache der Launcher-Oberfläche.",

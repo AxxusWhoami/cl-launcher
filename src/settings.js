@@ -29,6 +29,8 @@ export function saveSettings(settings) {
 const progressModal = () => document.querySelector("#progress-modal");
 const progressMsg   = () => document.querySelector("#progress-modal-msg");
 
+let settingsGameInstalled = false;
+
 export function showProgress(messageKey) {
   const el = progressModal();
   if (!el) return;
@@ -61,6 +63,23 @@ export function setAvailableGameLanguages(available) {
   });
 }
 
+export function setGameInstalled(installed) {
+  settingsGameInstalled = installed;
+  const btn = document.querySelector("#settings-toggle");
+  if (!btn) return;
+  const locale = getLocale();
+  if (installed) {
+    btn.disabled = false;
+    btn.title = "";
+    btn.setAttribute("aria-label", t("settings.open", locale));
+  } else {
+    btn.disabled = true;
+    const tip = t("settings.disabled", locale);
+    btn.title = tip;
+    btn.setAttribute("aria-label", tip);
+  }
+}
+
 export function initSettingsModal() {
   const modal    = document.querySelector("#settings-modal");
   const openBtn  = document.querySelector("#settings-toggle");
@@ -83,6 +102,7 @@ export function initSettingsModal() {
   }
 
   function openModal() {
+    if (!settingsGameInstalled) return;
     settings = loadSettings();
     applyToDOM();
     modal.hidden = false;
@@ -96,6 +116,16 @@ export function initSettingsModal() {
 
   openBtn.addEventListener("click", openModal);
   closeBtn?.addEventListener("click", closeModal);
+
+  window.addEventListener("localechange", (e) => {
+    const loc = e.detail?.locale ?? getLocale();
+    const btn = document.querySelector("#settings-toggle");
+    if (btn && !settingsGameInstalled) {
+      const tip = t("settings.disabled", loc);
+      btn.title = tip;
+      btn.setAttribute("aria-label", tip);
+    }
+  });
 
   modal.addEventListener("click", (e) => {
     if (e.target === modal) closeModal();
