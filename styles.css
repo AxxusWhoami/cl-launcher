@@ -2070,6 +2070,10 @@ body {
   flex-shrink: 0;
   align-self: center;
   display: flex;
+}
+
+.pkg-item__progress-wrap[hidden] {
+  display: none;
   align-items: center;
   gap: 8px;
 }
