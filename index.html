@@ -371,7 +371,10 @@
 
           <div class="setting-row">
             <div class="setting-row__info">
-              <span class="setting-row__label" data-i18n="settings.dxvk.label">DXVK (Vulkan)</span>
+              <span class="setting-row__label">
+                <span data-i18n="settings.dxvk.label">DXVK (Vulkan)</span>
+                <span class="dxvk-version-badge" id="dxvk-version-badge" hidden></span>
+              </span>
               <span class="setting-row__desc" data-i18n="settings.dxvk.desc">Traduce llamadas Direct3D a Vulkan mediante DXVK. Puede mejorar significativamente el rendimiento en sistemas Linux y en equipos con drivers Vulkan modernos.</span>
             </div>
             <label class="setting-switch" aria-label="DXVK (Vulkan)">

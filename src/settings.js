@@ -62,6 +62,21 @@ export function setAvailableGameLanguages(available) {
   });
 }
 
+const DXVK_VERSIONS = ["1.10.3", "2.7.1", "3.0.1"];
+
+export function setDxvkVersion(version) {
+  const badge = document.querySelector("#dxvk-version-badge");
+  if (!badge) return;
+  const dxvkEnabled = document.querySelector("#setting-dxvk")?.checked ?? false;
+  if (version && DXVK_VERSIONS.includes(version) && dxvkEnabled) {
+    badge.textContent = `v${version}`;
+    badge.hidden = false;
+    badge.removeAttribute("hidden");
+  } else {
+    badge.hidden = true;
+  }
+}
+
 export function setGameInstalled(installed) {
   settingsGameInstalled = installed;
   if (!isTauri()) return;
@@ -163,6 +178,8 @@ export function initSettingsModal() {
     // Implementar con RUST
     settings.dxvk = e.target.checked;
     saveSettings(settings);
+    const badge = document.querySelector("#dxvk-version-badge");
+    if (badge && !settings.dxvk) badge.hidden = true;
     showProgress(settings.dxvk ? "progress.installing.dxvk" : "progress.uninstalling.dxvk");
   });
 
