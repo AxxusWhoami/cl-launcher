@@ -177,6 +177,15 @@ function updateItemUI(id, locale) {
     spinner.className = "pkg-item__spinner";
     spinner.setAttribute("aria-label", t("pkgmgr.action.busy", locale));
     actionSlot.appendChild(spinner);
+  } else if (state === "deleting") {
+    hideProgressBar(item);
+    badge.hidden = true;
+    item.classList.add("pkg-item--busy");
+    item.classList.remove("pkg-item--installed", "pkg-item--update");
+    const spinner = document.createElement("span");
+    spinner.className = "pkg-item__spinner";
+    spinner.setAttribute("aria-label", t("pkgmgr.action.busy", locale));
+    actionSlot.appendChild(spinner);
   } else if (state === "update") {
     hideProgressBar(item);
     badge.textContent = t("pkgmgr.status.update", locale);
@@ -225,7 +234,7 @@ function updateItemUI(id, locale) {
 
 function triggerAction(id, action) {
   pkgProgress[id] = 0;
-  pkgState[id] = "busy";
+  pkgState[id] = action === "delete" ? "deleting" : "busy";
   updateItemUI(id, getLocale());
   if (action === "download") {
     window.__onDownloadPackage?.(id);
@@ -509,4 +518,10 @@ export function onUninstallComplete() {
   const modal = document.querySelector("#uninstall-progress-modal");
   if (modal) modal.hidden = true;
   setGameActionBusy(false);
+}
+
+export function onPackageDeleteComplete(id) {
+  if (!(id in pkgState)) return;
+  pkgState[id] = "uninstalled";
+  if (isModalOpen) updateItemUI(id, getLocale());
 }

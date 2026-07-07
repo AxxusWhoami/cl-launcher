@@ -9,7 +9,7 @@ import { startSnow } from "./src/snow.js";
 import { isTauri, getLocale, initLocale } from "./src/locale.js";
 import { applyTranslations, t } from "./src/i18n.js";
 import { initSettingsModal, setAvailableGameLanguages, setGameInstalled as setSettingsGameInstalled } from "./src/settings.js";
-import { initPackagesModal, setInstalledPackages, onPackageStateChange, onPackageProgress, onRepairProgress, onRepairComplete, onUninstallComplete, setGameInstalled, setGameActionBusy } from "./src/packages.js";
+import { initPackagesModal, setInstalledPackages, onPackageStateChange, onPackageProgress, onRepairProgress, onRepairComplete, onUninstallComplete, onPackageDeleteComplete, setGameInstalled, setGameActionBusy } from "./src/packages.js";
 import { initRegisterModal, onCreateAccountResult } from "./src/register.js";
 
 const AUDIO_STORAGE_KEY = "launcher_audio_muted";
@@ -263,7 +263,8 @@ const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   window.__onPackageProgress     = onPackageProgress;
   window.__onRepairProgress      = onRepairProgress;
   window.__onRepairComplete      = onRepairComplete;
-  window.__onUninstallComplete   = onUninstallComplete;
+  window.__onUninstallComplete      = onUninstallComplete;
+  window.__onPackageDeleteComplete  = onPackageDeleteComplete;
   window.__setGameInstalled      = (installed) => {
     setGameInstalled(installed);
     setSettingsGameInstalled(installed);
