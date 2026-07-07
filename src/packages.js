@@ -232,10 +232,25 @@ function updateItemUI(id, locale) {
   }
 }
 
+function hasAnyPkgBusy() {
+  return Object.values(pkgState).some((s) => s === "busy" || s === "deleting");
+}
+
+function syncGameActionButtons() {
+  const busy = hasAnyPkgBusy();
+  const repairBtn    = document.querySelector("#pkgmgr-repair");
+  const uninstallBtn = document.querySelector("#pkgmgr-uninstall");
+  [repairBtn, uninstallBtn].forEach((btn) => {
+    if (!btn) return;
+    btn.disabled = busy;
+  });
+}
+
 function triggerAction(id, action) {
   pkgProgress[id] = 0;
   pkgState[id] = action === "delete" ? "deleting" : "busy";
   updateItemUI(id, getLocale());
+  syncGameActionButtons();
   if (action === "download") {
     window.__onDownloadPackage?.(id);
   } else if (action === "update") {
@@ -274,6 +289,7 @@ function buildModalBody(locale) {
   for (const id of Object.keys(pkgState)) {
     updateItemUI(id, locale);
   }
+  syncGameActionButtons();
 }
 
 // ── Public bridge functions (exposed on window in app.js) ────────────────────
@@ -327,6 +343,7 @@ export function onPackageStateChange(id, newState) {
   if (!(id in pkgState)) return;
   pkgState[id] = newState;
   if (isModalOpen) updateItemUI(id, getLocale());
+  syncGameActionButtons();
 }
 
 /**
@@ -524,4 +541,5 @@ export function onPackageDeleteComplete(id) {
   if (!(id in pkgState)) return;
   pkgState[id] = "uninstalled";
   if (isModalOpen) updateItemUI(id, getLocale());
+  syncGameActionButtons();
 }
