@@ -2182,7 +2182,7 @@ body {
 }
 
 /* ── Elevar modal de confirmación sobre el gestor de paquetes ── */
-.game-confirm-modal {
+.update-modal.game-confirm-modal {
   z-index: 320;
 }
 
