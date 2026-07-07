@@ -387,15 +387,17 @@ export function initPackagesModal() {
   const confirmCancel = document.querySelector("#game-confirm-cancel");
   const confirmOk     = document.querySelector("#game-confirm-ok");
   let pendingAction   = null;
+  let pendingIsRepair = false;
 
-  function showGameConfirm(titleKey, bodyKey, isDanger, action) {
+  function showGameConfirm(titleKey, bodyKey, isDanger, action, isRepair = false) {
     const loc = getLocale();
     if (confirmTitle) confirmTitle.textContent  = t(titleKey, loc);
     if (confirmBody)  confirmBody.textContent   = t(bodyKey,  loc);
     if (confirmCancel) confirmCancel.textContent = t("pkgmgr.confirm.cancel",  loc);
     if (confirmOk)    confirmOk.textContent     = t("pkgmgr.confirm.proceed", loc);
     confirmModal?.classList.toggle("game-confirm-modal--danger", isDanger);
-    pendingAction = action;
+    pendingAction   = action;
+    pendingIsRepair = isRepair;
     if (confirmModal) {
       confirmModal.hidden = false;
       confirmModal.removeAttribute("hidden");
@@ -405,7 +407,8 @@ export function initPackagesModal() {
 
   function closeConfirmModal() {
     if (confirmModal) confirmModal.hidden = true;
-    pendingAction = null;
+    pendingAction   = null;
+    pendingIsRepair = false;
   }
 
   document.querySelector("#pkgmgr-repair")?.addEventListener("click", () => {
@@ -413,7 +416,8 @@ export function initPackagesModal() {
       "pkgmgr.repair.confirm.title",
       "pkgmgr.repair.confirm.body",
       false,
-      () => window.__onRepairGame?.()
+      () => window.__onRepairGame?.(),
+      true
     );
   });
 
@@ -429,10 +433,12 @@ export function initPackagesModal() {
   confirmCancel?.addEventListener("click", closeConfirmModal);
 
   confirmOk?.addEventListener("click", () => {
+    const shouldShowRepair = pendingIsRepair;
     pendingAction?.();
     closeConfirmModal();
     closeModal();
     setGameActionBusy(true);
+    if (shouldShowRepair) openRepairProgressModal();
   });
 
   confirmModal?.addEventListener("click", (e) => {
@@ -442,4 +448,41 @@ export function initPackagesModal() {
   confirmModal?.addEventListener("keydown", (e) => {
     if (e.key === "Escape") closeConfirmModal();
   });
+}
+
+// ── Repair progress modal ────────────────────────────────────────────────────
+
+function openRepairProgressModal() {
+  const modal  = document.querySelector("#repair-progress-modal");
+  const status = document.querySelector("#repair-progress-status");
+  const fill   = document.querySelector("#repair-progress-fill");
+  const track  = document.querySelector("#repair-progress-track");
+  const pct    = document.querySelector("#repair-progress-pct");
+  if (!modal) return;
+  if (fill)  fill.style.width = "0%";
+  if (track) track.setAttribute("aria-valuenow", "0");
+  if (pct)   pct.textContent  = "0%";
+  if (status) status.textContent = t("pkgmgr.repair.progress.status", getLocale());
+  modal.hidden = false;
+  modal.removeAttribute("hidden");
+}
+
+export function onRepairProgress(percent, statusMsg) {
+  const modal  = document.querySelector("#repair-progress-modal");
+  if (!modal || modal.hidden) return;
+  const p      = Math.max(0, Math.min(100, Math.round(percent)));
+  const fill   = document.querySelector("#repair-progress-fill");
+  const track  = document.querySelector("#repair-progress-track");
+  const pct    = document.querySelector("#repair-progress-pct");
+  const status = document.querySelector("#repair-progress-status");
+  if (fill)   fill.style.width = `${p}%`;
+  if (track)  track.setAttribute("aria-valuenow", String(p));
+  if (pct)    pct.textContent  = `${p}%`;
+  if (status && statusMsg != null) status.textContent = statusMsg;
+}
+
+export function onRepairComplete() {
+  const modal = document.querySelector("#repair-progress-modal");
+  if (modal) modal.hidden = true;
+  setGameActionBusy(false);
 }

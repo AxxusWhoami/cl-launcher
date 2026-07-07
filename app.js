@@ -9,7 +9,7 @@ import { startSnow } from "./src/snow.js";
 import { isTauri, getLocale, initLocale } from "./src/locale.js";
 import { applyTranslations, t } from "./src/i18n.js";
 import { initSettingsModal, setAvailableGameLanguages, setGameInstalled as setSettingsGameInstalled } from "./src/settings.js";
-import { initPackagesModal, setInstalledPackages, onPackageStateChange, onPackageProgress, setGameInstalled, setGameActionBusy } from "./src/packages.js";
+import { initPackagesModal, setInstalledPackages, onPackageStateChange, onPackageProgress, onRepairProgress, onRepairComplete, setGameInstalled, setGameActionBusy } from "./src/packages.js";
 import { initRegisterModal, onCreateAccountResult } from "./src/register.js";
 
 const AUDIO_STORAGE_KEY = "launcher_audio_muted";
@@ -261,6 +261,8 @@ const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   window.__onPackageStateChange  = onPackageStateChange;
   // Rust notifica progreso de descarga/instalación: window.__onPackageProgress("hd", 42)
   window.__onPackageProgress     = onPackageProgress;
+  window.__onRepairProgress      = onRepairProgress;
+  window.__onRepairComplete      = onRepairComplete;
   window.__setGameInstalled      = (installed) => {
     setGameInstalled(installed);
     setSettingsGameInstalled(installed);

@@ -238,6 +238,20 @@
       </div>
     </dialog>
 
+    <dialog class="repair-progress-modal" id="repair-progress-modal" aria-labelledby="repair-progress-title" aria-modal="true" hidden>
+      <div class="repair-progress-modal__box">
+        <i class="fa-solid fa-screwdriver-wrench repair-progress-modal__icon" aria-hidden="true"></i>
+        <h2 class="repair-progress-modal__title" id="repair-progress-title" data-i18n="pkgmgr.repair.progress.title">Reparando el juego</h2>
+        <p class="repair-progress-modal__status" id="repair-progress-status"></p>
+        <div class="repair-progress-modal__bar-row">
+          <div class="repair-progress-modal__track" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="repair-progress-track">
+            <div class="repair-progress-modal__fill" id="repair-progress-fill" style="width:0%"></div>
+          </div>
+          <span class="repair-progress-modal__pct" id="repair-progress-pct">0%</span>
+        </div>
+      </div>
+    </dialog>
+
     <dialog class="update-modal game-confirm-modal" id="game-confirm-modal" aria-labelledby="game-confirm-title" aria-modal="true" hidden>
       <div class="update-modal__box">
         <i class="fa-solid fa-triangle-exclamation update-modal__icon" aria-hidden="true"></i>
