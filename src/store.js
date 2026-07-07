@@ -8,19 +8,31 @@ function buildCard(item) {
   const card = document.createElement("article");
   card.className = "store-card";
 
+  const imgWrap = document.createElement("div");
+  imgWrap.className = "store-card__img-wrap";
+
   if (item.img_src) {
     const img = document.createElement("img");
     img.className = "store-card__img";
     img.src = item.img_src;
     img.alt = item.title || "";
     img.loading = "lazy";
-    card.appendChild(img);
+    imgWrap.appendChild(img);
   } else {
     const placeholder = document.createElement("div");
     placeholder.className = "store-card__img-placeholder";
     placeholder.innerHTML = `<i class="fa-solid fa-box-open" aria-hidden="true"></i>`;
-    card.appendChild(placeholder);
+    imgWrap.appendChild(placeholder);
   }
+
+  if (item.price) {
+    const priceBadge = document.createElement("span");
+    priceBadge.className = "store-card__price-badge";
+    priceBadge.textContent = item.price;
+    imgWrap.appendChild(priceBadge);
+  }
+
+  card.appendChild(imgWrap);
 
   const body = document.createElement("div");
   body.className = "store-card__body";
@@ -35,18 +47,6 @@ function buildCard(item) {
     desc.className = "store-card__desc";
     desc.textContent = item.description;
     body.appendChild(desc);
-  }
-
-  if (item.price) {
-    const footer = document.createElement("div");
-    footer.className = "store-card__footer";
-
-    const priceEl = document.createElement("span");
-    priceEl.className = "store-card__price";
-    priceEl.textContent = item.price;
-    footer.appendChild(priceEl);
-
-    body.appendChild(footer);
   }
 
   card.appendChild(body);

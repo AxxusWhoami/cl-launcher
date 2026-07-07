@@ -869,6 +869,11 @@ body {
   transform: translateY(-2px);
 }
 
+.store-card__img-wrap {
+  position: relative;
+  width: 100%;
+}
+
 .store-card__img {
   width: 100%;
   aspect-ratio: 16 / 9;
@@ -886,6 +891,24 @@ body {
   color: var(--text-dim);
   font-size: 1.8rem;
   opacity: 0.4;
+}
+
+.store-card__price-badge {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  font-family: var(--font-morpheus);
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--gold-bright);
+  letter-spacing: 0.06em;
+  white-space: nowrap;
+  background: rgba(5, 9, 18, 0.82);
+  border: 1px solid rgba(200, 162, 74, 0.45);
+  border-radius: 4px;
+  padding: 2px 8px;
+  text-shadow: 0 0 8px rgba(200, 162, 74, 0.5);
+  backdrop-filter: blur(4px);
 }
 
 .store-card__body {
@@ -914,28 +937,9 @@ body {
   margin: 0;
   line-height: 1.5;
   display: -webkit-box;
-  -webkit-line-clamp: 4;
+  -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
-}
-
-.store-card__footer {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  margin-top: auto;
-  padding-top: 6px;
-  border-top: 1px solid rgba(200, 162, 74, 0.12);
-}
-
-.store-card__price {
-  font-family: var(--font-morpheus);
-  font-size: 0.82rem;
-  font-weight: 700;
-  color: var(--gold-bright);
-  letter-spacing: 0.06em;
-  white-space: nowrap;
-  text-shadow: 0 0 8px rgba(200, 162, 74, 0.4);
 }
 
 /* ===== Panel de control ===== */
