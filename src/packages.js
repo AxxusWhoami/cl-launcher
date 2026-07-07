@@ -33,6 +33,18 @@ const PACKAGE_DEFS = [
     id: "hd-spells", section: "hd", icon: "fa-wand-magic-sparkles",
     nameKey: "pkgmgr.hd-spells.name",
   },
+  {
+    id: "hd-maps", section: "hd", icon: "fa-map",
+    nameKey: "pkgmgr.hd-maps.name",
+  },
+  {
+    id: "hd-music", section: "hd", icon: "fa-music",
+    nameKey: "pkgmgr.hd-music.name",
+  },
+  {
+    id: "hd-skybox", section: "hd", icon: "fa-cloud-sun",
+    nameKey: "pkgmgr.hd-skybox.name",
+  },
 ];
 
 // Estado por paquete: "uninstalled" | "installed" | "update" | "busy"
