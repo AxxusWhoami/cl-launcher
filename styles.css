@@ -2325,7 +2325,7 @@ body {
   border: 1px solid rgba(111, 216, 255, 0.2);
 }
 
-.pkgmgr__game-action-btn--repair:hover {
+.pkgmgr__game-action-btn--repair:hover:not(:disabled) {
   background: rgba(111, 216, 255, 0.12);
   border-color: rgba(111, 216, 255, 0.35);
 }
@@ -2336,9 +2336,17 @@ body {
   border: 1px solid rgba(220, 60, 60, 0.22);
 }
 
-.pkgmgr__game-action-btn--uninstall:hover {
+.pkgmgr__game-action-btn--uninstall:hover:not(:disabled) {
   background: rgba(220, 60, 60, 0.12);
   border-color: rgba(220, 60, 60, 0.38);
+}
+
+.pkgmgr__game-action-btn:disabled {
+  color: rgba(120, 130, 145, 0.5);
+  background: rgba(40, 48, 60, 0.35);
+  border-color: rgba(80, 90, 105, 0.2);
+  cursor: not-allowed;
+  opacity: 0.55;
 }
 
 /* ── Elevar modal de confirmación sobre el gestor de paquetes ── */
