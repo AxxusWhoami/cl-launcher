@@ -598,8 +598,8 @@ body {
 
 .account__card {
   width: 100%;
-  max-width: 420px;
-  margin-top: 16px;
+  max-width: 340px;
+  margin-top: 10px;
   background: linear-gradient(180deg, rgba(14, 22, 36, 0.96), rgba(6, 10, 18, 0.97));
   border: 1px solid var(--panel-edge);
   border-radius: 10px;
@@ -613,7 +613,7 @@ body {
 
 .account__tab {
   flex: 1;
-  padding: 16px 12px;
+  padding: 11px 12px;
   font-family: var(--font-morpheus);
   font-size: 0.88rem;
   font-weight: 700;
@@ -641,13 +641,13 @@ body {
 
 /* Paneles */
 .account__panel {
-  padding: 28px 32px 32px;
+  padding: 18px 22px 22px;
 }
 
 .account__form {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 11px;
 }
 
 .account__field {
@@ -695,12 +695,12 @@ body {
 .account__input {
   width: 100%;
   font-family: var(--font-ui);
-  font-size: 0.95rem;
+  font-size: 0.85rem;
   color: var(--text);
   background: rgba(4, 8, 15, 0.9);
   border: 1px solid var(--panel-edge);
   border-radius: 6px;
-  padding: 11px 14px;
+  padding: 8px 12px;
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
@@ -755,17 +755,17 @@ body {
 }
 
 .account__submit {
-  margin-top: 4px;
+  margin-top: 2px;
   font-family: var(--font-morpheus);
   font-weight: 700;
-  font-size: 0.95rem;
+  font-size: 0.85rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--abyss);
   background: linear-gradient(180deg, var(--gold-bright), var(--gold));
   border: 1px solid var(--gold-deep);
   border-radius: 6px;
-  padding: 13px 18px;
+  padding: 9px 18px;
   cursor: pointer;
   transition: transform 0.15s ease, box-shadow 0.2s ease, filter 0.2s ease;
 }
