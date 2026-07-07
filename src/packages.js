@@ -54,6 +54,7 @@ const pkgSizes    = Object.fromEntries(PACKAGE_DEFS.map((p) => [p.id, { download
 
 let isModalOpen = false;
 let gameInstalled = false;
+let gameRunning = false;
 
 function buildDescList(keys, locale) {
   const ul = document.createElement("ul");
@@ -214,7 +215,12 @@ function updateItemUI(id, locale) {
     btn.className = "pkg-btn pkg-btn--delete";
     btn.setAttribute("aria-label", t("pkgmgr.action.delete", locale));
     btn.innerHTML = `<i class="fa-solid fa-trash-can" aria-hidden="true"></i>`;
-    btn.addEventListener("click", () => triggerAction(id, "delete"));
+    if (gameRunning) {
+      btn.disabled = true;
+      btn.title = t("pkgmgr.running.disabled", locale);
+    } else {
+      btn.addEventListener("click", () => triggerAction(id, "delete"));
+    }
     actionSlot.appendChild(btn);
   } else {
     hideProgressBar(item);
@@ -242,7 +248,13 @@ function syncGameActionButtons() {
   const uninstallBtn = document.querySelector("#pkgmgr-uninstall");
   [repairBtn, uninstallBtn].forEach((btn) => {
     if (!btn) return;
-    btn.disabled = busy;
+    btn.disabled = busy || gameRunning;
+    if (gameRunning) {
+      const loc = getLocale();
+      btn.title = t("pkgmgr.running.disabled", loc);
+    } else {
+      btn.title = "";
+    }
   });
 }
 
@@ -306,6 +318,22 @@ export function setGameActionBusy(busy) {
       delete btn.dataset.busyDisabled;
     }
   });
+}
+
+/**
+ * Llamado desde Rust cuando el proceso del juego (Wow.exe) arranca o se detiene.
+ * Mientras el juego está en ejecución se deshabilitan Reparar, Desinstalar y
+ * los botones de borrar paquetes para evitar modificar archivos en uso.
+ * Uso: window.__setGameRunning(true) / window.__setGameRunning(false)
+ */
+export function setGameRunning(running) {
+  gameRunning = running;
+  syncGameActionButtons();
+  if (isModalOpen) {
+    for (const id of Object.keys(pkgState)) {
+      updateItemUI(id, getLocale());
+    }
+  }
 }
 
 export function setGameInstalled(installed) {

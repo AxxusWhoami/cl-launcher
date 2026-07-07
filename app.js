@@ -10,7 +10,7 @@ import { startSnow } from "./src/snow.js";
 import { isTauri, getLocale, initLocale } from "./src/locale.js";
 import { applyTranslations, t } from "./src/i18n.js";
 import { initSettingsModal, setAvailableGameLanguages, setDxvkVersion, setDetectedGpu, setDetectedRam, setDetectedCpuCores, setGameInstalled as setSettingsGameInstalled } from "./src/settings.js";
-import { initPackagesModal, setInstalledPackages, onPackageStateChange, onPackageProgress, onRepairProgress, onRepairComplete, onUninstallComplete, onPackageDeleteComplete, setGameInstalled, setGameActionBusy } from "./src/packages.js";
+import { initPackagesModal, setInstalledPackages, onPackageStateChange, onPackageProgress, onRepairProgress, onRepairComplete, onUninstallComplete, onPackageDeleteComplete, setGameInstalled, setGameActionBusy, setGameRunning } from "./src/packages.js";
 import { initRegisterModal, onCreateAccountResult } from "./src/register.js";
 
 const AUDIO_STORAGE_KEY = "launcher_audio_muted";
@@ -300,6 +300,9 @@ const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   // Rust llama esto cuando termina una reparación o desinstalación.
   // Uso desde Rust: window.__onGameActionDone()
   window.__onGameActionDone = () => setGameActionBusy(false);
+  // Rust notifica si el proceso del juego (Wow.exe) está en ejecución.
+  // Uso desde Rust: window.__setGameRunning(true) / window.__setGameRunning(false)
+  window.__setGameRunning = setGameRunning;
 
   // Puente para el registro de cuenta.
   // Rust llama con el resultado: window.__onCreateAccountResult(true, "mensaje")

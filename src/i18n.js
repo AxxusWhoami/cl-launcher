@@ -137,6 +137,7 @@ const TRANSLATIONS = {
     // Gestor de paquetes
     "pkgmgr.open":               "Gestor de paquetes",
     "pkgmgr.disabled":           "Requiere que el juego esté instalado",
+    "pkgmgr.running.disabled":   "No disponible mientras el juego está en ejecución",
     "pkgmgr.title":              "Gestor de paquetes",
     "pkgmgr.section.languages":  "Paquetes de idioma",
     "pkgmgr.section.hd":         "Modelos y Texturas HD",
@@ -304,6 +305,7 @@ const TRANSLATIONS = {
     // Package Manager
     "pkgmgr.open":               "Package Manager",
     "pkgmgr.disabled":           "Requires the game to be installed",
+    "pkgmgr.running.disabled":   "Not available while the game is running",
     "pkgmgr.title":              "Package Manager",
     "pkgmgr.section.languages":  "Language Packs",
     "pkgmgr.section.hd":         "Models & Textures HD",
@@ -463,6 +465,7 @@ const TRANSLATIONS = {
     // Gestionnaire de paquets
     "pkgmgr.open":               "Gestionnaire de paquets",
     "pkgmgr.disabled":           "Nécessite que le jeu soit installé",
+    "pkgmgr.running.disabled":   "Non disponible pendant que le jeu est en cours d'exécution",
     "pkgmgr.title":              "Gestionnaire de paquets",
     "pkgmgr.section.languages":  "Packs de langue",
     "pkgmgr.section.hd":         "Modèles et textures HD",
@@ -622,6 +625,7 @@ const TRANSLATIONS = {
     // Paket-Manager
     "pkgmgr.open":               "Paket-Manager",
     "pkgmgr.disabled":           "Erfordert, dass das Spiel installiert ist",
+    "pkgmgr.running.disabled":   "Nicht verfügbar, während das Spiel läuft",
     "pkgmgr.title":              "Paket-Manager",
     "pkgmgr.section.languages":  "Sprachpakete",
     "pkgmgr.section.hd":         "Modelle und Texturen HD",
