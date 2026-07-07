@@ -800,6 +800,49 @@ body {
   text-shadow: 0 0 10px var(--ice-glow);
 }
 
+/* ===== Vista de tienda ===== */
+.store {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 8px 8px;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 30%, rgba(10, 20, 40, 0.82) 0%, transparent 100%),
+    linear-gradient(180deg, rgba(5, 12, 28, 0.78) 0%, rgba(3, 8, 20, 0.88) 100%);
+}
+
+.store__empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  text-align: center;
+  opacity: 0.55;
+}
+
+.store__empty-icon {
+  font-size: 3rem;
+  color: var(--ice-pale);
+}
+
+.store__empty-heading {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  color: var(--text);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.store__empty-msg {
+  font-family: var(--font-ui);
+  font-size: 0.85rem;
+  color: var(--text-dim);
+  margin: 0;
+}
+
 /* ===== Panel de control ===== */
 .control-panel {
   flex-shrink: 0;

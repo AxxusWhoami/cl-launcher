@@ -10,7 +10,9 @@ const TRANSLATIONS = {
     "nav.account":     "Cuenta",
     "nav.store":       "Tienda",
 
-    // Noticias
+    // Tienda
+    "store.heading":   "Tienda",
+    "store.empty":     "La tienda estará disponible próximamente.",
     "news.heading":       "Noticias del Reino",
     "news.loading":       "Cargando noticias...",
     "news.empty":         "No hay noticias disponibles.",
@@ -168,7 +170,9 @@ const TRANSLATIONS = {
     "nav.account":     "Account",
     "nav.store":       "Store",
 
-    // News
+    // Store
+    "store.heading":   "Store",
+    "store.empty":     "The store will be available soon.",
     "news.heading":       "Realm News",
     "news.loading":       "Loading news...",
     "news.empty":         "No news available.",
@@ -326,7 +330,9 @@ const TRANSLATIONS = {
     "nav.account":     "Compte",
     "nav.store":       "Boutique",
 
-    // News
+    // Boutique
+    "store.heading":   "Boutique",
+    "store.empty":     "La boutique sera disponible prochainement.",
     "news.heading":       "Actualités du Royaume",
     "news.loading":       "Chargement des actualités...",
     "news.empty":         "Aucune actualité disponible.",
@@ -476,7 +482,9 @@ const TRANSLATIONS = {
     "nav.account":     "Konto",
     "nav.store":       "Shop",
 
-    // News
+    // Shop
+    "store.heading":   "Shop",
+    "store.empty":     "Der Shop wird bald verfügbar sein.",
     "news.heading":       "Neuigkeiten aus dem Reich",
     "news.loading":       "Neuigkeiten werden geladen...",
     "news.empty":         "Keine Neuigkeiten verfügbar.",
