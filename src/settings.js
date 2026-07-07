@@ -63,13 +63,17 @@ export function setAvailableGameLanguages(available) {
 }
 
 const DXVK_VERSIONS = ["1.10.3", "2.7.1", "3.0.1"];
+let currentDxvkVersion = null;
 
 export function setDxvkVersion(version) {
+  if (version && DXVK_VERSIONS.includes(version)) {
+    currentDxvkVersion = version;
+  }
   const badge = document.querySelector("#dxvk-version-badge");
   if (!badge) return;
   const dxvkEnabled = document.querySelector("#setting-dxvk")?.checked ?? false;
-  if (version && DXVK_VERSIONS.includes(version) && dxvkEnabled) {
-    badge.textContent = `v${version}`;
+  if (currentDxvkVersion && dxvkEnabled) {
+    badge.textContent = `v${currentDxvkVersion}`;
     badge.hidden = false;
     badge.removeAttribute("hidden");
   } else {
@@ -115,6 +119,7 @@ export function initSettingsModal() {
       const radio = document.querySelector(`input[name="game-lang"][value="${settings.gameLanguage}"]`);
       if (radio && !radio.disabled) radio.checked = true;
     }
+    setDxvkVersion(currentDxvkVersion);
   }
 
   function openModal() {
@@ -178,8 +183,7 @@ export function initSettingsModal() {
     // Implementar con RUST
     settings.dxvk = e.target.checked;
     saveSettings(settings);
-    const badge = document.querySelector("#dxvk-version-badge");
-    if (badge && !settings.dxvk) badge.hidden = true;
+    setDxvkVersion(currentDxvkVersion);
     showProgress(settings.dxvk ? "progress.installing.dxvk" : "progress.uninstalling.dxvk");
   });
 
