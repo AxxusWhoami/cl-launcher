@@ -87,7 +87,12 @@ export function initRegisterModal() {
 
   if (!modal) return;
 
-  installBtn?.addEventListener("click", openModal);
+  installBtn?.addEventListener("click", () => {
+    openModal();
+    // La instalación arranca en background; Rust reporta progreso via
+    // window.__onInstallProgress y notifica el fin via window.__onInstallComplete.
+    window.__onInstallGame?.();
+  });
   closeBtn?.addEventListener("click", closeModal);
 
   modal.addEventListener("click", (e) => {

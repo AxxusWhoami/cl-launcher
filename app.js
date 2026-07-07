@@ -279,6 +279,12 @@ const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   // Rust llama con el resultado: window.__onCreateAccountResult(true, "mensaje")
   window.__onCreateAccountResult = onCreateAccountResult;
 
+  // Puente para la instalación del juego (arranca al pulsar el botón Instalar).
+  // Rust reporta progreso:  window.__onInstallProgress(percent, message)
+  // Rust notifica el fin:   window.__onInstallComplete()
+  window.__onInstallProgress = (percent, message) => ui.setProgress(percent, message);
+  window.__onInstallComplete = () => ui.setProgress(100, "");
+
   // --- Modal de configuración ------------------------------------------------
   initSettingsModal();
 
