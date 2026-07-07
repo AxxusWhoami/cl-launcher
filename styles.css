@@ -2242,11 +2242,12 @@ body {
 }
 
 .repair-progress-modal__title {
-  font-family: var(--font-display);
+  font-family: var(--font-morpheus);
   font-size: 1.1rem;
-  font-weight: 600;
-  color: var(--text-bright);
-  letter-spacing: 0.04em;
+  font-weight: 700;
+  color: var(--gold-bright);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
   text-align: center;
   margin: 0;
 }
