@@ -81,6 +81,18 @@ export function setDxvkVersion(version) {
   }
 }
 
+export function setDetectedGpu(gpuName) {
+  const el = document.querySelector("#dxvk-gpu-info");
+  if (!el) return;
+  if (gpuName) {
+    el.textContent = gpuName;
+    el.hidden = false;
+    el.removeAttribute("hidden");
+  } else {
+    el.hidden = true;
+  }
+}
+
 export function setGameInstalled(installed) {
   settingsGameInstalled = installed;
   if (!isTauri()) return;

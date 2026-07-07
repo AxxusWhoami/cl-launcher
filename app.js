@@ -9,7 +9,7 @@ import { startRealmStatus } from "./src/realm-status.js";
 import { startSnow } from "./src/snow.js";
 import { isTauri, getLocale, initLocale } from "./src/locale.js";
 import { applyTranslations, t } from "./src/i18n.js";
-import { initSettingsModal, setAvailableGameLanguages, setDxvkVersion, setGameInstalled as setSettingsGameInstalled } from "./src/settings.js";
+import { initSettingsModal, setAvailableGameLanguages, setDxvkVersion, setDetectedGpu, setGameInstalled as setSettingsGameInstalled } from "./src/settings.js";
 import { initPackagesModal, setInstalledPackages, onPackageStateChange, onPackageProgress, onRepairProgress, onRepairComplete, onUninstallComplete, onPackageDeleteComplete, setGameInstalled, setGameActionBusy } from "./src/packages.js";
 import { initRegisterModal, onCreateAccountResult } from "./src/register.js";
 
@@ -274,6 +274,8 @@ const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   window.__setAvailableGameLanguages = setAvailableGameLanguages;
   // Uso desde Rust: window.__setDxvkVersion("2.7.1")
   window.__setDxvkVersion            = setDxvkVersion;
+  // Uso desde Rust: window.__setDetectedGpu("NVIDIA GeForce RTX 4070")
+  window.__setDetectedGpu            = setDetectedGpu;
 
   // Puentes para el Gestor de paquetes.
   // Rust informa los paquetes ya instalados:  window.__setInstalledPackages(["lang-esES", "hd"])
