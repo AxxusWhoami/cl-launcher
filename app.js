@@ -4,6 +4,7 @@ import { launchGame } from "./src/launcher.js";
 import { loadNews } from "./src/news.js";
 import { loadChangelog } from "./src/changelog.js";
 import { loadFeatures } from "./src/features.js";
+import { loadStore } from "./src/store.js";
 import { startRealmStatus } from "./src/realm-status.js";
 import { startSnow } from "./src/snow.js";
 import { isTauri, getLocale, initLocale } from "./src/locale.js";
@@ -45,6 +46,9 @@ const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
   const changelogContainer = document.querySelector("#changelog-list");
   const newsList = document.querySelector("#news-list");
+  const storeList = document.querySelector("#store-list");
+
+  let storeLoaded = false;
 
   tabs.forEach((tab) => {
     tab.addEventListener("click", () => {
@@ -61,6 +65,11 @@ const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         views.forEach((view) => {
           view.hidden = view.dataset.view !== target;
         });
+      }
+
+      if (target === "tienda" && !storeLoaded) {
+        storeLoaded = true;
+        loadStore(storeList);
       }
 
       if (target === "correcciones" && !changelogLoaded) {
@@ -95,6 +104,13 @@ const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       loadNews(newsList);
     } else {
       newsLoaded = false;
+    }
+
+    const storeVisible = !document.querySelector(".view[data-view='tienda']")?.hidden;
+    if (storeVisible) {
+      loadStore(storeList);
+    } else {
+      storeLoaded = false;
     }
   });
 

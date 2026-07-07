@@ -12,7 +12,10 @@ const TRANSLATIONS = {
 
     // Tienda
     "store.heading":   "Tienda",
-    "store.empty":     "La tienda estará disponible próximamente.",
+    "store.loading":   "Cargando tienda...",
+    "store.empty":     "No hay servicios disponibles.",
+    "store.error":     "No se pudo cargar la tienda.",
+    "store.free":      "Gratis",
     "news.heading":       "Noticias del Reino",
     "news.loading":       "Cargando noticias...",
     "news.empty":         "No hay noticias disponibles.",
@@ -172,7 +175,10 @@ const TRANSLATIONS = {
 
     // Store
     "store.heading":   "Store",
-    "store.empty":     "The store will be available soon.",
+    "store.loading":   "Loading store...",
+    "store.empty":     "No services available.",
+    "store.error":     "Could not load the store.",
+    "store.free":      "Free",
     "news.heading":       "Realm News",
     "news.loading":       "Loading news...",
     "news.empty":         "No news available.",
@@ -332,7 +338,10 @@ const TRANSLATIONS = {
 
     // Boutique
     "store.heading":   "Boutique",
-    "store.empty":     "La boutique sera disponible prochainement.",
+    "store.loading":   "Chargement de la boutique...",
+    "store.empty":     "Aucun service disponible.",
+    "store.error":     "Impossible de charger la boutique.",
+    "store.free":      "Gratuit",
     "news.heading":       "Actualités du Royaume",
     "news.loading":       "Chargement des actualités...",
     "news.empty":         "Aucune actualité disponible.",
@@ -484,7 +493,10 @@ const TRANSLATIONS = {
 
     // Shop
     "store.heading":   "Shop",
-    "store.empty":     "Der Shop wird bald verfügbar sein.",
+    "store.loading":   "Shop wird geladen...",
+    "store.empty":     "Keine Dienste verfügbar.",
+    "store.error":     "Shop konnte nicht geladen werden.",
+    "store.free":      "Kostenlos",
     "news.heading":       "Neuigkeiten aus dem Reich",
     "news.loading":       "Neuigkeiten werden geladen...",
     "news.empty":         "Keine Neuigkeiten verfügbar.",

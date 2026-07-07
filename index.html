@@ -184,10 +184,8 @@
       </section>
 
       <section class="store view" data-view="tienda" aria-label="Tienda" hidden>
-        <div class="store__empty">
-          <i class="fa-solid fa-store store__empty-icon" aria-hidden="true"></i>
-          <h2 class="store__empty-heading" data-i18n="store.heading">Tienda</h2>
-          <p class="store__empty-msg" data-i18n="store.empty">La tienda estará disponible próximamente.</p>
+        <div class="store__container" id="store-list" aria-live="polite">
+          <p class="store__placeholder" data-i18n="store.loading">Cargando tienda...</p>
         </div>
       </section>
 
