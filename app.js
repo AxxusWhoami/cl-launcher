@@ -84,11 +84,15 @@ const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     });
   });
 
+  const featuresContainer = document.querySelector("#features-list");
+
   // --- Reacción global a cambio de idioma ------------------------------------
   window.addEventListener("localechange", (e) => {
     const loc = e.detail?.locale ?? getLocale();
     applyTranslations(loc);
     document.documentElement.lang = LOCALE_LANG[loc] ?? "es";
+
+    loadFeatures(featuresContainer);
 
     if (changelogLoaded) {
       changelogLoaded = false;
@@ -311,7 +315,7 @@ const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   initRegisterModal();
 
   // --- Carga inicial ----------------------------------------------------------
-  loadFeatures(document.querySelector("#features-list"));
+  loadFeatures(featuresContainer);
   startRealmStatus();
   startSnow(document.querySelector(".snow-layer"));
 })();
