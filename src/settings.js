@@ -82,15 +82,21 @@ export function setDxvkVersion(version) {
 }
 
 export function setDetectedGpu(gpuName) {
-  const el = document.querySelector("#dxvk-gpu-info");
+  const el = document.querySelector("#sysinfo-gpu");
   if (!el) return;
-  if (gpuName) {
-    el.textContent = gpuName;
-    el.hidden = false;
-    el.removeAttribute("hidden");
-  } else {
-    el.hidden = true;
-  }
+  el.textContent = gpuName || "—";
+}
+
+export function setDetectedRam(ramLabel) {
+  const el = document.querySelector("#sysinfo-ram");
+  if (!el) return;
+  el.textContent = ramLabel || "—";
+}
+
+export function setDetectedCpuCores(cores) {
+  const el = document.querySelector("#sysinfo-cpu-cores");
+  if (!el) return;
+  el.textContent = cores != null ? String(cores) : "—";
 }
 
 export function setGameInstalled(installed) {

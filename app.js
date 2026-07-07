@@ -9,7 +9,7 @@ import { startRealmStatus } from "./src/realm-status.js";
 import { startSnow } from "./src/snow.js";
 import { isTauri, getLocale, initLocale } from "./src/locale.js";
 import { applyTranslations, t } from "./src/i18n.js";
-import { initSettingsModal, setAvailableGameLanguages, setDxvkVersion, setDetectedGpu, setGameInstalled as setSettingsGameInstalled } from "./src/settings.js";
+import { initSettingsModal, setAvailableGameLanguages, setDxvkVersion, setDetectedGpu, setDetectedRam, setDetectedCpuCores, setGameInstalled as setSettingsGameInstalled } from "./src/settings.js";
 import { initPackagesModal, setInstalledPackages, onPackageStateChange, onPackageProgress, onRepairProgress, onRepairComplete, onUninstallComplete, onPackageDeleteComplete, setGameInstalled, setGameActionBusy } from "./src/packages.js";
 import { initRegisterModal, onCreateAccountResult } from "./src/register.js";
 
@@ -276,6 +276,10 @@ const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   window.__setDxvkVersion            = setDxvkVersion;
   // Uso desde Rust: window.__setDetectedGpu("NVIDIA GeForce RTX 4070")
   window.__setDetectedGpu            = setDetectedGpu;
+  // Uso desde Rust: window.__setDetectedRam("16 GB")
+  window.__setDetectedRam            = setDetectedRam;
+  // Uso desde Rust: window.__setDetectedCpuCores(8)
+  window.__setDetectedCpuCores       = setDetectedCpuCores;
 
   // Puentes para el Gestor de paquetes.
   // Rust informa los paquetes ya instalados:  window.__setInstalledPackages(["lang-esES", "hd"])

@@ -382,7 +382,6 @@
                 <span class="dxvk-version-badge" id="dxvk-version-badge" hidden></span>
               </span>
               <span class="setting-row__desc" data-i18n="settings.dxvk.desc">Traduce llamadas Direct3D a Vulkan mediante DXVK. Puede mejorar significativamente el rendimiento en sistemas Linux y en equipos con drivers Vulkan modernos.</span>
-              <span class="dxvk-gpu-info" id="dxvk-gpu-info" hidden></span>
             </div>
             <label class="setting-switch" aria-label="DXVK (Vulkan)">
               <input type="checkbox" id="setting-dxvk" />
@@ -399,6 +398,24 @@
               <input type="checkbox" id="setting-audio" />
               <span class="setting-switch__track"><span class="setting-switch__thumb"></span></span>
             </label>
+          </div>
+
+          <div class="sysinfo-panel" aria-label="Información del sistema">
+            <span class="sysinfo-panel__title" data-i18n="settings.sysinfo.title">Información del sistema</span>
+            <div class="sysinfo-panel__grid">
+              <div class="sysinfo-panel__item">
+                <span class="sysinfo-panel__key" data-i18n="settings.sysinfo.gpu">GPU</span>
+                <span class="sysinfo-panel__val" id="sysinfo-gpu">—</span>
+              </div>
+              <div class="sysinfo-panel__item">
+                <span class="sysinfo-panel__key" data-i18n="settings.sysinfo.ram">RAM</span>
+                <span class="sysinfo-panel__val" id="sysinfo-ram">—</span>
+              </div>
+              <div class="sysinfo-panel__item">
+                <span class="sysinfo-panel__key" data-i18n="settings.sysinfo.cpu">CPU Cores</span>
+                <span class="sysinfo-panel__val" id="sysinfo-cpu-cores">—</span>
+              </div>
+            </div>
           </div>
 
         </div>

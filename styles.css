@@ -1672,6 +1672,58 @@ body {
   letter-spacing: 0.02em;
 }
 
+/* ── System info panel ── */
+.sysinfo-panel {
+  margin-top: 20px;
+  padding: 14px 16px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 8px;
+}
+
+.sysinfo-panel__title {
+  display: block;
+  font-family: var(--font-ui);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(180, 195, 215, 0.4);
+  margin-bottom: 10px;
+}
+
+.sysinfo-panel__grid {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.sysinfo-panel__item {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.sysinfo-panel__key {
+  font-family: var(--font-ui);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  color: rgba(180, 195, 215, 0.45);
+  min-width: 80px;
+  flex-shrink: 0;
+}
+
+.sysinfo-panel__val {
+  font-family: var(--font-ui);
+  font-size: 0.75rem;
+  font-weight: 400;
+  color: rgba(210, 220, 235, 0.75);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 .setting-row__desc {
   font-family: var(--font-ui);
   font-size: 0.75rem;
