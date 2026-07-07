@@ -386,18 +386,20 @@ export function initPackagesModal() {
   const confirmBody   = document.querySelector("#game-confirm-body");
   const confirmCancel = document.querySelector("#game-confirm-cancel");
   const confirmOk     = document.querySelector("#game-confirm-ok");
-  let pendingAction   = null;
-  let pendingIsRepair = false;
+  let pendingAction     = null;
+  let pendingIsRepair   = false;
+  let pendingIsUninstall = false;
 
-  function showGameConfirm(titleKey, bodyKey, isDanger, action, isRepair = false) {
+  function showGameConfirm(titleKey, bodyKey, isDanger, action, isRepair = false, isUninstall = false) {
     const loc = getLocale();
     if (confirmTitle) confirmTitle.textContent  = t(titleKey, loc);
     if (confirmBody)  confirmBody.textContent   = t(bodyKey,  loc);
     if (confirmCancel) confirmCancel.textContent = t("pkgmgr.confirm.cancel",  loc);
     if (confirmOk)    confirmOk.textContent     = t("pkgmgr.confirm.proceed", loc);
     confirmModal?.classList.toggle("game-confirm-modal--danger", isDanger);
-    pendingAction   = action;
-    pendingIsRepair = isRepair;
+    pendingAction      = action;
+    pendingIsRepair    = isRepair;
+    pendingIsUninstall = isUninstall;
     if (confirmModal) {
       confirmModal.hidden = false;
       confirmModal.removeAttribute("hidden");
@@ -407,8 +409,9 @@ export function initPackagesModal() {
 
   function closeConfirmModal() {
     if (confirmModal) confirmModal.hidden = true;
-    pendingAction   = null;
-    pendingIsRepair = false;
+    pendingAction      = null;
+    pendingIsRepair    = false;
+    pendingIsUninstall = false;
   }
 
   document.querySelector("#pkgmgr-repair")?.addEventListener("click", () => {
@@ -426,19 +429,23 @@ export function initPackagesModal() {
       "pkgmgr.uninstall.confirm.title",
       "pkgmgr.uninstall.confirm.body",
       true,
-      () => window.__onUninstallGame?.()
+      () => window.__onUninstallGame?.(),
+      false,
+      true
     );
   });
 
   confirmCancel?.addEventListener("click", closeConfirmModal);
 
   confirmOk?.addEventListener("click", () => {
-    const shouldShowRepair = pendingIsRepair;
+    const shouldShowRepair     = pendingIsRepair;
+    const shouldShowUninstall  = pendingIsUninstall;
     pendingAction?.();
     closeConfirmModal();
     closeModal();
     setGameActionBusy(true);
-    if (shouldShowRepair) openRepairProgressModal();
+    if (shouldShowRepair)    openRepairProgressModal();
+    if (shouldShowUninstall) openUninstallProgressModal();
   });
 
   confirmModal?.addEventListener("click", (e) => {
@@ -483,6 +490,23 @@ export function onRepairProgress(percent, statusMsg) {
 
 export function onRepairComplete() {
   const modal = document.querySelector("#repair-progress-modal");
+  if (modal) modal.hidden = true;
+  setGameActionBusy(false);
+}
+
+// ── Uninstall progress modal ─────────────────────────────────────────────────
+
+function openUninstallProgressModal() {
+  const modal  = document.querySelector("#uninstall-progress-modal");
+  const status = document.querySelector("#uninstall-progress-status");
+  if (!modal) return;
+  if (status) status.textContent = t("pkgmgr.uninstall.progress.status", getLocale());
+  modal.hidden = false;
+  modal.removeAttribute("hidden");
+}
+
+export function onUninstallComplete() {
+  const modal = document.querySelector("#uninstall-progress-modal");
   if (modal) modal.hidden = true;
   setGameActionBusy(false);
 }

@@ -252,6 +252,15 @@
       </div>
     </dialog>
 
+    <dialog class="uninstall-progress-modal" id="uninstall-progress-modal" aria-labelledby="uninstall-progress-title" aria-modal="true" hidden>
+      <div class="uninstall-progress-modal__box">
+        <i class="fa-solid fa-trash uninstall-progress-modal__icon" aria-hidden="true"></i>
+        <h2 class="uninstall-progress-modal__title" id="uninstall-progress-title" data-i18n="pkgmgr.uninstall.progress.title">Desinstalando el juego</h2>
+        <div class="uninstall-progress-modal__spinner" aria-hidden="true"></div>
+        <p class="uninstall-progress-modal__status" id="uninstall-progress-status"></p>
+      </div>
+    </dialog>
+
     <dialog class="update-modal game-confirm-modal" id="game-confirm-modal" aria-labelledby="game-confirm-title" aria-modal="true" hidden>
       <div class="update-modal__box">
         <i class="fa-solid fa-triangle-exclamation update-modal__icon" aria-hidden="true"></i>
