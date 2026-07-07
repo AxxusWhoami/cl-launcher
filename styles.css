@@ -1894,7 +1894,7 @@ body {
 /* ── Ítem individual ── */
 .pkg-item {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   gap: 14px;
   padding: 12px 0;
   border-bottom: 1px solid rgba(26, 39, 56, 0.6);
@@ -1918,7 +1918,6 @@ body {
   justify-content: center;
   font-size: 0.9rem;
   color: var(--ice);
-  margin-top: 1px;
 }
 
 .pkg-item--installed .pkg-item__icon-wrap {
