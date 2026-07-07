@@ -49,6 +49,8 @@ const PACKAGE_DEFS = [
 const pkgState    = Object.fromEntries(PACKAGE_DEFS.map((p) => [p.id, "uninstalled"]));
 // Progreso por paquete (0-100). Solo relevante cuando state === "busy".
 const pkgProgress = Object.fromEntries(PACKAGE_DEFS.map((p) => [p.id, 0]));
+// Tamaño de descarga por paquete { downloaded: MB|null, total: MB|null }
+const pkgSizes    = Object.fromEntries(PACKAGE_DEFS.map((p) => [p.id, { downloaded: null, total: null }]));
 
 let isModalOpen = false;
 let gameInstalled = false;
@@ -106,7 +108,10 @@ function buildItem(def, locale) {
          aria-valuenow="0">
       <div class="pkg-item__progress-fill"></div>
     </div>
-    <span class="pkg-item__progress-pct">0%</span>
+    <div class="pkg-item__progress-info">
+      <span class="pkg-item__progress-pct">0%</span>
+      <span class="pkg-item__progress-size"></span>
+    </div>
   `;
 
   const actionSlot = document.createElement("div");
@@ -121,19 +126,31 @@ function buildItem(def, locale) {
   return item;
 }
 
-function setProgressBar(item, pct) {
+function formatMB(mb) {
+  if (mb >= 1024) return `${(mb / 1024).toFixed(1)} GB`;
+  if (mb >= 100)  return `${Math.round(mb)} MB`;
+  return `${mb.toFixed(1)} MB`;
+}
+
+function setProgressBar(item, pct, downloaded, total) {
   const wrap  = item.querySelector(".pkg-item__progress-wrap");
   if (!wrap) return;
-  const track = wrap.querySelector(".pkg-item__progress-track");
-  const fill  = wrap.querySelector(".pkg-item__progress-fill");
-  const label = wrap.querySelector(".pkg-item__progress-pct");
+  const track     = wrap.querySelector(".pkg-item__progress-track");
+  const fill      = wrap.querySelector(".pkg-item__progress-fill");
+  const label     = wrap.querySelector(".pkg-item__progress-pct");
+  const sizeLabel = wrap.querySelector(".pkg-item__progress-size");
   wrap.hidden = false;
   if (track) track.setAttribute("aria-valuenow", String(pct));
-  if (fill)  {
+  if (fill) {
     fill.style.width = `${pct}%`;
     fill.classList.toggle("pkg-item__progress-fill--indeterminate", pct === 0);
   }
   if (label) label.textContent = pct > 0 ? `${pct}%` : "";
+  if (sizeLabel) {
+    sizeLabel.textContent = (downloaded != null && total != null)
+      ? `${formatMB(downloaded)} / ${formatMB(total)}`
+      : "";
+  }
 }
 
 function hideProgressBar(item) {
@@ -155,7 +172,7 @@ function updateItemUI(id, locale) {
     badge.hidden = true;
     item.classList.add("pkg-item--busy");
     item.classList.remove("pkg-item--installed", "pkg-item--update");
-    setProgressBar(item, pkgProgress[id] ?? 0);
+    setProgressBar(item, pkgProgress[id] ?? 0, pkgSizes[id]?.downloaded, pkgSizes[id]?.total);
     const spinner = document.createElement("span");
     spinner.className = "pkg-item__spinner";
     spinner.setAttribute("aria-label", t("pkgmgr.action.busy", locale));
@@ -308,12 +325,14 @@ export function onPackageStateChange(id, newState) {
  * El progreso avanza de 0 a 100. Varios paquetes pueden estar en progreso simultáneamente.
  * Ejemplo desde Rust: window.__onPackageProgress("hd", 42)
  */
-export function onPackageProgress(id, percent) {
+export function onPackageProgress(id, percent, downloaded, total) {
   if (!(id in pkgProgress)) return;
   pkgProgress[id] = Math.max(0, Math.min(100, Math.round(percent)));
+  if (downloaded != null) pkgSizes[id].downloaded = downloaded;
+  if (total      != null) pkgSizes[id].total      = total;
   if (!isModalOpen || pkgState[id] !== "busy") return;
   const item = document.querySelector(`.pkg-item[data-pkg-id="${id}"]`);
-  if (item) setProgressBar(item, pkgProgress[id]);
+  if (item) setProgressBar(item, pkgProgress[id], pkgSizes[id].downloaded, pkgSizes[id].total);
 }
 
 // ── Modal init ───────────────────────────────────────────────────────────────

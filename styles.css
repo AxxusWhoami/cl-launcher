@@ -2058,12 +2058,20 @@ body {
   flex-shrink: 0;
   align-self: center;
   display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 120px;
 }
 
 .pkg-item__progress-wrap[hidden] {
   display: none;
+}
+
+.pkg-item__progress-info {
+  display: flex;
   align-items: center;
-  gap: 8px;
+  justify-content: space-between;
+  gap: 6px;
 }
 
 .pkg-item__progress-track {
@@ -2099,6 +2107,15 @@ body {
   min-width: 26px;
   text-align: left;
   font-variant-numeric: tabular-nums;
+}
+
+.pkg-item__progress-size {
+  font-family: var(--font-ui);
+  font-size: 0.68rem;
+  color: var(--text-dim);
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  opacity: 0.75;
 }
 
 /* ── Spinner por ítem (reservado) ── */
