@@ -17,7 +17,7 @@ function buildPriceBadge(item) {
     const qty = document.createElement("span");
     qty.textContent = item.creditos;
     const icon = document.createElement("img");
-    icon.src = "/creditos.avif";
+    icon.src = "/creditos.png";
     icon.alt = "créditos";
     icon.className = "store-card__credits-icon";
     icon.setAttribute("aria-hidden", "true");
