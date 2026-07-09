@@ -4,6 +4,37 @@ import { t } from "./i18n.js";
 
 const STORE_URL = "https://apis.corelegacy.gg/store.php?function=getservices";
 
+function buildPriceBadge(item) {
+  if (item.euro != null && item.euro !== "" && item.euro !== 0) {
+    const badge = document.createElement("span");
+    badge.className = "store-card__price-badge";
+    badge.textContent = `${item.euro} €`;
+    return badge;
+  }
+  if (item.creditos != null && item.creditos !== "" && item.creditos !== 0) {
+    const badge = document.createElement("span");
+    badge.className = "store-card__price-badge store-card__price-badge--credits";
+    const qty = document.createElement("span");
+    qty.textContent = item.creditos;
+    const icon = document.createElement("img");
+    icon.src = "/creditos.avif";
+    icon.alt = "créditos";
+    icon.className = "store-card__credits-icon";
+    icon.setAttribute("aria-hidden", "true");
+    badge.appendChild(qty);
+    badge.appendChild(icon);
+    return badge;
+  }
+  // Fallback para el campo legacy "price"
+  if (item.price) {
+    const badge = document.createElement("span");
+    badge.className = "store-card__price-badge";
+    badge.textContent = item.price;
+    return badge;
+  }
+  return null;
+}
+
 function buildCard(item) {
   const card = document.createElement("article");
   card.className = "store-card";
@@ -25,12 +56,8 @@ function buildCard(item) {
     imgWrap.appendChild(placeholder);
   }
 
-  if (item.price) {
-    const priceBadge = document.createElement("span");
-    priceBadge.className = "store-card__price-badge";
-    priceBadge.textContent = item.price;
-    imgWrap.appendChild(priceBadge);
-  }
+  const priceBadge = buildPriceBadge(item);
+  if (priceBadge) imgWrap.appendChild(priceBadge);
 
   card.appendChild(imgWrap);
 
