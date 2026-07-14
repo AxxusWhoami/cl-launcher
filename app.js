@@ -327,4 +327,11 @@ const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   loadFeatures(featuresContainer);
   startRealmStatus();
   startSnow(document.querySelector(".snow-layer"));
+
+  // --- Comprobación de actualización del lanzador -----------------------------
+  // En entorno Tauri, Rust invoca window.__openUpdateModal() cuando detecta una
+  // nueva versión. En modo web, se muestra automáticamente al iniciar.
+  if (!isTauri()) {
+    openUpdateModal();
+  }
 })();
