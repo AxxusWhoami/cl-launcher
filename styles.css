@@ -1925,6 +1925,33 @@ body {
   letter-spacing: 0.03em;
 }
 
+.account__legal {
+  margin: 0;
+  padding-top: 2px;
+  font-family: var(--font-ui, sans-serif);
+  font-size: 0.75rem;
+  color: var(--text-dim, #888);
+  text-align: center;
+  line-height: 1.6;
+}
+
+.account__legal-link {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: inherit;
+  color: var(--accent, #c8a96a);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  transition: color 0.2s;
+}
+
+.account__legal-link:hover {
+  color: var(--accent-light, #e0c484);
+}
+
 /* ===== Modal de progreso ===== */
 .progress-modal {
   position: fixed;

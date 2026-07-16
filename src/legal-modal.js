@@ -77,13 +77,19 @@ function closeModal() {
 export function initLegalModal() {
   const modal      = getEl("legal-modal");
   const closeBtn   = getEl("legal-modal-close");
-  const openTos    = getEl("open-tos");
-  const openPriv   = getEl("open-privacy");
 
   if (!modal) return;
 
-  openTos?.addEventListener("click", (e) => { e.stopPropagation(); loadDocument("ToS"); });
-  openPriv?.addEventListener("click", (e) => { e.stopPropagation(); loadDocument("Privacy-Policy"); });
+  function bindOpen(id, type) {
+    document.querySelectorAll(`#${id}`).forEach((btn) => {
+      btn.addEventListener("click", (e) => { e.stopPropagation(); loadDocument(type); });
+    });
+  }
+
+  bindOpen("open-tos",           "ToS");
+  bindOpen("open-privacy",       "Privacy-Policy");
+  bindOpen("account-open-tos",   "ToS");
+  bindOpen("account-open-privacy", "Privacy-Policy");
   closeBtn?.addEventListener("click", closeModal);
 
   modal.addEventListener("click", (e) => { if (e.target === modal) closeModal(); });
