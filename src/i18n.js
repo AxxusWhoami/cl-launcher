@@ -83,6 +83,14 @@ const TRANSLATIONS = {
     "register.error.invalid_email": "Introduce un correo electrónico válido.",
     "register.error.generic":       "No se pudo crear la cuenta. Inténtalo de nuevo.",
     "modal.close":                  "Cerrar",
+    "register.legal.prefix":        "Al continuar aceptas los",
+    "register.legal.tos":           "Términos de servicio",
+    "register.legal.sep":           "y la",
+    "register.legal.privacy":       "Política de privacidad",
+    "legal.tos.title":              "Términos de servicio",
+    "legal.privacy.title":          "Política de privacidad",
+    "legal.loading":                "Cargando...",
+    "legal.error":                  "No se pudo cargar el documento. Inténtalo de nuevo.",
 
     // Audio
     "audio.mute":   "Silenciar música",
@@ -251,6 +259,14 @@ const TRANSLATIONS = {
     "register.error.invalid_email": "Enter a valid email address.",
     "register.error.generic":       "Could not create account. Please try again.",
     "modal.close":                  "Close",
+    "register.legal.prefix":        "By continuing you accept the",
+    "register.legal.tos":           "Terms of Service",
+    "register.legal.sep":           "and the",
+    "register.legal.privacy":       "Privacy Policy",
+    "legal.tos.title":              "Terms of Service",
+    "legal.privacy.title":          "Privacy Policy",
+    "legal.loading":                "Loading...",
+    "legal.error":                  "Could not load the document. Please try again.",
 
     // Audio
     "audio.mute":   "Mute music",
@@ -411,6 +427,14 @@ const TRANSLATIONS = {
     "register.error.invalid_email": "Entrez une adresse e-mail valide.",
     "register.error.generic":       "Impossible de créer le compte. Veuillez réessayer.",
     "modal.close":                  "Fermer",
+    "register.legal.prefix":        "En continuant, vous acceptez les",
+    "register.legal.tos":           "Conditions d'utilisation",
+    "register.legal.sep":           "et la",
+    "register.legal.privacy":       "Politique de confidentialité",
+    "legal.tos.title":              "Conditions d'utilisation",
+    "legal.privacy.title":          "Politique de confidentialité",
+    "legal.loading":                "Chargement...",
+    "legal.error":                  "Impossible de charger le document. Veuillez réessayer.",
 
     // Audio
     "audio.mute":   "Couper la musique",
@@ -571,6 +595,14 @@ const TRANSLATIONS = {
     "register.error.invalid_email": "Gib eine gültige E-Mail-Adresse ein.",
     "register.error.generic":       "Konto konnte nicht erstellt werden. Bitte erneut versuchen.",
     "modal.close":                  "Schließen",
+    "register.legal.prefix":        "Mit dem Fortfahren akzeptierst du die",
+    "register.legal.tos":           "Nutzungsbedingungen",
+    "register.legal.sep":           "und die",
+    "register.legal.privacy":       "Datenschutzrichtlinie",
+    "legal.tos.title":              "Nutzungsbedingungen",
+    "legal.privacy.title":          "Datenschutzrichtlinie",
+    "legal.loading":                "Laden...",
+    "legal.error":                  "Dokument konnte nicht geladen werden. Bitte erneut versuchen.",
 
     // Audio
     "audio.mute":   "Musik stumm schalten",

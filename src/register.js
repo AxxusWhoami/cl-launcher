@@ -5,6 +5,7 @@
 
 import { getLocale } from "./locale.js";
 import { t } from "./i18n.js";
+import { initLegalModal } from "./legal-modal.js";
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -86,6 +87,8 @@ export function initRegisterModal() {
   const installBtn = getEl("install-button");
 
   if (!modal) return;
+
+  initLegalModal();
 
   installBtn?.addEventListener("click", () => {
     openModal();

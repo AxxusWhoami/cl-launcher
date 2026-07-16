@@ -460,10 +460,35 @@
             <span class="register-modal__submit-label" data-i18n="register.cta">Crear cuenta</span>
             <span class="register-modal__submit-spinner" aria-hidden="true"></span>
           </button>
+          <p class="register-modal__legal">
+            <span data-i18n="register.legal.prefix">Al continuar aceptas los</span>
+            <button type="button" class="register-modal__legal-link" id="open-tos" data-i18n="register.legal.tos">Términos de servicio</button>
+            <span data-i18n="register.legal.sep">y la</span>
+            <button type="button" class="register-modal__legal-link" id="open-privacy" data-i18n="register.legal.privacy">Política de privacidad</button>
+          </p>
         </form>
         <div class="register-modal__result" id="register-modal-result" hidden>
           <i id="register-modal-result-icon" class="fa-solid fa-circle-check register-modal__result-icon" aria-hidden="true"></i>
           <p class="register-modal__result-msg" id="register-modal-result-msg"></p>
+        </div>
+      </div>
+    </dialog>
+
+    <!-- Legal modal -->
+    <dialog class="legal-modal" id="legal-modal" aria-labelledby="legal-modal-title" aria-modal="true" hidden>
+      <div class="legal-modal__box">
+        <div class="legal-modal__header">
+          <h2 class="legal-modal__title" id="legal-modal-title"></h2>
+          <button class="legal-modal__close" id="legal-modal-close" type="button" aria-label="Cerrar">
+            <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+          </button>
+        </div>
+        <div class="legal-modal__body" id="legal-modal-body">
+          <div class="legal-modal__loading" id="legal-modal-loading">
+            <span class="legal-modal__spinner" aria-hidden="true"></span>
+          </div>
+          <div class="legal-modal__content" id="legal-modal-content" hidden></div>
+          <div class="legal-modal__error" id="legal-modal-error" hidden></div>
         </div>
       </div>
     </dialog>
