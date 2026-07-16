@@ -19,16 +19,17 @@ function decodeHtmlEntities(encoded) {
 
 function getEl(id) { return document.querySelector(`#${id}`); }
 
+function show(el)  { if (el) { el.removeAttribute("hidden"); el.style.display = ""; } }
+function hide(el)  { if (el) { el.setAttribute("hidden", ""); el.style.display = "none"; } }
+
 function setLoading(loading) {
   const loadingEl = getEl("legal-modal-loading");
   const contentEl = getEl("legal-modal-content");
   const errorEl   = getEl("legal-modal-error");
   if (loading) {
-    if (loadingEl) loadingEl.hidden = false;
-    if (contentEl) contentEl.hidden = true;
-    if (errorEl)   errorEl.hidden   = true;
+    show(loadingEl); hide(contentEl); hide(errorEl);
   } else {
-    if (loadingEl) loadingEl.hidden = true;
+    hide(loadingEl);
   }
 }
 
@@ -50,8 +51,7 @@ async function loadDocument(type) {
   }
 
   setLoading(true);
-  modal.hidden = false;
-  modal.removeAttribute("hidden");
+  show(modal);
 
   async function fetchForLocale(fetchLocale) {
     const url = `${BASE_URL}?type=${encodeURIComponent(type)}&locale=${fetchLocale}`;
@@ -73,14 +73,19 @@ async function loadDocument(type) {
 
     setLoading(false);
     if (contentEl) {
-      contentEl.innerHTML = decodeHtmlEntities(raw);
-      contentEl.hidden = false;
+      const decoded = decodeHtmlEntities(raw);
+      const tmp = document.createElement("div");
+      tmp.innerHTML = decoded;
+      // Strip the header block that duplicates branding already in the modal title
+      tmp.querySelectorAll("header, .logo-text, .logo-sub").forEach((el) => el.remove());
+      contentEl.innerHTML = tmp.innerHTML;
+      show(contentEl);
     }
   } catch {
     setLoading(false);
     if (errorEl) {
       errorEl.textContent = t("legal.error", loc);
-      errorEl.hidden = false;
+      show(errorEl);
     }
   }
 }
@@ -90,9 +95,9 @@ function closeModal() {
   const contentEl = getEl("legal-modal-content");
   const errorEl   = getEl("legal-modal-error");
   if (!modal) return;
-  modal.hidden = true;
-  if (contentEl) { contentEl.innerHTML = ""; contentEl.hidden = true; }
-  if (errorEl)   errorEl.hidden = true;
+  hide(modal);
+  if (contentEl) { contentEl.innerHTML = ""; hide(contentEl); }
+  if (errorEl)   hide(errorEl);
 }
 
 export function initLegalModal() {
