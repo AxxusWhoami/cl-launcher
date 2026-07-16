@@ -1,12 +1,20 @@
 import { getLocale } from "./locale.js";
 import { t } from "./i18n.js";
 
-const LOCALE_MAP = { esES: "esES", enUS: "enUS", frFR: "frFR", deDE: "deDE" };
 const BASE_URL = "https://apis.corelegacy.gg/legal_agreements.php";
+const FALLBACK_LOCALE = "esES";
 
 function apiLocale() {
   const loc = getLocale();
-  return LOCALE_MAP[loc] ?? "enUS";
+  // Only locales that exist in the API
+  const supported = ["esES", "enUS", "frFR", "deDE"];
+  return supported.includes(loc) ? loc : FALLBACK_LOCALE;
+}
+
+function decodeHtmlEntities(encoded) {
+  const txt = document.createElement("textarea");
+  txt.innerHTML = encoded;
+  return txt.value;
 }
 
 function getEl(id) { return document.querySelector(`#${id}`); }
@@ -45,14 +53,27 @@ async function loadDocument(type) {
   modal.hidden = false;
   modal.removeAttribute("hidden");
 
-  try {
-    const url = `${BASE_URL}?type=${type}&locale=${locale}`;
+  async function fetchForLocale(fetchLocale) {
+    const url = `${BASE_URL}?type=${encodeURIComponent(type)}&locale=${fetchLocale}`;
     const res = await fetch(url);
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    const html = await res.text();
+    const json = await res.json();
+    if (json.status === 200 && json.data?.content) return json.data.content;
+    return null;
+  }
+
+  try {
+    let raw = await fetchForLocale(locale);
+
+    // Fallback to esES if the user's locale has no document yet
+    if (raw === null && locale !== FALLBACK_LOCALE) {
+      raw = await fetchForLocale(FALLBACK_LOCALE);
+    }
+
+    if (raw === null) throw new Error("no_content");
+
     setLoading(false);
     if (contentEl) {
-      contentEl.innerHTML = html;
+      contentEl.innerHTML = decodeHtmlEntities(raw);
       contentEl.hidden = false;
     }
   } catch {
@@ -75,8 +96,8 @@ function closeModal() {
 }
 
 export function initLegalModal() {
-  const modal      = getEl("legal-modal");
-  const closeBtn   = getEl("legal-modal-close");
+  const modal    = getEl("legal-modal");
+  const closeBtn = getEl("legal-modal-close");
 
   if (!modal) return;
 
@@ -86,12 +107,12 @@ export function initLegalModal() {
     });
   }
 
-  bindOpen("open-tos",           "ToS");
-  bindOpen("open-privacy",       "Privacy-Policy");
-  bindOpen("account-open-tos",   "ToS");
+  bindOpen("open-tos",             "ToS");
+  bindOpen("open-privacy",         "Privacy-Policy");
+  bindOpen("account-open-tos",     "ToS");
   bindOpen("account-open-privacy", "Privacy-Policy");
-  closeBtn?.addEventListener("click", closeModal);
 
-  modal.addEventListener("click", (e) => { if (e.target === modal) closeModal(); });
+  closeBtn?.addEventListener("click", closeModal);
+  modal.addEventListener("click",   (e) => { if (e.target === modal) closeModal(); });
   modal.addEventListener("keydown", (e) => { if (e.key === "Escape") closeModal(); });
 }
