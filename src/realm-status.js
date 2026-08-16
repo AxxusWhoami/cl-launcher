@@ -30,8 +30,6 @@ function setText(el, value) {
 function showUnknown(refs) {
   setUnknownIndicator(refs.login);
   setUnknownIndicator(refs.server);
-  setText(refs.players, "?");
-  setText(refs.uptime, "-");
 }
 
 async function fetchStatus(refs) {
@@ -50,8 +48,6 @@ async function fetchStatus(refs) {
 
     setIndicator(refs.login, Number(data.logon_status) === 1);
     setIndicator(refs.server, Number(data.server_status) === 1);
-    setText(refs.players, String(data.players_online ?? 0));
-    setText(refs.uptime, data.uptime || "-");
   } catch (error) {
     console.error("No se pudo cargar el estado del reino:", error);
     showUnknown(refs);
@@ -64,8 +60,6 @@ export function startRealmStatus() {
   const refs = {
     login: document.querySelector("#status-login"),
     server: document.querySelector("#status-server"),
-    players: document.querySelector("#status-players"),
-    uptime: document.querySelector("#status-uptime"),
   };
 
   fetchStatus(refs);
